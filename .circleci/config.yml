@@ -9,11 +9,11 @@ orbs:
 jobs:
   my-example-job:
     executor:
-      name: node/ default
+      name: node/default
     steps:
       - checkout
       - node/with-cache:
-        steps:
+         steps:
           - run: npm install
           - run: npm test
           - run: npm run lint
@@ -23,6 +23,6 @@ jobs:
 
 workflows:
   my-cicd-example-workflow:
-    job:
+    jobs:
       - my-example-job
       
