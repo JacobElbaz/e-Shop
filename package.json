@@ -6,7 +6,7 @@
   "scripts": {
     "lint": "eslint src/* --color",
     "dev": "node scr/index.js",
-    "test": "mocha test/*.spec.js --color"
+    "test": "mocha tests/*.spec.js --color"
   },
   "repository": {
     "type": "git",
