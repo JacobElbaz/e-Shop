@@ -13,10 +13,10 @@ jobs:
     steps:
       - checkout
       - node/with-cache:
-         steps:
-          - run: npm install
-          - run: npm test
-          - run: npm run lint
+          steps:
+            - run: npm install
+            - run: npm test
+            - run: npm run lint
 
 # Invoke jobs via workflows
 # See: https://circleci.com/docs/2.0/configuration-reference/#workflows
@@ -25,4 +25,3 @@ workflows:
   my-cicd-example-workflow:
     jobs:
       - my-example-job
-      
