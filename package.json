@@ -1,0 +1,35 @@
+{
+  "name": "cicd_class",
+  "version": "1.0.0",
+  "description": "CICD - example",
+  "main": "index.js",
+  "scripts": {
+    "lint": "eslint src/* --color",
+    "dev": "node scr/index.js",
+    "test": "mocha test/*.spec.js --color"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ElieB-1012/CICD_Class.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ElieB-1012/CICD_Class/issues"
+  },
+  "homepage": "https://github.com/ElieB-1012/CICD_Class#readme",
+  "dependencies": {
+    "express": "^4.17.3"
+  },
+  "devDependencies": {
+    "@types/chai": "^4.3.0",
+    "@types/mocha": "^9.1.0",
+    "@typescript-eslint/eslint-plugin": "^5.14.0",
+    "@typescript-eslint/parser": "^5.14.0",
+    "chai": "^4.3.6",
+    "eslint": "^8.10.0",
+    "eslint-config-google": "^0.14.0",
+    "eslint-plugin-react": "^7.29.3",
+    "mocha": "^9.2.1"
+  }
+}
