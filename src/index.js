@@ -1,11 +1,12 @@
 const express = require('express');
-const port = process.env.PORT || 4000;
+const port = process.env.PORT || 8080;
 const app = express();
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hey from server main page<h1>');
-});
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static('client/build'));
+}
 
 app.listen(port, () => {
   console.log('server is up and running');
 });
+

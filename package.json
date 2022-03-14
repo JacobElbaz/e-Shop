@@ -6,7 +6,10 @@
   "scripts": {
     "lint": "eslint src/* --color",
     "dev": "nodemon run src/index.js",
-    "start": "node client/src/index.js",
+    "build": "cd client && npm run build",
+    "install-client": "cd client && npm install",
+    "heroku-postbuild": "npm run install-client && npm run build",
+    "start": "node src/index.js",
     "test": "mocha tests/*.spec.js --color"
   },
   "repository": {
