@@ -33,6 +33,7 @@
     "eslint-config-google": "^0.14.0",
     "eslint-plugin-react": "^7.29.3",
     "mocha": "^9.2.2",
-    "nodemon": "^2.0.15"
+    "nodemon": "^2.0.15",
+    "typescript": "^4.6.2"
   }
 }
