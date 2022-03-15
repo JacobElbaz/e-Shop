@@ -3,6 +3,7 @@ import LoginForm from './LoginForm';
 import './App.css';
 import { Routes, Route } from "react-router-dom"
 import SignupForm from './SignupForm';
+import HomePage from './HomePage';
 
 function App() {
 
@@ -34,24 +35,15 @@ function App() {
     }
 
     const Signup = details => {
-        console.log(details);
-        if (details.password == details.confirmPass) {
-            console.log("Signed up");
-            const newUser = {email: details.email, password: details.password};
-            users.push(newUser);
-            
-        }
-        else {
-            console.log("Details not match!");
-            setError("Please confirm the password.")
-        }
+        // verify if the email is already exist in the db
     }
 
     return (
         <div className="Login">
             <Routes>
-                <Route path='/' element={<LoginForm Login={Login} error={error} setError={setError} />} />
+                <Route path='/login' element={<LoginForm Login={Login} error={error} setError={setError} />} />
                 <Route path='/signup' element={<SignupForm Signup={Signup} error={error} setError={setError}/>} />
+                <Route path='/' element={<HomePage/>} />
             </Routes>
 
         </div>
