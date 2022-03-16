@@ -15,6 +15,7 @@ function LoginForm({Login, error, setError}) {
     const navigate = useNavigate()
 
   return (
+      <div className='Login'>
     <form onSubmit={submitHandler}>
         <div className='form-inner'>
             <h2>Login</h2>
@@ -28,9 +29,9 @@ function LoginForm({Login, error, setError}) {
                 <input type="password" name='password' id='password' onChange={e => setDetails({...details, password: e.target.value})} value={details.password}/>
             </div>
             <input type="submit" value="LOGIN" />
-            <button className='signup' onClick={() => {navigate("/signup"); setError("")}}>Sign up</button>
         </div>
     </form>
+    </div>
   )
 };
 

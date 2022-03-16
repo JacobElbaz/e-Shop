@@ -26,7 +26,7 @@ form:after {
     right: -5px;
     bottom: -5px;
     z-index: 1;
-    background-image: linear-gradient(to bottom right, #ffce00, #fe4880);
+    background-image: linear-gradient(to bottom right, #2EFEF7, #8000FF);
 }
 
 form .form-inner {
@@ -59,7 +59,7 @@ form .form-inner .form-group {
 }
 
 .form-inner .form-group:focus-within label {
-    color: #fe4880;
+    color: #8000FF;
 }
 
 form .form-inner .form-group input {
@@ -79,7 +79,7 @@ form .form-inner input[type="submit"], .welcome button {
     display: inline-block;
     padding: 10px 15px;
     border-radius: 8px;
-    background-image: linear-gradient(to right, #ffce00 50%, #ffce00 50%, #fe4880);
+    background-image: linear-gradient(to right, #8000FF 50%, #8000FF 50%, #2EFEF7);
     background-size: 200%;
     background-position: 0%;
     transition: 0.4s;

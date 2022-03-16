@@ -4,6 +4,7 @@ import './App.css';
 import { Routes, Route } from "react-router-dom"
 import SignupForm from './SignupForm';
 import HomePage from './HomePage';
+import NavbarComp from "./NavbarComp";
 
 function App() {
 
@@ -39,13 +40,8 @@ function App() {
     }
 
     return (
-        <div className="Login">
-            <Routes>
-                <Route path='/login' element={<LoginForm Login={Login} error={error} setError={setError} />} />
-                <Route path='/signup' element={<SignupForm Signup={Signup} error={error} setError={setError}/>} />
-                <Route path='/' element={<HomePage/>} />
-            </Routes>
-
+        <div className="App">
+            <NavbarComp/>
         </div>
     );
 }
