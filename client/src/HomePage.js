@@ -1,5 +1,4 @@
 import React from "react";
-import NavbarComp from "./NavbarComp";
 
 function HomePage() {
 
