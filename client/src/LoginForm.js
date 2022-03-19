@@ -1,13 +1,23 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
-function LoginForm({ Login, error, setError }) {
+function LoginForm({ setUser, error, users }) {
 
     const [details, setDetails] = useState({ email: "", password: "" });
 
+    const navigate = useNavigate()
+
+    const Login = details => {
+        const found = users.find(user => user.email == details.email)
+        if( found.password == details.password ) {
+            setUser({name: found.name, email: found.email})
+            navigate('/')
+        }
+    }
+
     const submitHandler = e => {
         e.preventDefault();
-
         Login(details);
     }
 
