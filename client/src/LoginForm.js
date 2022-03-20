@@ -2,17 +2,23 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './LoginForm.css';
 
-function LoginForm({ setUser, error, users }) {
+function LoginForm({ setUser, users }) {
 
     const [details, setDetails] = useState({ email: "", password: "" });
+    const [error, setError] = useState("");
 
     const navigate = useNavigate()
 
     const Login = details => {
         const found = users.find(user => user.email == details.email)
-        if( found.password == details.password ) {
-            setUser({name: found.name, email: found.email})
-            navigate('/')
+        if (found) {
+            if (found.password == details.password) {
+                setUser({ name: found.name, email: found.email })
+                navigate('/')
+            }
+        }
+        else {
+            setError("Wrong username or password.")
         }
     }
 

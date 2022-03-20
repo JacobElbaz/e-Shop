@@ -1,13 +1,36 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-function SignupForm({ Signup, error }) {
+function SignupForm({ users, setUsers }) {
 
     const [details, setDetails] = useState({ name: "", email: "", password: "" });
+    const [error, setError] = useState("")
+    const navigate = useNavigate()
 
     const submitHandler = e => {
         e.preventDefault();
-
         Signup(details);
+    }
+
+    const Signup = details => {
+        if (users.some(u => u.email == details.email)) {
+            setError("Email already exists.");
+        }
+        else if (details.name == "") {
+            setError("Empty name.");
+        }
+        else if (details.email == "") {
+            setError("Empty emaiil.");
+        }
+        else if (details.password == "") {
+            setError("Empty password.");
+        }
+        else {
+            const newusers = [...users];
+            newusers.push(details)
+            setUsers(newusers);
+            navigate('/login')
+        }
     }
 
     return (

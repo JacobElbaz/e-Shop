@@ -11,7 +11,7 @@ function NavbarComp() {
 
   const [user, setUser] = useState({name: "", email: ""});
 
-  const users = [{name: "Jacob", email: "admin@admin.com", password: "12345"}]
+  const [users, setUsers] = useState([{name: "Jacob", email: "admin@admin.com", password: "12345"}])
 
   const Logout = () => {
     setUser({name:"", email:""})
@@ -22,7 +22,7 @@ function NavbarComp() {
         <div>
           <Navbar bg="dark" variant="dark">
             <Container>
-              <Navbar.Brand href="/">Tazmin</Navbar.Brand>
+              <Navbar.Brand href="/">Team10</Navbar.Brand>
               <Nav className="me-auto">
                 <Nav.Link as={Link} to={"/"}>Home</Nav.Link>
                 <Nav.Link as={Link} to={"/about"}>About</Nav.Link>
@@ -54,7 +54,7 @@ function NavbarComp() {
             <Route path="/about" element={<About/>}/>
             <Route path="/contact" element={<Contact/>}/>
             <Route path="/login" element={<LoginForm setUser={setUser} users={users}/>}/>
-            <Route path="/signup" element={<SignupForm/>}/>
+            <Route path="/signup" element={<SignupForm users={users} setUsers={setUsers}/>}/>
           </Routes>
         </div>
       </div>
