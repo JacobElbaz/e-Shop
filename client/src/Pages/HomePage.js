@@ -1,10 +1,16 @@
 import React from "react";
+import Banner from '../Components/Banner';
+import img from '../images/intro-img.png'
 
 function HomePage() {
 
     return (
         <div className="Home">
-            <h1>Home</h1>
+            <img src={img} alt=""/>
+            <Banner name='Trending'/>
+            <br />
+            <hr />
+            <Banner name='Best-Seller'/>
         </div>
     )
 }

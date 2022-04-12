@@ -1,7 +1,27 @@
-.Login, .Signup, .Home, .About, .Contact {
+.Login, .Signup, .About, .Contact {
  height: 100vh;
  display: flex;
  align-items: center;
  justify-content: center;
  background-color: #53565A;   
+}
+
+.Home {
+    height: auto;
+    align-items: center;
+    justify-content: center;
+    background-color: #53565A;  
+    padding-left: 10%;
+    padding-right: 10%;
+    padding-bottom: 10%;
+}
+
+.banner img {
+    height: 150px;
+}
+
+.Home img {
+    height: 200px;
+    margin-left: 25%;
+    margin-top: 10px;
 }
