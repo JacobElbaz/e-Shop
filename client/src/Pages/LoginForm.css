@@ -26,7 +26,7 @@ form:after {
     right: -5px;
     bottom: -5px;
     z-index: 1;
-    background-image: linear-gradient(to bottom right, #2EFEF7, #8000FF);
+    /*background-image: linear-gradient(to bottom right, #2EFEF7, #8000FF);*/
 }
 
 form .form-inner {

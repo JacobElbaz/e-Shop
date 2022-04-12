@@ -25,3 +25,11 @@
     margin-left: 25%;
     margin-top: 10px;
 }
+
+.Test {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #53565A;   
+}

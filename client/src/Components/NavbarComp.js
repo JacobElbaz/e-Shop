@@ -10,6 +10,7 @@ import SearchBar from './SearchBar';
 import ShoppingCart from '../Pages/ShoppingCart';
 import MyAccount from '../Pages/MyAccount';
 import Wishlist from '../Pages/WishList';
+import Test from '../Pages/Test';
 
 function NavbarComp() {
 
@@ -67,6 +68,7 @@ function NavbarComp() {
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/wish" element={<Wishlist />} />
           <Route path="/account" element={<MyAccount />} />
+          <Route path="/test" element={<Test />} />
           <Route path="/login" element={<LoginForm setUser={setUser} users={users} />} />
           <Route path="/signup" element={<SignupForm users={users} setUsers={setUsers} />} />
         </Routes>
