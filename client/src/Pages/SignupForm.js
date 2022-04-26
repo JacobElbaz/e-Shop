@@ -19,6 +19,7 @@ function SignupForm({ users, setUsers }) {
       data: details,
     });
     //then try catch
+    navigate('/login');
   };
 
   const Signup = (details) => {
