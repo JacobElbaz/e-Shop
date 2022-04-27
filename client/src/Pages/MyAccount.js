@@ -1,9 +1,12 @@
-import React from 'react'
+import React from 'react';
+import axios from "axios";
+import Logout from '../Components/Log/Logout';
 
 export default function MyAccount() {
+    
     return (
         <div className='About'>
-            <h1>My Account</h1>
+            <Logout/>
         </div>
     )
 }

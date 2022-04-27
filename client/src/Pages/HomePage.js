@@ -27,22 +27,22 @@ function HomePage() {
                 <Banner name='Big Deals' />
                 <br />
             </div>
-            <div class="footer-dark">
+            <div className="footer-dark">
                 <footer>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-sm-6 col-md-3 item">
+                    <div className="container">
+                        <div className="row">
+                            <div className="col-sm-6 col-md-3 item">
                                 <h3>Contact</h3>
                                 <ul>
                                     <li><a href="#">050-301-3489</a></li>
                                     <li><a href="#">jacobelbz@gmail.com</a></li>
                                 </ul>
                             </div>
-                            <div class="col-md-6 item text">
+                            <div className="col-md-6 item text">
                                 <h3>About</h3>
                                 <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
                             </div></div>
-                        <p class="copyright">Game Zone © 2022</p>
+                        <p className="copyright">Game Zone © 2022</p>
                     </div>
                 </footer>
             </div>

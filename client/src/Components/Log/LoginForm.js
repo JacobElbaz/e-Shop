@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
 import axios from "axios";
 import './LoginForm.css';
 
@@ -8,7 +7,6 @@ function LoginForm({ setUser, users }) {
     const [details, setDetails] = useState({ email: "", password: "" });
     const [error, setError] = useState("");
 
-    const navigate = useNavigate()
 
 
     const submitHandler = e => {
@@ -28,8 +26,7 @@ function LoginForm({ setUser, users }) {
                 emailError.innerHTML = res.data.errors.email;
                 passwordError.innerHTML = res.data.errors.password;
             } else {
-                navigate('/');
-                setUser({name: 'Sam', email: details.email})
+                window.location = "/";
             }
         })
 
