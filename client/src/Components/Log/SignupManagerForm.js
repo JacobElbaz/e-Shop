@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
-function SignupForm({ users, setUsers }) {
+function SignupForm() {
   const [details, setDetails] = useState({
     username: '',
     email: '',
@@ -10,21 +10,40 @@ function SignupForm({ users, setUsers }) {
     code: '',
     manager: false,
   });
-  const [error, setError] = useState('');
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    await axios({
-      method: 'post',
-      url: `${process.env.REACT_APP_API_URL}api/client/register`,
-      data: {username: details.username, 
-            email: details.email,
-            password: details.password,
-            manager: details.manager},
-    });
-    //then try catch
-    navigate('/login');
+    const usernameError = document.querySelector(".username.error");
+    const emailError = document.querySelector(".email.error");
+    const passwordError = document.querySelector(".password.error");
+    const codeError = document.querySelector(".code.error");
+
+    if (details.code != '12345') {
+      codeError.innerHTML = "Company code not valid";
+    } else {
+      await axios({
+        method: 'post',
+        url: `${process.env.REACT_APP_API_URL}api/client/register`,
+        data: {
+          username: details.username,
+          email: details.email,
+          password: details.password,
+          manager: details.manager
+        },
+      })
+        .then((res) => {
+          console.log(res);
+          if (res.data.errors) {
+            usernameError.innerHTML = res.data.errors.username;
+            emailError.innerHTML = res.data.errors.email;
+            passwordError.innerHTML = res.data.errors.password;
+          } else {
+            navigate('/login');
+          }
+        })
+        .catch((err) => console.log(err));
+    }
   };
 
   return (
@@ -32,18 +51,18 @@ function SignupForm({ users, setUsers }) {
       <form onSubmit={submitHandler}>
         <div className="form-inner">
           <h2>Manager Signup</h2>
-          {error != '' ? <div className="error">{error}</div> : ''}
           <div className="form-group">
-            <label htmlFor="name">Name:</label>
+            <label htmlFor="username">Name:</label>
             <input
               type="text"
-              name="name"
-              id="name"
+              name="username"
+              id="username"
               onChange={(e) =>
                 setDetails({ ...details, username: e.target.value })
               }
               value={details.username}
             />
+            <div className="username error"></div>
           </div>
           <div className="form-group">
             <label htmlFor="email">Email:</label>
@@ -56,6 +75,7 @@ function SignupForm({ users, setUsers }) {
               }
               value={details.email}
             />
+            <div className="email error"></div>
           </div>
           <div className="form-group">
             <label htmlFor="password">Password:</label>
@@ -68,6 +88,7 @@ function SignupForm({ users, setUsers }) {
               }
               value={details.password}
             />
+            <div className="password error"></div>
           </div>
           <div className="form-group">
             <label htmlFor="code">Company code:</label>
@@ -80,6 +101,7 @@ function SignupForm({ users, setUsers }) {
               }
               value={details.code}
             />
+            <div className="code error"></div>
           </div>
           <input type="submit" value="Sign Up" />
         </div>
