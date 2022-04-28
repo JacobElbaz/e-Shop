@@ -5,6 +5,10 @@
     font-family: montserrat, sans-serif;
 }
 
+.managerlink {
+    font-size: 12px;
+}
+
 input, button {
     appearance: none;
     background: none;

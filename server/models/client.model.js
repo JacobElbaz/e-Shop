@@ -18,6 +18,9 @@ const clientSchema = mongoose.Schema(
       type: String,
       required: [true, 'Please add an password'],
     },
+    manager: {
+      type: Boolean,
+    },
   },
   {
     //automatically create and upate the field

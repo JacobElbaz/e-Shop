@@ -3,12 +3,12 @@ import { Container, Navbar, Nav } from 'react-bootstrap';
 import { Routes, Route, Link } from 'react-router-dom';
 import LoginForm from './Log/LoginForm';
 import SignupForm from './Log/SignupForm';
+import SignupManagerForm from './Log/SignupManagerForm';
 import HomePage from '../Pages/HomePage';
 import SearchBar from './SearchBar';
 import ShoppingCart from '../Pages/ShoppingCart';
 import MyAccount from '../Pages/MyAccount';
 import Wishlist from '../Pages/WishList';
-import Test from '../Pages/Test';
 import { UidContext } from './AppContext';
 import { useSelector } from 'react-redux';
 
@@ -93,7 +93,7 @@ function NavbarComp() {
           <Route path="/cart" element={<ShoppingCart />} />
           <Route path="/wish" element={<Wishlist />} />
           <Route path="/account" element={<MyAccount />} />
-          <Route path="/test" element={<Test />} />
+          <Route path="/signupManager" element={<SignupManagerForm />} />
           <Route
             path="/login"
             element={<LoginForm/>}

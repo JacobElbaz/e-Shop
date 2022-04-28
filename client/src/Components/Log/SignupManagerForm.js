@@ -7,6 +7,7 @@ function SignupForm({ users, setUsers }) {
     username: '',
     email: '',
     password: '',
+    code: '',
     manager: false,
   });
   const [error, setError] = useState('');
@@ -17,7 +18,10 @@ function SignupForm({ users, setUsers }) {
     await axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}api/client/register`,
-      data: details,
+      data: {username: details.username, 
+            email: details.email,
+            password: details.password,
+            manager: details.manager},
     });
     //then try catch
     navigate('/login');
@@ -27,7 +31,7 @@ function SignupForm({ users, setUsers }) {
     <div className="Signup">
       <form onSubmit={submitHandler}>
         <div className="form-inner">
-          <h2>Signup</h2>
+          <h2>Manager Signup</h2>
           {error != '' ? <div className="error">{error}</div> : ''}
           <div className="form-group">
             <label htmlFor="name">Name:</label>
@@ -65,8 +69,19 @@ function SignupForm({ users, setUsers }) {
               value={details.password}
             />
           </div>
+          <div className="form-group">
+            <label htmlFor="code">Company code:</label>
+            <input
+              type="password"
+              name="password"
+              id="password"
+              onChange={(e) =>
+                setDetails({ ...details, code: e.target.value })
+              }
+              value={details.code}
+            />
+          </div>
           <input type="submit" value="Sign Up" />
-          <a className='managerlink text-decoration-none text-decoration-underline ms-5' href='' onClick={() => navigate('/signupManager')}>For manager click here</a>
         </div>
       </form>
     </div>
