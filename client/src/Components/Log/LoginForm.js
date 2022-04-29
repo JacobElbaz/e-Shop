@@ -2,10 +2,9 @@ import React, { useState } from 'react';
 import axios from "axios";
 import './LoginForm.css';
 
-function LoginForm({ setUser, users }) {
+function LoginForm() {
 
     const [details, setDetails] = useState({ email: "", password: "" });
-    const [error, setError] = useState("");
 
 
 
@@ -21,18 +20,19 @@ function LoginForm({ setUser, users }) {
             data: details
         })
 
-        .then((res) => {
-            if(res.data.errors) {
-                emailError.innerHTML = res.data.errors.email;
-                passwordError.innerHTML = res.data.errors.password;
-            } else {
-                window.location = "/";
-            }
-        })
+            .then((res) => {
+                console.log(res);
+                if (res.data.errors) {
+                    emailError.innerHTML = res.data.errors.email;
+                    passwordError.innerHTML = res.data.errors.password;
+                } else {
+                    window.location = "/";
+                }
+            })
 
-        .catch((err) => {
-            console.log(err);
-        });
+            .catch((err) => {
+                console.log(err);
+            });
     };
 
     return (
@@ -40,14 +40,25 @@ function LoginForm({ setUser, users }) {
             <form onSubmit={submitHandler}>
                 <div className='form-inner'>
                     <h2>Login</h2>
-                    {(error != "") ? (<div className="error">{error}</div>) : ""}
                     <div className='form-group'>
                         <label htmlFor="email">Email:</label>
-                        <input type="email" name='email' id='email' onChange={e => setDetails({ ...details, email: e.target.value })} value={details.email} />
+                        <input
+                            type="email"
+                            name='email'
+                            id='email'
+                            onChange={e => setDetails({ ...details, email: e.target.value })}
+                            value={details.email} />
+                        <div className="email error"></div>
                     </div>
                     <div className='form-group'>
                         <label htmlFor="password">Password:</label>
-                        <input type="password" name='password' id='password' onChange={e => setDetails({ ...details, password: e.target.value })} value={details.password} />
+                        <input
+                            type="password"
+                            name='password'
+                            id='password'
+                            onChange={e => setDetails({ ...details, password: e.target.value })}
+                            value={details.password} />
+                        <div className="password error"></div>
                     </div>
                     <input type="submit" value="LOGIN" />
                 </div>

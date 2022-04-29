@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { Container, Navbar, Nav } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown } from 'react-bootstrap';
 import { Routes, Route, Link } from 'react-router-dom';
 import LoginForm from './Log/LoginForm';
 import SignupForm from './Log/SignupForm';
@@ -11,6 +11,7 @@ import MyAccount from '../Pages/MyAccount';
 import Wishlist from '../Pages/WishList';
 import { UidContext } from './AppContext';
 import { useSelector } from 'react-redux';
+import Logout from './Log/Logout';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -30,6 +31,31 @@ function NavbarComp() {
               />
             </Nav>
             {uid ? (
+              <>
+              <NavDropdown title={userData.username} id='username'>
+                  <NavDropdown.Item to='/account' as={Link}>
+                    Profile
+                  </NavDropdown.Item>
+                  {userData.manager && (
+                    <>
+                      <NavDropdown.Item to='/admin/stats' as={Link}>
+                        Staticstics
+                      </NavDropdown.Item>
+                      <NavDropdown.Item to='/admin/userList' as={Link}>
+                        Users
+                      </NavDropdown.Item>
+                      <NavDropdown.Item to='/admin/productList' as={Link}>
+                        Products
+                      </NavDropdown.Item>
+                      <NavDropdown.Item to='/admin/orderList' as={Link}>
+                        Orders
+                      </NavDropdown.Item>
+                    </>
+                  )}
+                  <NavDropdown.Item >
+                    <Logout></Logout>
+                  </NavDropdown.Item>
+                </NavDropdown>
               <Navbar bg="dark" variant="dark">
                 <Nav.Link as={Link} to={'/account'}>
                   <svg
@@ -74,6 +100,7 @@ function NavbarComp() {
                   Cart
                 </Nav.Link>
               </Navbar>
+              </>
             ) : (
               <Nav className="justify-content-end">
                 <Nav.Link as={Link} to={'/login'}>

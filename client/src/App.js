@@ -18,14 +18,13 @@ function App() {
                 withCredentials: true,
             })
               .then((res) =>{
-                  //console.log(res);
                   setUid(res.data);
                 })
-              .catch((err) => console.log("No token"))       
-        }
+              .catch((err) => console.log("No token"));       
+        };
         fetchToken();
         if (uid) dispatch(getUser(uid))
-    }, [uid]);
+    }, [uid, dispatch]);
     return (
 
         <UidContext.Provider value = {uid}>
