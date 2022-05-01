@@ -22,7 +22,7 @@ const Logout = () => {
   };
 
   return (
-    <button onClick={logout} className="btn btn-primary">
+    <button onClick={logout} className="btn btn-danger">
       Logout
     </button>
   );
