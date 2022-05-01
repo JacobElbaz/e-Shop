@@ -29,7 +29,7 @@ function SignupForm() {
           username: details.username,
           email: details.email,
           password: details.password,
-          manager: details.manager
+          manager: true
         },
       })
         .then((res) => {

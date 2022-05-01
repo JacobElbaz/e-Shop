@@ -5,7 +5,6 @@ import LoginForm from './Log/LoginForm';
 import SignupForm from './Log/SignupForm';
 import SignupManagerForm from './Log/SignupManagerForm';
 import HomePage from '../Pages/HomePage';
-import SearchBar from './SearchBar';
 import ShoppingCart from '../Pages/ShoppingCart';
 import MyAccount from '../Pages/MyAccount';
 import Wishlist from '../Pages/WishList';

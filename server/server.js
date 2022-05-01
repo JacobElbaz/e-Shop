@@ -8,6 +8,7 @@ const {checkClient, requireAuth} = require('./middleware/auth.middleware');
 require('./routes/client.routes')
 const app = express();
 const clientRoutes = require("./routes/client.routes");
+const productRoutes = require('./routes/product.routes');
 
 const corsOptions = {
     origin: process.env.CLIENT_URL,
@@ -30,6 +31,7 @@ app.get('/jwtid', requireAuth, (req, res) =>{
 
 //routes
 app.use("/api/client", clientRoutes);
+app.use('/api/product', productRoutes);
 
 //server
 app.listen(process.env.PORT, () => {
