@@ -33,9 +33,9 @@ const ProductList = () => {
                     <h1>Products</h1>
                 </Col>
                 <Col className='text-right'>
-                    <Button className='my-3' onClick={onCreateClick}>
+                    <Link className='my-3 btn btn-primary' to ="/admin/editProduct">
                         <i className='fas fa-plus'></i> Create Product
-                    </Button>
+                    </Link>
                 </Col>
             </Row>
             <Table striped bordered hover responsive className='table-sm'>
@@ -66,14 +66,14 @@ const ProductList = () => {
                                     <td>
                                         <Link to={`/admin/products/${product._id}/edit`}>
                                             <Button variant='light' className='btn-sm'>
-                                                <i className='fas fa-edit'></i>
+                                                <i className='fas fa-edit'>Edit</i>
                                             </Button>
                                         </Link>
                                         <Button
                                             variant='danger'
                                             className='btn-sm'
                                             onClick={() => onDeleteClick(product._id)}>
-                                            <i className='fas fa-trash'></i>
+                                            <i className='fas fa-trash'>Delete</i>
                                         </Button>
                                     </td>
                                 </tr>

@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
+import { UidContext } from '../Components/AppContext';
 import { useNavigate } from 'react-router-dom';
 import { Link } from 'react-router-dom';
 import axios from 'axios';
@@ -6,8 +7,9 @@ import axios from 'axios';
 
 
 function ProductEdit() {
+  const uid = useContext(UidContext);
   const [details, setDetails] = useState({
-    user: '',
+    user: uid,
     name: '',
     image: '',
     category: '',
@@ -78,19 +80,7 @@ function ProductEdit() {
       <form onSubmit={submitHandler}>
         <div className="form-inner">
           <h2>Edit Product</h2>
-          <div className="form-group">
-            <label htmlFor="user">User:</label>
-            <input
-              type="text"
-              name="user"
-              id="user"
-              onChange={(e) =>
-                setDetails({ ...details, user: e.target.value })
-              }
-              value={details.user}
-            />
-            <div className="user error"></div>
-          </div>
+          
           <div className="form-group">
             <label htmlFor="name">Name:</label>
             <input
@@ -108,29 +98,28 @@ function ProductEdit() {
 
             <div className="form-group">
             <label htmlFor="category">Category:</label>
-            <input
-              type="category"
-              name="category"
-              id="category"
-              onChange={(e) =>
-                setDetails({ ...details, category: e.target.value })
-              }
-              value={details.category}
-            />
+            <select className="form-select" onChange={(e) => {setDetails({ ...details, category: e.target.value })}}>
+                <option value="PS4">PS4</option>
+                <option value="PS5">PS5</option>
+                <option value="XBOX">XBOX</option>
+                <option value="Switch">Switch</option>
+              </select>
             <div className="category error"></div>
             </div>
             
             <div className="form-group">
             <label htmlFor="genre">Genre:</label>
-            <input
-              type="genre"
-              name="genre"
-              id="genre"
-              onChange={(e) =>
-                setDetails({ ...details, genre: e.target.value })
-              }
-              value={details.genre}
-            />
+            <select className="form-select" onChange={(e) => {setDetails({ ...details, genre: e.target.value })}}>
+                <option value="Action">Action</option>
+                <option value="Adventure">Adventure</option>
+                <option value="Fighting">Fighting</option>
+                <option value="Racing">Racing</option>
+                <option value="Role">Role</option>
+                <option value="Shooter">Shooter</option>
+                <option value="Sport">Sport</option>
+                <option value="Strategy">Strategy</option>
+                <option value="Other">Other</option>
+              </select>
             <div className="genre error"></div>
             </div>
           
