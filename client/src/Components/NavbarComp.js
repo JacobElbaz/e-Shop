@@ -11,6 +11,7 @@ import Wishlist from '../Pages/WishList';
 import { UidContext } from './AppContext';
 import { useSelector } from 'react-redux';
 import Logout from './Log/Logout';
+import ProductsList from './ProductsList';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -118,6 +119,7 @@ function NavbarComp() {
           <Route path="/wish" element={<Wishlist />} />
           <Route path="/account" element={<MyAccount />} />
           <Route path="/signupManager" element={<SignupManagerForm />} />
+          <Route path="/admin/productList" element={<ProductsList />}/>
           <Route
             path="/login"
             element={<LoginForm />}

@@ -1,5 +1,9 @@
 const ProductModel = require('../models/product.model');
 const ClientModel = require('../models/client.model');
+const fs = require('fs');
+const { promisify } = require('util');
+const { uploadErrors } = require('../utils/errors.utils');
+const pipeline = promisify(require('stream').pipeline);
 const ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports.getProducts = (req, res) => {
@@ -74,7 +78,6 @@ module.exports.createProduct = async (req, res) => {
   const newProduct = new ProductModel({
     user: req.body.user,
     name: req.body.name,
-    //image: req.body.image,
     category: req.body.category,
     genre: req.body.genre,
     description: req.body.description,
@@ -88,6 +91,7 @@ module.exports.createProduct = async (req, res) => {
   } catch (err) {
     return res.status(400).send(err);
   }
+  
 };
 
 module.exports.updateProduct = (req, res) => {
