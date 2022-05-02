@@ -15,3 +15,7 @@ export const getProducts = (num) => {
             .catch((err) => console.log(err));
     };
 };
+
+export const deleteProduct = (pid) => {
+
+};
