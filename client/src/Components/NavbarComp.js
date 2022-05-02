@@ -12,6 +12,7 @@ import { UidContext } from './AppContext';
 import { useSelector } from 'react-redux';
 import Logout from './Log/Logout';
 import ProductsList from './ProductsList';
+import ProductEdit from '../Pages/ProductEdit';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -120,6 +121,8 @@ function NavbarComp() {
           <Route path="/account" element={<MyAccount />} />
           <Route path="/signupManager" element={<SignupManagerForm />} />
           <Route path="/admin/productList" element={<ProductsList />}/>
+          <Route path="/admin/baba" element={<ProductEdit />}/>
+          
           <Route
             path="/login"
             element={<LoginForm />}
