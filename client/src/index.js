@@ -12,12 +12,14 @@ import { composeWithDevTools } from 'redux-devtools-extension';
 import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { getUser } from './actions/user.action';
+import { getProducts } from './actions/products.action';
 
 const store = createStore(
   rootReducer,
   composeWithDevTools(applyMiddleware(thunk))
 );
 store.dispatch(getUser());
+store.dispatch(getProducts());
 
 ReactDOM.render(
   <React.StrictMode>
