@@ -14,6 +14,7 @@ import Logout from './Log/Logout';
 import ProductsList from './ProductsList';
 import ProductEdit from '../Pages/ProductEdit';
 import Product from '../Pages/Product';
+import AllProducts from '../Pages/AllProducts';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -124,6 +125,8 @@ function NavbarComp() {
           <Route path="/admin/productList" element={<ProductsList />}/>
           <Route path="/admin/editProduct" element={<ProductEdit />}/>
           <Route path='/product' element={<Product/>}/>
+          <Route path='/allProducts' element={<AllProducts/>}/>
+
           <Route
             path="/login"
             element={<LoginForm />}
