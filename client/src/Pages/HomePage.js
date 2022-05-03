@@ -1,6 +1,7 @@
 import React from "react";
 import Banner from '../Components/Banner';
 import img from '../images/intro-img.png';
+import { Link } from 'react-router-dom';
 
 function HomePage() {
 
@@ -15,6 +16,7 @@ function HomePage() {
                     <button className="btn btn-secondary btn-lg mx-auto w-25">XBOX</button>
                     <button className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</button>
                 </div>
+                <Link to='/allProducts' className="btn btn-secondary btn-lg mx-auto w-25">ALL</Link>
                 <Banner name='Trending' />
                 <br />
                 <hr />

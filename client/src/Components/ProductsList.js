@@ -56,7 +56,7 @@ const ProductList = () => {
                             return (
                                 <tr key={product._id}>
                                     <td>
-                                        <Link to={`/admin/products/${product._id}/edit`}>{product._id}</Link>
+                                        <Link to={`/admin/product/${product._id}/edit`}>{product._id}</Link>
                                     </td>
                                     <td>{product.name}</td>
                                     <td>${product.price}</td>
@@ -66,14 +66,14 @@ const ProductList = () => {
                                     <td>
                                         <Link to={`/admin/products/${product._id}/edit`}>
                                             <Button variant='light' className='btn-sm'>
-                                                <i className='fas fa-edit'>Edit</i>
+                                                <i className='fas fa-edit'></i>
                                             </Button>
                                         </Link>
                                         <Button
                                             variant='danger'
                                             className='btn-sm'
                                             onClick={() => onDeleteClick(product._id)}>
-                                            <i className='fas fa-trash'>Delete</i>
+                                            <i className='fas fa-trash'></i>
                                         </Button>
                                     </td>
                                 </tr>

@@ -124,7 +124,7 @@ function NavbarComp() {
           <Route path="/signupManager" element={<SignupManagerForm />} />
           <Route path="/admin/productList" element={<ProductsList />}/>
           <Route path="/admin/editProduct" element={<ProductEdit />}/>
-          <Route path='/product' element={<Product/>}/>
+          <Route path='/product/:id' element={<Product/>}/>
           <Route path='/allProducts' element={<AllProducts/>}/>
 
           <Route

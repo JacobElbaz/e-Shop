@@ -8,10 +8,10 @@ const Product = ({ product }) => {
   return (
     <Card className='my-3 p-3 rounded'>
       <Card.Body>
-        <Link to={`/products/${product._id}`}>
+        <Link to={`/product/${product._id}`}>
           <div>
             <Card.Img
-              src={`/api/products/${product._id}/image`}
+              src={`/api/product/${product._id}/image`}
               variant='top'
               style={{
                 height: '180px',
