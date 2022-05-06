@@ -22,14 +22,7 @@ const Product = () => {
     }, [loadProducts, dispatch]);
 
     return (
-        <div>
-            <Row className='m-auto'>
-                <Button
-                    className='mr-auto my-3'
-                    variant='secondary'>
-                    Go back
-                </Button>
-            </Row>
+        <div className='m-5'>
             <Row>
                 <Col md={5}>
                     <ProductDetails product={product} />

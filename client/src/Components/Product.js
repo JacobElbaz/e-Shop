@@ -11,7 +11,7 @@ const Product = ({ product }) => {
         <Link to={`/product/${product._id}`}>
           <div>
             <Card.Img
-              src={`/api/product/${product._id}/image`}
+              src={product.image}
               variant='top'
               style={{
                 height: '180px',

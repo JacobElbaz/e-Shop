@@ -50,19 +50,21 @@ const ProductAvailability = ({ product }) => {
           </ListGroup.Item>
         )}
         <ListGroup.Item>
+          <Row>
           <Button
-            className='btn-block'
+            className='btn-block my-1'
             type='button'
             disabled={product.countInStock < 1}
             onClick={onAddToCartClick}>
             Add To Cart
-          </Button>
+          </Button></Row>
+          <Row>
           <Button
-            className='btn-block'
+            className='btn-block my-1'
             type='button'
             onClick={onAddToWishListClick}>
             Add To WishList
-          </Button>
+          </Button></Row>
         </ListGroup.Item>
       </ListGroup>
     </Card>

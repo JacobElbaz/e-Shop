@@ -27,14 +27,14 @@ const ProductList = () => {
     };
 
     return (
-        <>
+        <div className='m-5'>
             <Row className='align-items-center'>
                 <Col>
                     <h1>Products</h1>
                 </Col>
                 <Col className='text-right'>
                     <Link className='my-3 btn btn-primary' to ="/admin/editProduct">
-                        <i className='fas fa-plus'></i> Create Product
+                        <i className='fas fa-plus'></i> Add New Product
                     </Link>
                 </Col>
             </Row>
@@ -82,7 +82,7 @@ const ProductList = () => {
                     }
                 </tbody>
             </Table>
-        </>
+        </div>
     );
 };
 
