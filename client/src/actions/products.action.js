@@ -4,6 +4,7 @@ export const GET_PRODUCTS_ERRORS = "GET_PRODUCTS_ERRORS";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT = "GET_PRODUCT";
 export const GET_TREND = "GET_TREND";
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
 export const getProducts = (num) => {
     return (dispatch) => {
@@ -30,6 +31,14 @@ export const getProduct = (pid) => {
 };
 
 export const deleteProduct = (pid) => {
+    return(dispatch) => {
+        return axios
+                .delete(`${process.env.REACT_APP_API_URL}api/product/${pid}`)
+                .then((res) => {
+                    dispatch({ type: DELETE_PRODUCT, payload: pid });
+                })
+                .catch((err) => console.log(err));
+    }
 
 };
 

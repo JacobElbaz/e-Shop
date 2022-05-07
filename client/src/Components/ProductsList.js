@@ -21,7 +21,10 @@ const ProductList = () => {
     }, [loadProducts, dispatch]);
 
     const onDeleteClick = (id) => {
+        dispatch(deleteProduct(id));
+        window.location.reload();
     };
+
 
     const onCreateClick = () => {
     };
