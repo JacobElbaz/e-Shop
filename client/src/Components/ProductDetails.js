@@ -10,6 +10,9 @@ const ProductDetails = ({ product }) => {
         <h3>{product.name}</h3>
       </ListGroup.Item>
       <ListGroup.Item>
+        <img src={product.image} height="400"></img>
+      </ListGroup.Item>
+      <ListGroup.Item>
         <Rating value={Number(product.rating)} text={`${Number(product.numReviews)} reviews`} />
       </ListGroup.Item>
       <ListGroup.Item>Price: {product.price}</ListGroup.Item>

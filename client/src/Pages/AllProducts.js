@@ -24,7 +24,7 @@ export default function AllProducts() {
 
 
   return (
-    <div>
+    <div className='m-5'>
       <h1>Products</h1>
     <ProductCards products={products} />
     </div>
