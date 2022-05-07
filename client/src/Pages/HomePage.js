@@ -1,9 +1,21 @@
-import React from "react";
+import React, { useState, useEffect } from 'react';
 import Banner from '../Components/Banner';
 import img from '../images/intro-img.png';
 import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { getTrend} from '../actions/products.action';
+import ProductCards from '../Components/ProductCards';
 
 function HomePage() {
+
+  const dispatch = useDispatch();
+  const trending = useSelector((state) => state.trendProductsReducer);
+  const newest = useSelector((state) => state.newestProductsReducer);
+  const best = useSelector((state) => state.bestsellerProductsReducer);
+  const deals = useSelector((state) => state.dealsProductsReducer);
+  useEffect(() => {
+        dispatch(getTrend());
+}, [dispatch]);
 
     return (
         <div>
@@ -17,16 +29,20 @@ function HomePage() {
                     <button className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</button>
                 </div>
                 <Link to='/allProducts' className="btn btn-secondary btn-lg mx-auto w-25">ALL</Link>
-                <Banner name='Trending' />
+                <h1>Trending</h1>
+                <ProductCards products={trending}></ProductCards>
                 <br />
                 <hr />
-                <Banner name='New Arrivals' />
+                <h1>New Arrivals</h1>
+                <ProductCards products={trending}></ProductCards>
                 <br />
                 <hr />
-                <Banner name='Best-Seller' />
+                <h1>Best-Seller</h1>
+                <ProductCards products={trending}></ProductCards>
                 <br />
                 <hr />
-                <Banner name='Big Deals' />
+                <h1>Big Deals</h1>
+                <ProductCards products={trending}></ProductCards>
                 <br />
             </div>
             <div className="footer-dark">

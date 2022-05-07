@@ -3,6 +3,7 @@ export const GET_PRODUCTS = 'GET_PRODUCTS';
 export const GET_PRODUCTS_ERRORS = "GET_PRODUCTS_ERRORS";
 export const GET_ALL_PRODUCTS = "GET_ALL_PRODUCTS";
 export const GET_PRODUCT = "GET_PRODUCT";
+export const GET_TREND = "GET_TREND";
 
 export const getProducts = (num) => {
     return (dispatch) => {
@@ -31,3 +32,15 @@ export const getProduct = (pid) => {
 export const deleteProduct = (pid) => {
 
 };
+
+
+export const getTrend = () => {
+    return (dispatch) => {
+        return axios
+            .get(`${process.env.REACT_APP_API_URL}api/product/trend`)
+            .then((res) => {
+                dispatch({ type: GET_TREND, payload: res.data });
+            })
+            .catch((err) => console.log(err));
+    };
+}
