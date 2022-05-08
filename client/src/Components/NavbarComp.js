@@ -127,6 +127,7 @@ function NavbarComp() {
           <Route path='/product/:id' element={<Product/>}/>
           <Route path='/allProducts' element={<AllProducts/>}/>
           <Route path='/profile' element={<Profile/>}/>
+          <Route path='/admin/editProduct' element={<ProductEdit/>}/>
 
           <Route
             path="/login"

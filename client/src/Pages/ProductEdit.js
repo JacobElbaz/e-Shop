@@ -69,9 +69,6 @@ function ProductEdit() {
   };
   return (
     <>
-      <Link to='/admin/productList' className='btn btn-light my-3'>
-        Go back
-      </Link>
       <div className="Signup">
         <form onSubmit={submitHandler}>
           <div className="form-inner">

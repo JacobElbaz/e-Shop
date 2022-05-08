@@ -24,13 +24,13 @@ function HomePage() {
             <div className="home">
                 <div className="text-center"><img src={img} alt="" className="w-50 mt-2"/></div>
                 
-                <div className="my-5 ">
+                <div className="mt-5 mb-2 ">
                     <button className="btn btn-secondary btn-lg mx-auto w-25">PS4</button>
                     <button className="btn btn-secondary btn-lg mx-auto w-25">PS5</button>
                     <button className="btn btn-secondary btn-lg mx-auto w-25">XBOX</button>
                     <button className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</button>
                 </div>
-                <Link to='/allProducts' className="btn btn-secondary btn-lg mx-auto w-25">ALL</Link>
+                <Link to='/allProducts' className="btn btn-success btn-lg mx-auto mb-5 w-100">ALL GAMES</Link>
                 <h1>Trending</h1>
                 <ProductCards products={trending}></ProductCards>
                 <br />
