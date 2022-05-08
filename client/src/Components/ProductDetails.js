@@ -10,7 +10,7 @@ const ProductDetails = ({ product }) => {
         <h3>{product.name}</h3>
       </ListGroup.Item>
       <ListGroup.Item>
-        <img src={product.image} height="400"></img>
+        <img src={product.image} height="320"></img>
       </ListGroup.Item>
       <ListGroup.Item>
         <Rating value={Number(product.rating)} text={`${Number(product.numReviews)} reviews`} />

@@ -15,7 +15,6 @@ module.exports.getProducts = (req, res) => {
 
 module.exports.getLatestProduct = async (req, res) => {
   const products = await ProductModel.find({})
-  .select('-image')
   .sort({releaseDate: -1})
   .limit(4)
   if (!products) {
@@ -27,7 +26,6 @@ module.exports.getLatestProduct = async (req, res) => {
 
 module.exports.getBestSeller = async (req, res) => {
   const products = await ProductModel.find({})
-  .select('-image')
   .sort({sales: -1})
   .limit(4)
   if (!products) {
@@ -39,7 +37,6 @@ module.exports.getBestSeller = async (req, res) => {
 
 module.exports.getTrend = async (req, res) => {
   const products = await ProductModel.find({})
-  .select('-image')
   .sort({sales: -1})
   .limit(4)
   if (!products) {
@@ -51,8 +48,7 @@ module.exports.getTrend = async (req, res) => {
 
 module.exports.getDeals = async (req, res) => {
   const products = await ProductModel.find({})
-  .select('-image')
-  .sort({price: -1})
+  .sort({price: 0})
   .limit(4)
   if (!products) {
     res.status(404);
