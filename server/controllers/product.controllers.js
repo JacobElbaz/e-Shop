@@ -47,7 +47,7 @@ module.exports.getTrend = async (req, res) => {
 }
 
 module.exports.getDeals = async (req, res) => {
-  const products = await ProductModel.find({})
+  const products = await ProductModel.find({price: {$lte: 10}})
   .sort({price: 0})
   .limit(4)
   if (!products) {

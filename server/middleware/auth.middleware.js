@@ -7,7 +7,7 @@ module.exports.checkClient = (req, res, next) => {
       jwt.verify(token, process.env.TOKEN_SECRET, async (err, decodedToken) => {
         if (err) {
           res.locals.client = null;
-          res.cookie("jwt", "", { maxAge: 1 });
+          // res.cookie("jwt", "", { maxAge: 1 });
           next();
         } else {
           let client = await clientModel.findById(decodedToken.id);

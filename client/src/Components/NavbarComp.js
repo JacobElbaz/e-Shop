@@ -6,7 +6,6 @@ import SignupForm from './Log/SignupForm';
 import SignupManagerForm from './Log/SignupManagerForm';
 import HomePage from '../Pages/HomePage';
 import ShoppingCart from '../Pages/ShoppingCart';
-import MyAccount from '../Pages/MyAccount';
 import Wishlist from '../Pages/WishList';
 import { UidContext } from './AppContext';
 import { useSelector } from 'react-redux';
@@ -15,6 +14,7 @@ import ProductsList from './ProductsList';
 import ProductEdit from '../Pages/ProductEdit';
 import Product from '../Pages/Product';
 import AllProducts from '../Pages/AllProducts';
+import Profile from '../Pages/Profile';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -37,7 +37,7 @@ function NavbarComp() {
                 {uid ? (
                   <>
                     <NavDropdown title={userData.username} id='username'>
-                      <NavDropdown.Item to='/account' as={Link}>
+                      <NavDropdown.Item to='/profile' as={Link}>
                         Profile
                       </NavDropdown.Item>
                       {userData.manager && (
@@ -61,7 +61,7 @@ function NavbarComp() {
                         <Logout></Logout>
                       </NavDropdown.Item>
                     </NavDropdown>
-                    <Nav.Link as={Link} to={'/wish'}>
+                    <Nav.Link as={Link} to={'/wishlist'}>
                       <svg
                         xmlns="http://www.w3.org/2000/svg"
                         width="20"
@@ -119,13 +119,13 @@ function NavbarComp() {
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/cart" element={<ShoppingCart />} />
-          <Route path="/wish" element={<Wishlist />} />
-          <Route path="/account" element={<MyAccount />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/signupManager" element={<SignupManagerForm />} />
           <Route path="/admin/productList" element={<ProductsList />}/>
           <Route path="/admin/editProduct" element={<ProductEdit />}/>
           <Route path='/product/:id' element={<Product/>}/>
           <Route path='/allProducts' element={<AllProducts/>}/>
+          <Route path='/profile' element={<Profile/>}/>
 
           <Route
             path="/login"

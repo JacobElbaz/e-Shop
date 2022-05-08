@@ -21,6 +21,9 @@ const clientSchema = mongoose.Schema(
     manager: {
       type: Boolean,
     },
+    wishlist: {
+      type: [{type: mongoose.Schema.Types.ObjectId, ref: 'Product'}]
+    }
   },
   {
     //automatically create and upate the field

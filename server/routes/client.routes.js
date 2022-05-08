@@ -10,5 +10,7 @@ router.get('/logout', authController.logout);
 //client DB
 router.get('/', clientController.getAllUsers);
 router.get("/:id", clientController.userInfo);
+router.put('/wishlist', clientController.updateWishlist);
+router.put("/:id", clientController.updateUser);
 
 module.exports = router;

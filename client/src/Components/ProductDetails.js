@@ -15,7 +15,9 @@ const ProductDetails = ({ product }) => {
       <ListGroup.Item>
         <Rating value={Number(product.rating)} text={`${Number(product.numReviews)} reviews`} />
       </ListGroup.Item>
-      <ListGroup.Item>Price: {product.price}</ListGroup.Item>
+      <ListGroup.Item>Price: {product.price} $</ListGroup.Item>
+      <ListGroup.Item>Platform: {product.category}</ListGroup.Item>
+      <ListGroup.Item>Genre: {product.genre}</ListGroup.Item>
       <ListGroup.Item>Description: {product.description}</ListGroup.Item>
     </ListGroup>
   );
