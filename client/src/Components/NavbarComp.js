@@ -15,6 +15,7 @@ import ProductEdit from '../Pages/ProductEdit';
 import Product from '../Pages/Product';
 import AllProducts from '../Pages/AllProducts';
 import Profile from '../Pages/Profile';
+import UserList from '../Pages/UserList';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -122,7 +123,7 @@ function NavbarComp() {
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/signupManager" element={<SignupManagerForm />} />
           <Route path="/admin/productList" element={<ProductsList />}/>
-          <Route path="/admin/editProduct" element={<ProductEdit />}/>
+          <Route path="/admin/userList" element={<UserList />}/>
           <Route path='/product/:id' element={<Product/>}/>
           <Route path='/allProducts' element={<AllProducts/>}/>
           <Route path='/profile' element={<Profile/>}/>
