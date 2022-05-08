@@ -1,20 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import Banner from '../Components/Banner';
+import React, { useEffect } from 'react';
 import img from '../images/intro-img.png';
 import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import { getTrend} from '../actions/products.action';
+import { getBestSeller, getDeals, getLatest, getTrend} from '../actions/products.action';
 import ProductCards from '../Components/ProductCards';
 
 function HomePage() {
 
   const dispatch = useDispatch();
   const trending = useSelector((state) => state.trendProductsReducer);
-  const newest = useSelector((state) => state.newestProductsReducer);
-  const best = useSelector((state) => state.bestsellerProductsReducer);
+  const newest = useSelector((state) => state.latestProductsReducer);
+  const best = useSelector((state) => state.bestSellerReducer);
   const deals = useSelector((state) => state.dealsProductsReducer);
   useEffect(() => {
         dispatch(getTrend());
+        dispatch(getDeals());
+        dispatch(getLatest());
+        dispatch(getBestSeller());
 }, [dispatch]);
 
     return (
@@ -34,15 +36,15 @@ function HomePage() {
                 <br />
                 <hr />
                 <h1>New Arrivals</h1>
-                <ProductCards products={trending}></ProductCards>
+                <ProductCards products={newest}></ProductCards>
                 <br />
                 <hr />
                 <h1>Best-Seller</h1>
-                <ProductCards products={trending}></ProductCards>
+                <ProductCards products={best}></ProductCards>
                 <br />
                 <hr />
                 <h1>Big Deals</h1>
-                <ProductCards products={trending}></ProductCards>
+                <ProductCards products={deals}></ProductCards>
                 <br />
             </div>
             <div className="footer-dark">
