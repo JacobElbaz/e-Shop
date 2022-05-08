@@ -6,11 +6,17 @@ const { uploadErrors } = require('../utils/errors.utils');
 const pipeline = promisify(require('stream').pipeline);
 const ObjectId = require('mongoose').Types.ObjectId;
 
-module.exports.getProducts = (req, res) => {
-  ProductModel.find((err, docs) => {
-  if(!err) res.send(docs);
-  else console.log('Error to get data : ' + err);
-  })
+module.exports.getProducts = async (req, res) => {
+  const match = {};
+  
+  if(req.query.category){
+    match.category = {$regex: req.query.category, $options: 'i'};
+  }
+  if(req.query.keyword){
+    match.name = {$regex: req.query.keyword, $options: 'i'};
+  }
+  const products = await ProductModel.find({...match});
+  res.send(products);
 }
 
 module.exports.getLatestProduct = async (req, res) => {

@@ -9,13 +9,11 @@ export const GET_DEALS = "GET_DEALS";
 export const GET_BEST = "GET_BEST";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 
-export const getProducts = (num) => {
+export const getProducts = ( keyword = '', category = '') => {
     return async (dispatch) => {
         try {
             const res = await axios
-                .get(`${process.env.REACT_APP_API_URL}api/product/`);
-            const array = res.data.slice(0, num);
-            dispatch({ type: GET_PRODUCTS, payload: array });
+                .get(`${process.env.REACT_APP_API_URL}api/product/`, {params: {keyword, category}});
             dispatch({ type: GET_ALL_PRODUCTS, payload: res.data });
         } catch (err) {
             return console.log(err);

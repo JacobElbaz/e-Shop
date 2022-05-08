@@ -1,6 +1,6 @@
-import React, { useContext } from 'react';
+import React, { useContext, useState } from 'react';
 import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
-import { Routes, Route, Link } from 'react-router-dom';
+import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import LoginForm from './Log/LoginForm';
 import SignupForm from './Log/SignupForm';
 import SignupManagerForm from './Log/SignupManagerForm';
@@ -16,10 +16,21 @@ import Product from '../Pages/Product';
 import AllProducts from '../Pages/AllProducts';
 import Profile from '../Pages/Profile';
 import UserList from '../Pages/UserList';
+import history from '../history';
+import SearchResults from '../Pages/SearchResults';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
+  const navigate = useNavigate();
   const userData = useSelector((state) => state.userReducer);
+  const [keyword, setkeyword] = useState('');
+  const onSearchClick = (e) => {
+    e.preventDefault();
+    if(keyword.trim())
+      navigate(`/search/${keyword}`);
+    else history.push('/');
+
+  }
 
 
   return (
@@ -103,14 +114,15 @@ function NavbarComp() {
                   </Nav>
                 )}
               </Nav>
-              <Form className="d-flex">
+              <Form onSubmit = {onSearchClick} className="d-flex">
                 <FormControl
                   type="search"
                   placeholder="Search"
                   className="me-2"
                   aria-label="Search"
+                  onChange = { (e) => setkeyword(e.target.value)}
                 />
-                <Button variant="outline-success">Search</Button>
+                <Button type = 'submit' variant="outline-success">Search</Button>
               </Form>
             </Navbar.Collapse>
           </Container>
@@ -128,6 +140,8 @@ function NavbarComp() {
           <Route path='/allProducts' element={<AllProducts/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/admin/editProduct' element={<ProductEdit/>}/>
+          <Route path='/search/:keyword' element={<SearchResults/>}/>
+
 
           <Route
             path="/login"
