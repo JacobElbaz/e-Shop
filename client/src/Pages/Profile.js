@@ -40,7 +40,7 @@ const UpdateProfil = () => {
               </div>
             )}
           </div>
-          <h4>Member from : {new Date(userData.createdAt).toISOString().split('T')[0]}</h4>
+          <h4>Member from : {Date(userData.createdAt)}</h4>
         </div>
       </div>
       
