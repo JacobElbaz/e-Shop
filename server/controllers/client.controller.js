@@ -18,14 +18,18 @@ module.exports.userInfo = (req, res) => {
 };
 
 module.exports.updateWishlist = async (req, res) => {
-  const {productId} = req.body;
-  const client = await ClientModel.findById(req.client._id)
+  const {productId, userId} = req.body;
+  const id = req.client._id
+  const client = await ClientModel.findById(userId)
   .select('-password')
   .populate('wishlist', 'name rating price')
+  console.log(req.client);
   if (client) {
     const alreadyExisted = client.wishlist.find(
       (wish) => wish._id.toString() === productId
     );
+
+    
 
     if (!alreadyExisted) {
       const product = await Product.findById(productId).select(
