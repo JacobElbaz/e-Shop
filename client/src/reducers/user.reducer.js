@@ -18,7 +18,7 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 data: {
                     ...state.data,
-                    wishList: [...action.payload],
+                    wishlist: [...action.payload],
                 },
             };
 
