@@ -19,22 +19,13 @@ module.exports.userInfo = (req, res) => {
 
 module.exports.updateWishlist = async (req, res) => {
   const {productId, userId} = req.body;
-  const id = req.client._id
-  const client = await ClientModel.findById(userId)
-  .select('-password')
-  .populate('wishlist', 'name rating price')
-  console.log(req.client);
+  const client = await ClientModel.findById(userId);
   if (client) {
     const alreadyExisted = client.wishlist.find(
       (wish) => wish._id.toString() === productId
     );
-
-    
-
     if (!alreadyExisted) {
-      const product = await Product.findById(productId).select(
-        'name rating price'
-      );
+      const product = await Product.findById(productId);
       client.wishlist.push(product);
     } else {
       client.wishlist = client.wishlist.filter((wish) => {
@@ -42,7 +33,7 @@ module.exports.updateWishlist = async (req, res) => {
       });
     }
 
-    await client.save();
+    client.save();
 
     res.send(client.wishlist);
   } else {

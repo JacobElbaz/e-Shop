@@ -15,6 +15,7 @@ const ProductAvailability = ({ product }) => {
   const onAddToWishListClick = () => {
     if (user) {
       dispatch(updateWishProduct(product._id, user._id));
+      window.location.reload();
       return;
     }
   };

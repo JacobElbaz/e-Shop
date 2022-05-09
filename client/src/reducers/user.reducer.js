@@ -10,7 +10,7 @@ export default function userReducer(state = initialState, action) {
         case UPDATE_NAME:
             return {
                 ...state,
-                bio: action.payload,
+                name: action.payload,
             };
 
         case UPDATE_WISH_PRODUCT:

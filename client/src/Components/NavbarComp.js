@@ -23,6 +23,8 @@ function NavbarComp() {
   const uid = useContext(UidContext);
   const navigate = useNavigate();
   const userData = useSelector((state) => state.userReducer);
+  if(userData._id){
+  localStorage.setItem('auth', JSON.stringify(userData));}
   const [keyword, setkeyword] = useState('');
   const onSearchClick = (e) => {
     e.preventDefault();
