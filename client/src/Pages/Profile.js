@@ -29,17 +29,18 @@ const UpdateProfil = () => {
               </>
             )}
             {updateForm && (
-              <>
+              <div >
                 <textarea
                   type="text"
                   defaultValue={userData.username}
                   onChange={(e) => setName(e.target.value)}
                 ></textarea>
-                <button onClick={handleUpdate}>Validate</button>
-              </>
+                <br />
+                <button className="btn btn-success" onClick={handleUpdate}>Validate</button>
+              </div>
             )}
           </div>
-          <h4>Member from : {userData.createdAt}</h4>
+          <h4>Member from : {new Date(userData.createdAt).toISOString().split('T')[0]}</h4>
         </div>
       </div>
       
