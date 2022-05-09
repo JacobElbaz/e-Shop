@@ -1,23 +1,31 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Row, Col } from 'react-bootstrap';
 import Product from '../Components/Product';
 import { HeartFill } from 'react-bootstrap-icons';
 import { getUser, updateWishProduct } from '../actions/user.action';
 import { UidContext } from '../Components/AppContext';
+import { getProducts } from '../actions/products.action';
 //import { deleteWishProduct } from '../actions/auth';
 
 const WishList = () => {
+    const [loadProducts, setLoadProducts] = useState();
     const user = JSON.parse(localStorage.getItem('auth'));
     const products = useSelector((state) => state.allProductsReducer);
-    const wishlist = user.wishlist;
+    const wishlist = user?.wishlist;
     console.log(user);
     console.log(products);
     const dispatch = useDispatch();
+    useEffect(() => {
+        if (loadProducts) {
+            dispatch(getProducts());
+            setLoadProducts(false);
+        }
+    }, [loadProducts, dispatch]);
     const onRemoveProduct = (productId) => {
         if (user) {
             dispatch(updateWishProduct(productId, user._id));
-            window.location.reload();
+            setLoadProducts(true);
             return;
           }
     };
@@ -46,7 +54,7 @@ const WishList = () => {
                     <h1>You don't have any order yet.</h1>
                 ) : (
                     Object.values(products)?.map((product) => {
-                        if(product._id == wishlist.find(wish => product._id == wish))
+                        if(product._id == wishlist?.find(wish => product._id == wish))
                         return (
                         <Col
                             key={product._id}
