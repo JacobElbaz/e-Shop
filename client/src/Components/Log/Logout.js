@@ -7,6 +7,7 @@ const Logout = () => {
     if (window !== "undefined") {
       cookie.remove(key, { expires: 1 });
     }
+    localStorage.clear();
   };
 
   const logout = async () => {

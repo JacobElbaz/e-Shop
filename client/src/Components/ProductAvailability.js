@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateWishProduct } from '../actions/user.action';
@@ -8,8 +8,28 @@ const ProductAvailability = ({ product }) => {
   const [qty, setQty] = useState(1);
   const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  let [cart, setCart] = useState([])
+  let localCart = localStorage.getItem("cart");
+
+ 
+  useEffect(() => {
+    localCart = JSON.parse(localCart);
+    if (localCart) setCart(localCart)
+
+  }, []) //the empty array ensures useEffect only runs once
 
   const onAddToCartClick = () => {
+    let cartCopy = [...cart];
+    let existingItem = cartCopy.find(cartItem => cartItem._id == product._id);
+    if (existingItem) {
+      
+    } else {
+      product.qty = qty;
+      cartCopy.push(product);
+    }
+    setCart(cartCopy)
+    let stringCart = JSON.stringify(cartCopy);
+    localStorage.setItem("cart", stringCart)
   };
 
   const onAddToWishListClick = () => {
