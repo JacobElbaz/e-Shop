@@ -26,8 +26,10 @@ const orderSchema = mongoose.Schema(
             appartment: {type: Number, required: true},
           },
           paymentMethod: {
-            type: String,
-            required: true,
+            creditCard: { type: Number, required: true },
+            ID: { type: Number, required: true },
+            expiredDate: { type: Date, required: true },
+            CVV: {type: Number, required: true},
           },
           totalPrice: {
             type: Number,

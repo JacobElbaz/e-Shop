@@ -3,7 +3,6 @@ import { ListGroup, Row, Col, Image } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 import history from '../history';
-import Message from '../components/Message';
 
 const OrderItems = ({ order }) => {
   const urlParams = history.location.pathname.split('/')[1];
@@ -13,24 +12,24 @@ const OrderItems = ({ order }) => {
   return (
     <ListGroup.Item>
       <h2>Order Items</h2>
-      {order[items].length === 0 ? (
-        <Message>Your cart is empty</Message>
+      {order.length === 0 ? (
+        <h1>Your cart is empty</h1>
       ) : (
         <ListGroup variant='flush'>
-          {order[items].map((item, index) => {
+          {order.map((item, index) => {
             return (
               <ListGroup.Item key={index}>
                 <Row>
                   <Col md={2}>
                     <Image
-                      src={`/api/products/${item.product}/image`}
+                      src={item.image}
                       alt={item.name}
                       fluid
                       rounded
                     />
                   </Col>
                   <Col>
-                    <Link to={`/products/${item.product}`}>{item.name}</Link>
+                    <Link to={`/products/${item._id}`}>{item.name}</Link>
                   </Col>
                   <Col md={4}>
                     {item.qty} x ${item.price} = ${item.qty * item.price}

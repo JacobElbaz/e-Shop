@@ -18,6 +18,9 @@ import Profile from '../Pages/Profile';
 import UserList from '../Pages/UserList';
 import history from '../history';
 import SearchResults from '../Pages/SearchResults';
+import Shipping from '../Pages/Shipping';
+import Payment from '../Pages/Payment';
+import PlaceOrder from '../Pages/PlaceOrder';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -143,16 +146,11 @@ function NavbarComp() {
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/admin/editProduct' element={<ProductEdit/>}/>
           <Route path='/search/:keyword' element={<SearchResults/>}/>
-
-
-          <Route
-            path="/login"
-            element={<LoginForm />}
-          />
-          <Route
-            path="/signup"
-            element={<SignupForm />}
-          />
+          <Route path='/shipping' element={<Shipping/>}/>
+          <Route path='/payment' element={<Payment/>}/>
+          <Route path='/placeorder' element={<PlaceOrder/>}/>
+          <Route path="/login" element={<LoginForm />}/>
+          <Route path="/signup" element={<SignupForm />}/>
         </Routes>
       </div>
     </div>

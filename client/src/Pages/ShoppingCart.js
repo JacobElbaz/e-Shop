@@ -110,14 +110,14 @@ export default function ShoppingCart() {
                                     .toFixed(2)}</h3>
                         </ListGroup.Item>
                         <ListGroup.Item>
-                            <Button
+                            <Link 
+                                to={'/shipping'}
                                 type='button'
-                                className='btn-block'
+                                className='btn btn-block btn-primary'
                                 disabled={cart.length < 1}
-                            //onClick={() => onCheckOutClick()}
                             >
                                 Procced To Checkout
-                            </Button>
+                            </Link>
                         </ListGroup.Item>
                     </ListGroup>
                 </Card>
