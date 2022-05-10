@@ -9,6 +9,7 @@ require('./routes/client.routes')
 const app = express();
 const clientRoutes = require("./routes/client.routes");
 const productRoutes = require('./routes/product.routes');
+const orderRoutes = require('./routes/order.routes');
 
 const corsOptions = {
     origin: process.env.CLIENT_URL,
@@ -32,7 +33,7 @@ app.get('/jwtid', requireAuth, (req, res) =>{
 //routes
 app.use("/api/client", clientRoutes);
 app.use('/api/product', productRoutes);
-
+app.use('/api/order', orderRoutes);
 //server
 app.listen(process.env.PORT, () => {
     console.log(`Listening on port ${process.env.PORT}`)
