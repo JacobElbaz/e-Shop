@@ -9,10 +9,15 @@ const orderSchema = mongoose.Schema(
         },
         orderItems: [
             {
+              category: { type: String, required: true },
+              countInStock: { type: String, required: true },
+              description: { type: String, required: true },
+              category: { type: String, required: true },
+              qty: { type: String, required: true},
+              image: { type: String, required: true},
               name: { type: String, required: true },
-              qty: { type: Number, required: true },
               price: { type: Number, required: true },
-              product: {
+              _id: {
                 type: mongoose.Schema.Types.ObjectId,
                 required: true,
                 ref: 'product',

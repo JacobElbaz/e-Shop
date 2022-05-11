@@ -2,14 +2,13 @@ import axios from 'axios';
 export const CREATE_ORDER = 'CREATE_ORDER';
 
 
-export const createOrder = async (order) => {
+export const createOrder = (order) => {
+    return async (dispatch) => {
     try {
-        await axios ({
-            method: "post",
-            url: `${process.env.REACT_APP_API_URL}api/order`,
-            data: order,
-        })
+        const res = await axios
+        .post(`${process.env.REACT_APP_API_URL}api/order`, order);
+        dispatch({type: CREATE_ORDER})
     } catch(err) {
         console.log(err);
-    }
+    }}
 }

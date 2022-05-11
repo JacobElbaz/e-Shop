@@ -11,6 +11,7 @@ module.exports.getOrders= async (req, res) => {
 
 module.exports.createOrder = async (req, res) =>{
     const {
+        client,
         orderItems, 
         shippingAddress,
         paymentMethod,
@@ -22,7 +23,7 @@ module.exports.createOrder = async (req, res) =>{
         console.log('No Item');
     } else {
         const order = new OrderModel ({
-            client: req.body.client,
+            client,
             orderItems,
             shippingAddress,
             paymentMethod,

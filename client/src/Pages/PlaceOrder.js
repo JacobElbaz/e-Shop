@@ -18,6 +18,7 @@ const PlaceOrder = () => {
 
     }, [])
   const dispatch = useDispatch();
+  const client = JSON.parse(localStorage.getItem("auth"))
 
   // calculate prices
   cart.totalPrice = cart.reduce(
@@ -28,6 +29,7 @@ const PlaceOrder = () => {
   const onPlaceOrderClick = () => {
     dispatch(
       createOrder({
+        client: client._id,
         orderItems: cart,
         shippingAddress: JSON.parse(localStorage.getItem('shippingAddress')),
         paymentMethod: JSON.parse(localStorage.getItem('paymentMethod')),
