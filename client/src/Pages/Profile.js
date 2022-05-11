@@ -1,16 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { updateName } from "../actions/user.action";
+import { getUser, updateName } from "../actions/user.action";
 
 const UpdateProfil = () => {
   const [name, setName] = useState("");
   const [updateForm, setUpdateForm] = useState(false);
+  const [updateUser, setUpdateUser] = useState(true);
   const userData = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    if (updateUser) {
+        dispatch(getUser(userData._id));
+        setUpdateUser(false);
+    }
+}, [updateUser, dispatch]);
+
   const handleUpdate = () => {
     dispatch(updateName(userData._id, name));
-    window.location.reload();
+    setUpdateUser(true);
     setUpdateForm(false);
   };
 

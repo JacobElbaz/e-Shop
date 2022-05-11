@@ -8,6 +8,7 @@ import latestProductsReducer from './latestProducts.reducer';
 import bestSellerReducer from './bestSeller.reducer';
 import dealsProductsReducer from './bestDeals.reducer';
 import ordersReducer from './orders.reducer';
+import orderReducer from './order.reducer';
 
 export default combineReducers({
     usersReducer,
@@ -19,4 +20,5 @@ export default combineReducers({
     bestSellerReducer,
     dealsProductsReducer,
     ordersReducer,
+    orderReducer,
 })

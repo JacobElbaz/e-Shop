@@ -4,6 +4,7 @@ import { Table, Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { isEmpty } from '../Components/Utils';
 import { getOrders } from '../actions/orders.action';
+import { updateStatus } from '../actions/order.action';
 
 const Orders = () => {
     const [loadOrders, setLoadOrders] = useState(true);
@@ -18,11 +19,15 @@ const Orders = () => {
         }
     }, [loadOrders, dispatch]);
 
-    const onDeleteClick = (id) => {
+    const confirm = (id) => {
+        dispatch(updateStatus(id, 'Confirmed'));
+        setLoadOrders(true);
     };
 
 
-    const onCreateClick = () => {
+    const cancel = (id) => {
+        dispatch(updateStatus(id, 'Canceled'));
+        setLoadOrders(true);	
     };
 
     return (
@@ -41,6 +46,7 @@ const Orders = () => {
                         <th>ADDRESS</th>
                         <th>STATUS</th>
                         <th>DELIVERED</th>
+                        <th>ACTION</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -64,6 +70,14 @@ const Orders = () => {
                                         ) : (
                                             <i className="fas fa-times" style={{ color: 'red' }}></i>
                                         )}
+                                    </td>
+                                    <td>
+                                        <Button variant='success' onClick={() => confirm(order._id)}>Approve
+
+                                        </Button>
+                                        <Button variant='danger' onClick={() => cancel(order._id)}>Cancel
+
+                                        </Button>
                                     </td>
                                 </tr>
                             )

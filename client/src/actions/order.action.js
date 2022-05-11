@@ -1,5 +1,6 @@
 import axios from 'axios';
 export const CREATE_ORDER = 'CREATE_ORDER';
+export const UPDATE_STATUS = 'UPDATE_STATUS';
 
 
 export const createOrder = (order) => {
@@ -12,3 +13,17 @@ export const createOrder = (order) => {
         console.log(err);
     }}
 }
+
+export const updateStatus = (orderId, status) => {
+    return async (dispatch) => {
+        return axios({
+            method: 'put',
+            url: `${process.env.REACT_APP_API_URL}api/order/` + orderId,
+            data: { status },
+        })
+        .then((res) => {
+            dispatch({ type: UPDATE_STATUS, payload: status });
+        })
+        .catch((err) => console.log(err));
+    };
+};
