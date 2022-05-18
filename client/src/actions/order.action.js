@@ -1,6 +1,7 @@
 import axios from 'axios';
 export const CREATE_ORDER = 'CREATE_ORDER';
 export const UPDATE_STATUS = 'UPDATE_STATUS';
+export const GET_MY_ORDERS = 'GET_MY_ORDERS';
 
 
 export const createOrder = (order) => {
@@ -27,3 +28,16 @@ export const updateStatus = (orderId, status) => {
         .catch((err) => console.log(err));
     };
 };
+
+
+export const getMyOrders = (id) => {
+    return async (dispatch) => {
+        try {
+            const res = await axios
+                .get(`${process.env.REACT_APP_API_URL}api/order/${id}/myorders`);
+            dispatch({ type: GET_MY_ORDERS, payload: res.data });
+        } catch (err) {
+            return console.log(err);
+        }
+    };
+}

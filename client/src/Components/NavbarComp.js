@@ -22,6 +22,7 @@ import Shipping from '../Pages/Shipping';
 import Payment from '../Pages/Payment';
 import PlaceOrder from '../Pages/PlaceOrder';
 import Orders from '../Pages/Orders';
+import ClientOrders from '../Pages/ClientOrders'
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -58,6 +59,9 @@ function NavbarComp() {
                       <NavDropdown.Item to='/profile' as={Link}>
                         Profile
                       </NavDropdown.Item>
+                      <NavDropdown.Item to= {`/myorders/${userData._id}`} as={Link}>
+                            My Orders
+                          </NavDropdown.Item>
                       {userData.manager && (
                         <>
                           <NavDropdown.Item to='/admin/stats' as={Link}>
@@ -153,6 +157,8 @@ function NavbarComp() {
           <Route path="/login" element={<LoginForm />}/>
           <Route path="/signup" element={<SignupForm />}/>
           <Route path="/admin/orderList" element={<Orders/>}/>
+          <Route path="/myorders/:id" element={<ClientOrders/>}/>
+
         </Routes>
       </div>
     </div>

@@ -18,6 +18,8 @@ module.exports.createOrder = async (req, res) => {
         totalPrice,
     } = req.body
 
+    const payementDate = new Date().toISOString();
+
     if (orderItems && orderItems.length === 0) {
         res.status(400);
         console.log('No Item');
@@ -28,6 +30,7 @@ module.exports.createOrder = async (req, res) => {
             shippingAddress,
             paymentMethod,
             totalPrice,
+            payementDate,
         });
 
         await order.save();
