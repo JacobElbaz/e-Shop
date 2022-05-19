@@ -25,12 +25,12 @@ function HomePage() {
                 <div className="text-center"><img src={img} alt="" className="w-50 mt-2"/></div>
                 
                 <div className="mt-5 mb-2 ">
-                    <button className="btn btn-secondary btn-lg mx-auto w-25">PS4</button>
-                    <button className="btn btn-secondary btn-lg mx-auto w-25">PS5</button>
-                    <button className="btn btn-secondary btn-lg mx-auto w-25">XBOX</button>
-                    <button className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</button>
+                    <Link to='/allProducts/PS4' className="btn btn-secondary btn-lg mx-auto w-25">PS4</Link>
+                    <Link to='/allProducts/PS5' className="btn btn-secondary btn-lg mx-auto w-25">PS5</Link>
+                    <Link to='/allProducts/XBOX' className="btn btn-secondary btn-lg mx-auto w-25">XBOX</Link>
+                    <Link to='/allProducts/SWITCH' className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</Link>
                 </div>
-                <Link to='/allProducts' className="btn btn-success btn-lg mx-auto mb-5 w-100">ALL GAMES</Link>
+                <Link to='/allProducts/all' className="btn btn-success btn-lg mx-auto mb-5 w-100">ALL GAMES</Link>
                 <h1>Trending</h1>
                 <ProductCards products={trending}></ProductCards>
                 <br />

@@ -12,7 +12,6 @@ const SearchResults = ({ match }) => {
   const products = useSelector(
     (state) => state.allProductsReducer);
   const keyword = String(useParams().keyword);
-  console.log(keyword);
 
   useEffect(() => {
     dispatch(getProducts(keyword, undefined));

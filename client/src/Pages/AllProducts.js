@@ -5,6 +5,7 @@ import ProductCards from '../Components/ProductCards';
 import {
   getProducts,
 } from '../actions/products.action';
+import { useParams } from 'react-router-dom';
 
 
 
@@ -14,9 +15,10 @@ export default function AllProducts() {
   const [loadProducts, setLoadProducts] = useState(true);
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProductsReducer);
+  const category = String(useParams().category);
   useEffect(() => {
     if (loadProducts) {
-        dispatch(getProducts());
+        category == 'all' ? dispatch(getProducts()) : dispatch(getProducts(undefined, category));
         setLoadProducts(false);
     }
 }, [loadProducts, dispatch]);

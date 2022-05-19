@@ -21,6 +21,7 @@ const ProductAvailability = ({ product }) => {
   }, []) //the empty array ensures useEffect only runs once
 
   const onAddToCartClick = () => {
+    if(user){
     let cartCopy = [...cart];
     let existingItem = cartCopy.find(cartItem => cartItem._id == product._id);
     if (existingItem) {
@@ -32,13 +33,19 @@ const ProductAvailability = ({ product }) => {
     setCart(cartCopy)
     let stringCart = JSON.stringify(cartCopy);
     localStorage.setItem("cart", stringCart);
-    setShowModalCart(true);
+    setShowModalCart(true);}
+    else {
+      window.location ='/login';
+    }
   };
 
   const onAddToWishListClick = () => {
     if (user) {
       dispatch(updateWishProduct(product._id, user._id));
       window.location.reload();
+    }
+    else {
+      window.location = '/login';
     }
   };
 

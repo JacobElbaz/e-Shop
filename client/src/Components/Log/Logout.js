@@ -20,6 +20,10 @@ const Logout = () => {
       .catch((err) => console.log(err));
     
     window.location = "/";
+    window.localStorage.removeItem('cart');
+    window.localStorage.removeItem('auth');
+    window.localStorage.removeItem('paymentMethod');
+    window.localStorage.removeItem('shippingAddress');
   };
 
   return (

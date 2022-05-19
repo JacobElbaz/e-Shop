@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Row, Col, ListGroup } from 'react-bootstrap';
+import { Button, Row, Col, ListGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { createOrder } from '../actions/order.action';
@@ -8,6 +8,7 @@ import CheckoutSteps from '../Components/CheckoutSteps';
 import OrderSummary from '../Components/OrderSummary';
 import ShippingDetails from '../Components/ShippingDetails';
 import OrderItems from '../Components/OrderItems';
+import { Link } from 'react-router-dom';
 
 const PlaceOrder = () => {
     let [cart, setCart] = useState([]);
@@ -19,7 +20,7 @@ const PlaceOrder = () => {
     }, [])
   const dispatch = useDispatch();
   const client = JSON.parse(localStorage.getItem("auth"))
-
+  const [showModal, setShowModal] = useState(false);
   // calculate prices
   cart.totalPrice = cart.reduce(
     (acc, item) => acc + item.price * item.qty,
@@ -36,10 +37,30 @@ const PlaceOrder = () => {
         totalPrice: cart.totalPrice,
       })
     );
+    setShowModal(true);
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
+    window.localStorage.removeItem('cart');
   };
 
   return (
     <div>
+      <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Thank you !</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Your order was successfully received.</Modal.Body>
+        <Modal.Footer>
+          <Link type="button" className='btn btn-secondary' to={'/'} onClick={handleClose}>
+            Continue Shopping
+          </Link>
+          <Link type="button" className='btn btn-primary' to={`/myorders/${client._id}`} onClick={handleClose}>
+            To My Orders
+          </Link>
+        </Modal.Footer>
+      </Modal>
       <CheckoutSteps step1 step2 step3 step4 />
       <Row>
         <Col md={8}>

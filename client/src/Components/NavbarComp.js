@@ -36,7 +36,6 @@ function NavbarComp() {
     if(keyword.trim())
       navigate(`/search/${keyword}`);
     else history.push('/');
-
   }
 
 
@@ -149,7 +148,7 @@ function NavbarComp() {
           <Route path="/admin/productList" element={<ProductsList />}/>
           <Route path="/admin/userList" element={<UserList />}/>
           <Route path='/product/:id' element={<Product/>}/>
-          <Route path='/allProducts' element={<AllProducts/>}/>
+          <Route path='/allProducts/:category' element={<AllProducts/>}/>
           <Route path='/profile' element={<Profile/>}/>
           <Route path='/admin/editProduct' element={<ProductEdit/>}/>
           <Route path='/search/:keyword' element={<SearchResults/>}/>
