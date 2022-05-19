@@ -1,21 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { Row, Col, ListGroup, Card, Form, Button } from 'react-bootstrap';
+import React, { useContext, useEffect, useState } from 'react';
+import { Row, Col, ListGroup, Card, Form, Button, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateWishProduct } from '../actions/user.action';
+import { getUser, updateWishProduct } from '../actions/user.action';
+import {Link} from 'react-router-dom';
+import { UidContext } from '../Components/AppContext';
 
 
 const ProductAvailability = ({ product }) => {
+  const [showModalCart, setShowModalCart] = useState(false);
   const [qty, setQty] = useState(1);
-  const user = useSelector((state) => state.userReducer);
   const dispatch = useDispatch();
+  const user = JSON.parse(localStorage.getItem('auth'));
   let [cart, setCart] = useState([])
   let localCart = localStorage.getItem("cart");
 
  
   useEffect(() => {
     localCart = JSON.parse(localCart);
-    if (localCart) setCart(localCart)
-
+    if (localCart) setCart(localCart);
   }, []) //the empty array ensures useEffect only runs once
 
   const onAddToCartClick = () => {
@@ -29,19 +31,42 @@ const ProductAvailability = ({ product }) => {
     }
     setCart(cartCopy)
     let stringCart = JSON.stringify(cartCopy);
-    localStorage.setItem("cart", stringCart)
+    localStorage.setItem("cart", stringCart);
+    setShowModalCart(true);
   };
 
   const onAddToWishListClick = () => {
     if (user) {
       dispatch(updateWishProduct(product._id, user._id));
       window.location.reload();
-      return;
     }
   };
 
+  const handleClose = () => {
+    setShowModalCart(false);
+  }
+
+  const renderWishlistText = 
+  user && user.wishlist?.find(wish => wish[0] === product._id)
+      ? 'Remove From Wishlist'
+      : 'Add To Wishlist';
+
   return (
     <Card>
+       <Modal show={showModalCart} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Thank you for adding to the cart</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>The product was added to your cart!</Modal.Body>
+        <Modal.Footer>
+          <Link type="button" className='btn btn-secondary' to={'/'} onClick={handleClose}>
+            Continue Shopping
+          </Link>
+          <Link type="button" className='btn btn-primary' to='/cart' onClick={handleClose}>
+            To My Cart
+          </Link>
+        </Modal.Footer>
+      </Modal>
       <ListGroup varient='flush'>
         <ListGroup.Item>
           <Row>
@@ -91,7 +116,9 @@ const ProductAvailability = ({ product }) => {
               className='btn-block my-1'
               type='button'
               onClick={onAddToWishListClick}>
-              Add To WishList
+              {user && user.wishlist.find(wish => wish === product._id)
+      ? 'Remove From Wishlist'
+      : 'Add To Wishlist'}
             </Button></Row>
         </ListGroup.Item>
       </ListGroup>

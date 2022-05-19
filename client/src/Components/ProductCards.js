@@ -3,7 +3,6 @@ import { Row, Col } from 'react-bootstrap';
 import Product from './Product';
 
 const ProductCards = ({ products }) => {
-    // console.log(products);
   return (
     <>
       <Row>

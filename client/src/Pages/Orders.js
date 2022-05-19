@@ -10,7 +10,6 @@ const Orders = () => {
     const [loadOrders, setLoadOrders] = useState(true);
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.ordersReducer);
-    console.log(orders);
 
     useEffect(() => {
         if (loadOrders) {

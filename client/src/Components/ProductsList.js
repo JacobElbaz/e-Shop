@@ -12,7 +12,6 @@ const ProductList = () => {
     const [loadProducts, setLoadProducts] = useState(true);
     const dispatch = useDispatch();
     const products = useSelector((state) => state.allProductsReducer);
-    console.log(products);
 
     useEffect(() => {
         if (loadProducts) {

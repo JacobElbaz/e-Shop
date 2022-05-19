@@ -13,8 +13,6 @@ const WishList = () => {
     const user = JSON.parse(localStorage.getItem('auth'));
     const products = useSelector((state) => state.allProductsReducer);
     const wishlist = user?.wishlist;
-    console.log(user);
-    console.log(products);
     const dispatch = useDispatch();
     useEffect(() => {
         if (loadProducts) {

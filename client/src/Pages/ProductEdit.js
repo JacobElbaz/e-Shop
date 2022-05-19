@@ -43,7 +43,6 @@ function ProductEdit() {
     );
     imageUrl = dataRes.data.url;
     setDetails({ ...details, image: imageUrl });
-    console.log(details);
     
     await axios({
       method: 'post',

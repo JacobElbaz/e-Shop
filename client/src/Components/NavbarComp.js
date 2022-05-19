@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button } from 'react-bootstrap';
+import { Container, Navbar, Nav, NavDropdown, Form, FormControl, Button, Badge } from 'react-bootstrap';
 import { Routes, Route, Link, useNavigate } from 'react-router-dom';
 import LoginForm from './Log/LoginForm';
 import SignupForm from './Log/SignupForm';
@@ -98,6 +98,7 @@ function NavbarComp() {
                         />
                       </svg>{' '}
                       Wishlist
+                      <Badge bg="secondary">{JSON.parse(localStorage.getItem('auth')).wishlist.length}</Badge>
                     </Nav.Link>
                     <Nav.Link as={Link} to={'/cart'}>
                       <svg
@@ -111,6 +112,7 @@ function NavbarComp() {
                         <path d="M0 1.5A.5.5 0 0 1 .5 1H2a.5.5 0 0 1 .485.379L2.89 3H14.5a.5.5 0 0 1 .491.592l-1.5 8A.5.5 0 0 1 13 12H4a.5.5 0 0 1-.491-.408L2.01 3.607 1.61 2H.5a.5.5 0 0 1-.5-.5zM5 12a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm7 0a2 2 0 1 0 0 4 2 2 0 0 0 0-4zm-7 1a1 1 0 1 1 0 2 1 1 0 0 1 0-2zm7 0a1 1 0 1 1 0 2 1 1 0 0 1 0-2z" />
                       </svg>{' '}
                       Cart
+                      <Badge bg="secondary">{JSON.parse(localStorage.getItem('cart')).length}</Badge>
                     </Nav.Link>
                   </>
                 ) : (
