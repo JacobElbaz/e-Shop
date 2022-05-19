@@ -24,7 +24,6 @@ const WishList = () => {
         if (user) {
             dispatch(updateWishProduct(productId, user._id));
             setLoadProducts(true);
-            return;
           }
     };
     const renderLikeIcon = (productId) => {

@@ -7,7 +7,6 @@ const Logout = () => {
     if (window !== "undefined") {
       cookie.remove(key, { expires: 1 });
     }
-    localStorage.clear();
   };
 
   const logout = async () => {
@@ -16,7 +15,8 @@ const Logout = () => {
       url: `${process.env.REACT_APP_API_URL}api/client/logout`,
       withCredentials: true,
     })
-      .then(() => removeCookie("jwt"))
+      .then(() => {
+        removeCookie("jwt");})
       .catch((err) => console.log(err));
     
     window.location = "/";
