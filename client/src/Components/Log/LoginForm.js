@@ -11,6 +11,9 @@ function LoginForm() {
   const [details, setDetails] = useState({ email: '', password: '' });
 
   const [showModal, setShowModal] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const [newPass, setNewPass] = useState();
+  const [email, setEmail] = useState();
   const dispatch = useDispatch();
 
   const submitHandler = (e) => {
@@ -41,19 +44,34 @@ function LoginForm() {
 
   const handleClose = () => {
     setShowModal(false);
+    setShowPassword(false);
   };
 
   const onForgotPassword = () => {
     setShowModal(true);
   };
 
-  const onSubmit = ({ email, password }) => {
-      
-    dispatch(forgot_password(email, password));
+  const onSubmit = () => {
+    setShowModal(false);
+    setNewPass('123456');
+    dispatch(forgot_password(email, '123456'));
+    setShowPassword(true);
   };
 
   return (
     <>
+    <Modal show={showPassword} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>New Password</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This is your new password: {newPass}</Modal.Body>
+        <Modal.Footer>
+          <Link type="button" className='btn btn-secondary' to={'/login'} onClick={handleClose}>
+            OK
+          </Link>
+        </Modal.Footer>
+      </Modal>
+
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Forgot Password</Modal.Title>
@@ -69,6 +87,7 @@ function LoginForm() {
                     name = "email"
                     required
                     placeholder='Enter Email'
+                    onChange={e => setEmail(e.target.value)}
                     />
                 </Form.Group>
               </Form>
@@ -80,7 +99,7 @@ function LoginForm() {
             type="button"
             className="btn btn-secondary"
             to={'/login'}
-            onClick={handleClose}
+            onClick={() => onSubmit()}
           >
             Submit
           </Link>
