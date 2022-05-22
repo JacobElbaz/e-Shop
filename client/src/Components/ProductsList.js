@@ -59,7 +59,7 @@ const ProductList = () => {
                             return (
                                 <tr key={product._id}>
                                     <td>
-                                        <Link to={`/admin/product/${product._id}/edit`}>{product._id}</Link>
+                                        <Link to={`/product/${product._id}`}>{product._id}</Link>
                                     </td>
                                     <td>{product.name}</td>
                                     <td>${product.price}</td>

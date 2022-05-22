@@ -30,6 +30,7 @@ const Product = ({ product }) => {
             </p>
           </Card.Title>
         </Link>
+        <Card.Text as='div'>{product.category}</Card.Text>
         <Card.Text as='div'>
           <Rating value={product.rating} />
         </Card.Text>
