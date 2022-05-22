@@ -13,31 +13,31 @@ import { useParams } from 'react-router-dom';
 export default function AllProducts() {
 
   const [loadProducts, setLoadProducts] = useState(true);
-  const [filter, setFilter] = useState({ category: undefined, genre: undefined });
+  const [filter, setFilter] = useState({ category: String(useParams().category), genre: undefined });
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProductsReducer);
   const category = String(useParams().category);
   useEffect(() => {
-    if (loadProducts) {
-      category == 'all' ? dispatch(getProducts()) : dispatch(getProducts(undefined, category));
-      setLoadProducts(false);
+    if (filter.category != 'all') {
+      dispatch(getProducts(undefined, filter.category));
     }
-  }, [loadProducts, dispatch]);
+    else
+      dispatch(getProducts());
+  }, [filter, loadProducts, dispatch]);
 
 
 
   return (
     <div className='m-5'>
       <h1>Products</h1>
-      <select className="form-select w-25 d-inline" onChange={(e) => { setFilter({ ...filter, category: e.target.value }) }}>
-        <option selected></option>
+      Filter <select className="form-select w-25 d-inline" onChange={(e) => { setFilter({ ...filter, category: e.target.value }) }}>
+        <option value="all">ALL</option>
         <option value="PS4">PS4</option>
         <option value="PS5">PS5</option>
         <option value="XBOX">XBOX</option>
         <option value="Switch">Switch</option>
       </select>
       <select className="form-select w-25 d-inline" onChange={(e) => { setFilter({ ...filter, genre: e.target.value }) }}>
-        <option selected></option>
         <option value="Action">Action</option>
         <option value="Adventure">Adventure</option>
         <option value="Fighting">Fighting</option>
@@ -47,6 +47,13 @@ export default function AllProducts() {
         <option value="Sport">Sport</option>
         <option value="Strategy">Strategy</option>
         <option value="Other">Other</option>
+      </select>
+      {' '}Sort by {' '}
+      <select className="form-select w-25 d-inline" id="">
+        <option value="az">A-Z</option>
+        <option value="za">Z-A</option>
+        <option value="low-high">Low-High</option>
+        <option value="high-low">High-Low</option>
       </select>
       <ProductCards products={products} />
     </div>
