@@ -32,7 +32,7 @@ const Payment = () => {
         <>
 
             <FormContainer>
-                <CheckoutSteps step1 step2 step3 />
+                <CheckoutSteps step1 step2 step3 step5 />
                 <h1>Payment method</h1>
                 <Formik
                     initialValues={initialValues}

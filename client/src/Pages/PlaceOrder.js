@@ -35,6 +35,7 @@ const PlaceOrder = () => {
         shippingAddress: JSON.parse(localStorage.getItem('shippingAddress')),
         paymentMethod: JSON.parse(localStorage.getItem('paymentMethod')),
         totalPrice: cart.totalPrice,
+        deliveredAt: new Date(JSON.parse(localStorage.getItem('deliveryDate'))),
       })
     );
     setShowModal(true);
@@ -61,7 +62,7 @@ const PlaceOrder = () => {
           </Link>
         </Modal.Footer>
       </Modal>
-      <CheckoutSteps step1 step2 step3 step4 />
+      <CheckoutSteps step1 step2 step3 step4 step5 />
       <Row>
         <Col md={8}>
           <ListGroup variant='flush'>

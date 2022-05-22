@@ -23,6 +23,8 @@ import Payment from '../Pages/Payment';
 import PlaceOrder from '../Pages/PlaceOrder';
 import Orders from '../Pages/Orders';
 import ClientOrders from '../Pages/ClientOrders'
+import Delivery from '../Pages/Delivery';
+import Order from '../Pages/Order';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -96,8 +98,7 @@ function NavbarComp() {
                           d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"
                         />
                       </svg>{' '}
-                      Wishlist {' '}
-                      <Badge pill bg="secondary">{JSON.parse(localStorage.getItem('auth'))?.wishlist.length}</Badge>
+                      Wishlist
                     </Nav.Link>
                     <Nav.Link as={Link} to={'/cart'}>
                       <svg
@@ -153,12 +154,14 @@ function NavbarComp() {
           <Route path='/admin/editProduct' element={<ProductEdit/>}/>
           <Route path='/search/:keyword' element={<SearchResults/>}/>
           <Route path='/shipping' element={<Shipping/>}/>
+          <Route path='/delivery' element={<Delivery/>}/>
           <Route path='/payment' element={<Payment/>}/>
           <Route path='/placeorder' element={<PlaceOrder/>}/>
           <Route path="/login" element={<LoginForm />}/>
           <Route path="/signup" element={<SignupForm />}/>
           <Route path="/admin/orderList" element={<Orders/>}/>
           <Route path="/myorders/:id" element={<ClientOrders/>}/>
+          <Route path="/order/:id" element={<Order/>}/>
 
         </Routes>
       </div>

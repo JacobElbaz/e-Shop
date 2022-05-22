@@ -16,6 +16,7 @@ module.exports.createOrder = async (req, res) => {
         shippingAddress,
         paymentMethod,
         totalPrice,
+        deliveredAt,
     } = req.body
 
     const payementDate = new Date().toISOString();
@@ -31,6 +32,7 @@ module.exports.createOrder = async (req, res) => {
             paymentMethod,
             totalPrice,
             payementDate,
+            deliveredAt,
         });
 
         await order.save();

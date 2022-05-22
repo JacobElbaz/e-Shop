@@ -13,6 +13,7 @@ import thunk from 'redux-thunk';
 import rootReducer from './reducers';
 import { getUser } from './actions/user.action';
 import { getProducts } from './actions/products.action';
+import { getOrders } from './actions/orders.action';
 
 const store = createStore(
   rootReducer,
@@ -20,6 +21,7 @@ const store = createStore(
 );
 store.dispatch(getUser());
 store.dispatch(getProducts());
+store.dispatch(getOrders());
 
 ReactDOM.render(
   <React.StrictMode>
