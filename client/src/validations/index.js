@@ -70,3 +70,9 @@ export const addressFormValidationSchema = yup.object({
     ),
     CVV: yup.string().min(3).max(3).required('CVV is required'),
   });
+
+  export const profileFormValidationSchema = yup.object({
+    name: yup.string().required('Name is required'),
+    password: yup.string().min(6, 'Required at least 6 characters'),
+    confirmPassword: yup.string().min(6, 'Required at least 6 characters'),
+  });
