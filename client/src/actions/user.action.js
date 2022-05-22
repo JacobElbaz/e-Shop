@@ -6,6 +6,7 @@ export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USERS = "GET_USERS";
 export const UPDATE_WISH_PRODUCT = "UPDATE_WISH_PRODUCT";
+export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 
 export const getUser = (uid) => {
   return async (dispatch) => {
@@ -46,6 +47,20 @@ export const updateProfile = (userId, username, password) => {
       .catch((err) => console.log(err));
   };
 };
+
+export const forgot_password = (email, password) => {
+  return async (dispatch) => {
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/client/forgotpassword`,
+      data: { email, password },
+    })
+    .then((res) => {
+      dispatch({ type: FORGOT_PASSWORD, payload: password });
+    })
+    .catch((err) => console.log(err));
+  }
+}
 
 
 

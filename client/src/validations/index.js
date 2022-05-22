@@ -76,3 +76,9 @@ export const addressFormValidationSchema = yup.object({
     password: yup.string().min(6, 'Required at least 6 characters'),
     confirmPassword: yup.string().min(6, 'Required at least 6 characters'),
   });
+
+  export const forgotPassordValidationSchema = yup.object({
+    email: yup.string().required('email is required'),
+    password: yup.string().min(6, 'Required at least 6 characters'),
+    
+  });

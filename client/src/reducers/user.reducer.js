@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_PROFILE, UPDATE_WISH_PRODUCT } from '../actions/user.action';
+import { FORGOT_PASSWORD, GET_USER, UPDATE_PROFILE, UPDATE_WISH_PRODUCT } from '../actions/user.action';
 
 const initialState = {};
 
@@ -12,6 +12,12 @@ export default function userReducer(state = initialState, action) {
                 ...state,
                 data: action.payload,
             };
+
+        case FORGOT_PASSWORD:
+            return{
+                ...state,
+                data: action.payload,
+            }
 
         case UPDATE_WISH_PRODUCT:
             return {

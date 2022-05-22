@@ -6,6 +6,7 @@ const clientController = require('../controllers/client.controller');
 router.post('/register', authController.signUp);
 router.post('/login', authController.signIn);
 router.get('/logout', authController.logout);
+router.put('/forgotpassword', authController.forgot_password);
 
 //client DB
 router.get('/', clientController.getAllUsers);
