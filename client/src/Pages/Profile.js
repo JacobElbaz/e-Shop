@@ -1,58 +1,87 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { getUser, updateName } from "../actions/user.action";
+import React, { useEffect, useState } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { getUser, updateProfile} from '../actions/user.action';
 
-const UpdateProfil = () => {
-  const [name, setName] = useState("");
-  const [updateForm, setUpdateForm] = useState(false);
-  const [updateUser, setUpdateUser] = useState(true);
-  const userData = useSelector((state) => state.userReducer);
+import { Button } from 'react-bootstrap';
+import { Formik, Form } from 'formik';
+import { profileFormValidationSchema } from '../validations';
+import Input from '../Components/Input';
+import FormContainer from '../Components/FormContainer';
+
+
+const initialValues = {
+  username: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
+};
+
+const validate = ({ password, confirmPassword }) => {
+  let errors = {};
+  if (password !== confirmPassword) {
+    errors.confirmPassword = 'Password not matched';
+  }
+  return errors;
+};
+
+const Profile = () => {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.userReducer);
+  const [savedFormValues, setSavedFormValues] = useState(null);
 
   useEffect(() => {
-    if (updateUser) {
-        dispatch(getUser(userData._id));
-        setUpdateUser(false);
+    if (user) {
+      dispatch(getUser(user._id));
+      setSavedFormValues({ ...user, password: '', confirmPassword: '' });
     }
-}, [updateUser, dispatch]);
+  }, [user, setSavedFormValues]);
 
-  const handleUpdate = () => {
-    dispatch(updateName(userData._id, name));
-    setUpdateUser(true);
-    setUpdateForm(false);
+  const onSubmit = ({ name, password }) => {
+
+    dispatch(updateProfile(user._id, name, password));
+    
   };
 
+ 
   return (
-    <div className="container">
-      <h1> {userData.username}'s Profile</h1>
-      <div className="container">
-          <div className="bio-update">
-            <h3>Name</h3>
-            {updateForm === false && (
-              <>
-                <p className="border rounded w-25" onClick={() => setUpdateForm(!updateForm)}>{userData.username}</p>
-                <button className="btn btn-secondary" onClick={() => setUpdateForm(!updateForm)}>
-                  Update username
-                </button>
-              </>
-            )}
-            {updateForm && (
-              <div >
-                <textarea
-                  type="text"
-                  defaultValue={userData.username}
-                  onChange={(e) => setName(e.target.value)}
-                ></textarea>
-                <br />
-                <button className="btn btn-success" onClick={handleUpdate}>Validate</button>
-              </div>
-            )}
-          </div>
-          <h4>Member from : {Date(userData.createdAt)}</h4>
-        </div>
-      </div>
-      
+    <>
+      <FormContainer>
+        <h1>{user.username}'s Profile</h1>
+        <Formik
+          initialValues={savedFormValues || initialValues}
+          validationSchema={profileFormValidationSchema}
+          validate={validate}
+          onSubmit={onSubmit}
+          enableReinitialize>
+          {({ values, isSubmitting }) => (
+            <Form>
+              <Input label="Name" name="name" type="text" />
+              <Input
+                label="Email"
+                name="email"
+                type="email"
+                disabled={user && values.email}
+              />
+              <Input label="Password" name="password" type="password" />
+              <Input
+                label="Confirm Password"
+                name="confirmPassword"
+                type="password"
+              />
+              <Button
+                className="d-block ml-auto"
+                type="submit"
+                variant="primary"
+                disabled={isSubmitting}
+              >
+                Update
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </FormContainer>
+    </>
   );
 };
 
-export default UpdateProfil;
+export default Profile;

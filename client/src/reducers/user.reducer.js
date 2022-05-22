@@ -1,4 +1,4 @@
-import { GET_USER, UPDATE_NAME, UPDATE_WISH_PRODUCT } from '../actions/user.action';
+import { GET_USER, UPDATE_PROFILE, UPDATE_WISH_PRODUCT } from '../actions/user.action';
 
 const initialState = {};
 
@@ -7,10 +7,10 @@ export default function userReducer(state = initialState, action) {
         case GET_USER:
             return action.payload;
 
-        case UPDATE_NAME:
+        case UPDATE_PROFILE:
             return {
                 ...state,
-                name: action.payload,
+                data: action.payload,
             };
 
         case UPDATE_WISH_PRODUCT:

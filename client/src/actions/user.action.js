@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const GET_USER = 'GET_USER';
 export const GET_USER_ERRORS = "GET_USER_ERRORS";
-export const UPDATE_NAME = "UPDATE_NAME";
+export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USERS = "GET_USERS";
 export const UPDATE_WISH_PRODUCT = "UPDATE_WISH_PRODUCT";
@@ -33,19 +33,21 @@ export const updateWishProduct = (productId, userId) => async (dispatch, getStat
 };
 
 
-export const updateName = (userId, username) => {
+export const updateProfile = (userId, username, password) => {
   return async (dispatch) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_URL}api/client/` + userId,
-      data: { username },
+      url: `${process.env.REACT_APP_API_URL}api/client/` + userId ,
+      data: { username, password },
     })
       .then((res) => {
-        dispatch({ type: UPDATE_NAME, payload: username });
+        dispatch({ type: UPDATE_PROFILE, payload: username });
       })
       .catch((err) => console.log(err));
   };
 };
+
+
 
 export const getAllUsers = () => {
   return async (dispatch) => {

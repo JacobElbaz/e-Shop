@@ -46,18 +46,20 @@ module.exports.updateUser = async (req, res) => {
   if (!ObjectID.isValid(req.params.id))
     return res.status(400).send("ID unknown : " + req.params.id);
 
-  try {
-    await ClientModel.findOneAndUpdate(
-      { _id: req.params.id },
-      {
-        $set: {
-          username: req.body.username,
-        },
-      },
-      { new: true, upsert: true, setDefaultsOnInsert: true })
-      .then((data) => res.send(data))
-      .catch((err) => res.status(500).send({ message: err }));
-  } catch (err) {
-    return res.status(500).json({ message: err });
-  }
+    const { username, password } = req.body;
+
+    const user = await ClientModel.findById(req.params.id);
+  
+    if (user) {
+      user.username = username || user.username;
+      user.password = password || user.password;
+  
+      const updateUser = await user.save();
+  
+      res.send({name: updateUser.name,});
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
 };
+
