@@ -93,11 +93,20 @@ const Orders = () => {
                                         )}
                                     </td>
                                     <td>
+                                        {order.isDelivered && order.status != 'Canceled' ? (
+                                            <Button
+                                            variant='success'
+                                            onClick={() => onCancelClick(order._id)}
+                                            >Confirm Reception
+                                        </Button>
+                                    ) : (
                                         <Button
                                             variant='danger'
                                             onClick={() => onCancelClick(order._id)}
                                             disabled={order.status == 'Canceled' || order.isDelivered}>Cancel
                                         </Button>
+                                    )}
+                                        
                                     </td>
                                 </tr>
                             )
