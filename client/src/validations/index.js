@@ -88,3 +88,10 @@ export const addressFormValidationSchema = yup.object({
     password: yup.string().min(6, 'Required at least 6 characters'),
     
   });
+
+  export const productFormValidationSchema = yup.object({
+    name: yup.string().required('Name is required'),
+    price: yup.number().min(1).required('Price is required'),
+    countInStock: yup.number().min(1).required('Count in stock is required'),
+    description: yup.string().required('Description is required'),
+  });

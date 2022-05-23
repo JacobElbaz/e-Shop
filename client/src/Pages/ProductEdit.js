@@ -1,7 +1,11 @@
 import React, { useState, useContext } from 'react';
 import { UidContext } from '../Components/AppContext';
 import { useNavigate } from 'react-router-dom';
-import { Link } from 'react-router-dom';
+import { Formik, Form } from 'formik';
+import { Button } from 'react-bootstrap';
+import FormContainer from '../Components/FormContainer';
+import Input from '../Components/Input';
+import { productFormValidationSchema } from '../validations';
 import axios from 'axios';
 
 
@@ -19,19 +23,31 @@ function ProductEdit() {
     countInStock: '',
     releaseDate: new Date().toISOString().split('T')[0],
   });
+  const initialValues = {
+  };
+
+  const categoryOptions = [
+    { title: 'PS4', value: 'PS4' },
+    { title: 'PS5', value: 'PS5' },
+    { title: 'XBOX', value: 'XBOX' },
+    { title: 'Switch', value: 'Switch' },
+  ];
+
+  const genreOptions = [
+    { title: 'Action', value: 'Action' },
+    { title: 'Adventure', value: 'Adventure' },
+    { title: 'Fighting', value: 'Fighting' },
+    { title: 'Racing', value: 'Racing' },
+    { title: 'Role', value: 'Role' },
+    { title: 'Shooter', value: 'Shooter' },
+    { title: 'Sport', value: 'Sport' },
+    { title: 'Strategy', value: 'Strategy' },
+    { title: 'Other', value: 'Other' },
+  ];
 
   const navigate = useNavigate();
 
   const submitHandler = async (e) => {
-    e.preventDefault();
-    const userError = document.querySelector('.user.error');
-    const nameError = document.querySelector('.name.error');
-    //const imageError = document.querySelector(".image.error");
-    const categoryError = document.querySelector('.category.error');
-    const genreError = document.querySelector('.genre.error');
-    const descriptionError = document.querySelector('.description.error');
-    const priceError = document.querySelector('.price.error');
-    const countInStockError = document.querySelector('.countInStock.error');
     let imageUrl = "";
 
     const formData = new FormData();
@@ -43,23 +59,26 @@ function ProductEdit() {
     );
     imageUrl = dataRes.data.url;
     setDetails({ ...details, image: imageUrl });
-    
+
     await axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}api/product/`,
-      data: details,
+      data: {
+        user: uid,
+        name: e.name,
+        image: imageUrl,
+        category: e.category || 'PS4',
+        genre: e.genre || 'Action',
+        description: e.description,
+        price: e.price,
+        countInStock: e.countInStock,
+        releaseDate: new Date().toISOString().split('T')[0],
+      },
     })
       .then((res) => {
         console.log(res);
         if (res.data.errors) {
-          userError.innerHTML = res.data.errors.user;
-          nameError.innerHTML = res.data.errors.name;
-          //imageError.innerHTML = res.data.errors.image;
-          categoryError.innerHTML = res.data.errors.category;
-          genreError.innerHTML = res.data.errors.genre;
-          descriptionError.innerHTML = res.data.errors.description;
-          priceError.innerHTML = res.data.errors.price;
-          countInStockError.innerHTML = res.data.errors.countInStock;
+          console.log(res.data.errors);
         } else {
           navigate('/admin/productList');
         }
@@ -68,113 +87,46 @@ function ProductEdit() {
   };
   return (
     <>
-      <div className="Signup">
-        <form onSubmit={submitHandler}>
-          <div className="form-inner">
-            <h2>Edit Product</h2>
+      <FormContainer>
+        <h1>Add Product</h1>
+        <Formik
+          onSubmit={submitHandler}
+          initialValues={initialValues}
+          validationSchema={productFormValidationSchema}
+          enableReinitialize>
+          {() => (
+            <Form>
+              <Input label='Name' name='name' type='text' onChange={(e) =>
+                setDetails({ ...details, name: e.target.value })
+              }></Input>
 
-            <div className="form-group">
-              <label htmlFor="name">Name:</label>
-              <input
-                type="name"
-                name="name"
-                id="name"
-                onChange={(e) =>
-                  setDetails({ ...details, name: e.target.value })
-                }
-                value={details.name}
-              />
-              <div className="name error"></div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="category">Image:</label>
+              <label htmlFor="image">Image:</label>
               <input
                 type="file"
                 name="image"
                 id="validationFormik107"
                 accept='image/*'
-                className='position position-relative mt-2'
+                className='form-control position position-relative mt-2'
                 onChange={(e) => { setDetails({ ...details, image: e.target.files[0] }) }}
               />
-              <div className="category error"></div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="category">Category:</label>
-              <select className="form-select" onChange={(e) => { setDetails({ ...details, category: e.target.value }) }}>
-                <option value="PS4">PS4</option>
-                <option value="PS5">PS5</option>
-                <option value="XBOX">XBOX</option>
-                <option value="Switch">Switch</option>
-              </select>
-              <div className="category error"></div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="genre">Genre:</label>
-              <select className="form-select" onChange={(e) => { setDetails({ ...details, genre: e.target.value }) }}>
-                <option value="Action">Action</option>
-                <option value="Adventure">Adventure</option>
-                <option value="Fighting">Fighting</option>
-                <option value="Racing">Racing</option>
-                <option value="Role">Role</option>
-                <option value="Shooter">Shooter</option>
-                <option value="Sport">Sport</option>
-                <option value="Strategy">Strategy</option>
-                <option value="Other">Other</option>
-              </select>
-              <div className="genre error"></div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="description">Description:</label>
-              <input
-                type="description"
-                name="description"
-                id="description"
-                onChange={(e) =>
-                  setDetails({ ...details, description: e.target.value })
-                }
-                value={details.description}
-              />
-              <div className="description error"></div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="price">Price:</label>
-              <input
-                type="price"
-                name="price"
-                id="price"
-                onChange={(e) =>
-                  setDetails({ ...details, price: e.target.value })
-                }
-                value={details.price}
-              />
-              <div className="price error"></div>
-            </div>
-
-            <div className="form-group">
-              <label htmlFor="countInStock">Count In Stock:</label>
-              <input
-                type="countInStock"
-                name="countInStock"
-                id="countInStock"
-                onChange={(e) =>
-                  setDetails({ ...details, countInStock: e.target.value })
-                }
-                value={details.countInStock}
-              />
-              <div className="countInStock error"></div>
-            </div>
-
-            <input type="submit" value="Add" />
-          </div>
-        </form>
-      </div>
-
-
+              <Input label='Category' name='category' type='select' options={categoryOptions}>
+              </Input>
+              <Input label='Genre' name='genre' type='select' options={genreOptions}>
+              </Input>
+              <Input label='Descrition' name='description' type='textarea'></Input>
+              <Input label='Price' name='price' type='number'></Input>
+              <Input label='Count In Stock' name='countInStock' type='number'></Input>
+              <Button
+                className='d-block ml-auto'
+                type='submit'
+                variant='primary'>
+                Add in stock
+              </Button>
+            </Form>
+          )}
+        </Formik>
+      </FormContainer>
+      
     </>
 
   )

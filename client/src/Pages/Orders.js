@@ -71,10 +71,10 @@ const Orders = () => {
                                         )}
                                     </td>
                                     <td>
-                                        <Button variant='success' onClick={() => confirm(order._id)}>Approve
+                                        <Button variant='success' disabled={order.status == 'Confirmed'} onClick={() => confirm(order._id)}>Approve
 
                                         </Button>
-                                        <Button variant='danger' onClick={() => cancel(order._id)}>Cancel
+                                        <Button variant='danger' disabled={order.status == 'Canceled'} onClick={() => cancel(order._id)}>Cancel
 
                                         </Button>
                                     </td>
