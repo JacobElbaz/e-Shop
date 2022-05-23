@@ -14,7 +14,7 @@ export default function AllProducts() {
 
   const [loadProducts, setLoadProducts] = useState(true);
   const category = String(useParams().category);
-  const [filter, setFilter] = useState({ category: category == 'all' ? '' : category, genre: '' });
+  const [filter, setFilter] = useState({ category: category === 'all' ? '' : category, genre: '' });
   const [sort, setSort] = useState('');
   const dispatch = useDispatch();
   const products = useSelector((state) => state.allProductsReducer);

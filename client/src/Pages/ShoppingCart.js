@@ -8,12 +8,12 @@ export default function ShoppingCart() {
 
     const editItem = (itemID, amount) => {
         let cartCopy = [...cart]
-        let existentItem = cartCopy.find(item => item._id == itemID);
+        let existentItem = cartCopy.find(item => item._id === itemID);
         if (!existentItem) return
 
         existentItem.qty = amount;
         if (existentItem.qty <= 0) {
-            cartCopy = cartCopy.filter(item => item.ID != itemID)
+            cartCopy = cartCopy.filter(item => item.ID !== itemID)
         }
 
         setCart(cartCopy);
@@ -25,7 +25,7 @@ export default function ShoppingCart() {
     const removeItem = (itemID) => {
 
         let cartCopy = [...cart]
-        cartCopy = cartCopy.filter(item => item._id != itemID);
+        cartCopy = cartCopy.filter(item => item._id !== itemID);
         setCart(cartCopy);
         let cartString = JSON.stringify(cartCopy)
         localStorage.setItem('cart', cartString)
@@ -111,14 +111,15 @@ export default function ShoppingCart() {
                                         .toFixed(2)}</h3>
                             </ListGroup.Item>
                             <ListGroup.Item>
-                                <Link
+                                {cart.length !== 0 ? <Link
                                     to={'/shipping'}
                                     type='button'
                                     className='btn btn-block btn-primary'
                                     disabled={cart.length < 1}
                                 >
                                     Procced To Checkout
-                                </Link>
+                                </Link> : <h3>No item</h3> }
+                                
                             </ListGroup.Item>
                         </ListGroup>
                     </Card>

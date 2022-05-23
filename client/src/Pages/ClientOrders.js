@@ -85,7 +85,7 @@ const Orders = () => {
                                     <td>{order.shippingAddress.city}</td>
                                     <td>{order.status}</td>
                                     <td>
-                                        {new Date(order.deliveredAt) <= new Date() && order.status == 'Confirmed' ? (
+                                        {new Date(order.deliveredAt) <= new Date() && order.status === 'Confirmed' ? (
                                             <i
                                                 className="fas fa-check"
                                                 style={{ color: 'green' }}
@@ -95,7 +95,7 @@ const Orders = () => {
                                         )}
                                     </td>
                                     <td>
-                                        {new Date(order.deliveredAt) <= new Date() && order.status == 'Confirmed' ? (
+                                        {new Date(order.deliveredAt) <= new Date() && order.status === 'Confirmed' ? (
                                             <Button
                                             variant='success'
                                             onClick={() => onCancelClick(order._id)}
@@ -105,7 +105,7 @@ const Orders = () => {
                                         <Button
                                             variant='danger'
                                             onClick={() => onCancelClick(order._id)}
-                                            disabled={order.status == 'Canceled' || new Date(order.deliveredAt) < new Date()}>Cancel
+                                            disabled={order.status === 'Canceled' || new Date(order.deliveredAt) < new Date()}>Cancel
                                         </Button>
                                     )}
                                         
