@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { update_username, forgot_password } from '../actions/user.action';
+import { update_username, forgot_password, getUser, deleteUser } from '../actions/user.action';
 import { Link } from 'react-router-dom';
-
+import axios from "axios";
+import cookie from "js-cookie";
 import { Button, Modal, Form } from 'react-bootstrap';
 import FormContainer from '../Components/FormContainer';
-import { confirmPasswordFormValidationSchema } from '../validations';
 
 const Profile = () => {
   const user = useSelector((state) => state.userReducer);
+  const dispatch = useDispatch();
   const initialValues = {
     username: user.username,
     email: user.email,
@@ -18,8 +19,13 @@ const Profile = () => {
   const [showModalUsername, setShowModalUsername] = useState(false);
   const [showModalPassword, setShowModalPassword] = useState(false);
   const [showModalError, setShowModalError] = useState(false);
+  const [showDeleteModal, setShowDeleteModal] = useState(false);
   const [errors, setErrors] = useState('');
   const [passwordErrors, setPasswordErrors] = useState('');
+
+  useEffect(() => {
+    dispatch(getUser(user._id));
+  }, [showModalUsername, showModalPassword, dispatch]);
 
   const validate = (event) => {
     if (password !== event.target.value) {
@@ -42,7 +48,7 @@ const Profile = () => {
     }
   };
 
-  const dispatch = useDispatch();
+
   const onSubmitUsername = (e) => {
     e.preventDefault();
     dispatch(update_username(initialValues.email, username));
@@ -54,20 +60,70 @@ const Profile = () => {
     if (errors === '' && passwordErrors === '') {
       dispatch(forgot_password(initialValues.email, password));
       setShowModalPassword(true);
-    } else{
+    } else {
       setShowModalError(true);
-    } 
+    }
   };
 
   const handleClose = () => {
     setShowModalPassword(false);
     setShowModalUsername(false);
     setShowModalError(false);
-    window.location = '/profile';
+    setShowDeleteModal(false);
   };
+
+  const removeCookie = (key) => {
+    if (window !== "undefined") {
+      cookie.remove(key, { expires: 1 });
+    }
+  };
+
+  const logout = async () => {
+    await axios({
+      method: "get",
+      url: `${process.env.REACT_APP_API_URL}api/client/logout`,
+      withCredentials: true,
+    })
+      .then(() => {
+        removeCookie("jwt");})
+      .catch((err) => console.log(err));
+    
+    window.location = "/";
+    window.localStorage.removeItem('cart');
+    window.localStorage.removeItem('auth');
+    window.localStorage.removeItem('paymentMethod');
+    window.localStorage.removeItem('shippingAddress');
+    window.localStorage.removeItem('deliveryDate');
+  };
+
+  const onDeleteAccount = () => {
+    setShowDeleteModal(false);
+    logout();
+    //delete this user from the database 
+    dispatch(deleteUser(user._id));
+  };
+
+  
 
   return (
     <div className='p-5 home'>
+
+      <Modal show={showDeleteModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete Account</Modal.Title>
+        </Modal.Header>
+        <Modal.Body> Are you sure you want to delete your account?
+Your data will be permanently deleted and the account will no longer be accessible.</Modal.Body>
+        <Modal.Footer>
+          <Link type="button" className="btn btn-danger" to={'/profile'} onClick={onDeleteAccount} >
+            Yes, Delete My Account
+          </Link>
+          <Link type="button" className="btn btn-primary" to={'/profile'} onClick={handleClose} >
+            No
+          </Link>
+        </Modal.Footer>
+      </Modal>
+
       <Modal show={showModalError} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Error</Modal.Title>
@@ -130,9 +186,11 @@ const Profile = () => {
               onChange={UsernameChangeHandler}
             />
           </Form.Group>
+          <p></p>
           <Button variant="primary" size="sm" type="submit">
             Update Username
           </Button>
+          <hr />
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
             <Form.Control
@@ -145,6 +203,7 @@ const Profile = () => {
             />
           </Form.Group>
         </Form>
+        <hr />
         <Form onSubmit={onSubmitPassword}>
           <Form.Group controlId="password">
             <Form.Label>New Password</Form.Label>
@@ -175,6 +234,10 @@ const Profile = () => {
             </Button>
           </Form.Group>
         </Form>
+      </FormContainer>
+      <hr />
+      <FormContainer>
+        <Button variant='danger' onClick={() => setShowDeleteModal(true)}>Delete Account</Button>
       </FormContainer>
     </div>
   );

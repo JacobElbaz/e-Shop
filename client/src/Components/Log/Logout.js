@@ -24,6 +24,7 @@ const Logout = () => {
     window.localStorage.removeItem('auth');
     window.localStorage.removeItem('paymentMethod');
     window.localStorage.removeItem('shippingAddress');
+    window.localStorage.removeItem('deliveryDate');
   };
 
   return (

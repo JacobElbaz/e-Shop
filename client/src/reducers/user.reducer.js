@@ -5,6 +5,7 @@ import {
   UPDATE_PROFILE,
   UPDATE_USERNAME,
   UPDATE_WISH_PRODUCT,
+  DELETE_USER,
 } from '../actions/user.action';
 
 const initialState = {};
@@ -46,6 +47,9 @@ export default function userReducer(state = initialState, action) {
           wishlist: [...action.payload],
         },
       };
+
+    case DELETE_USER:
+      return { ...state };
 
     default:
       return state;

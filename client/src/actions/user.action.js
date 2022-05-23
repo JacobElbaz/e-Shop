@@ -9,6 +9,7 @@ export const UPDATE_WISH_PRODUCT = "UPDATE_WISH_PRODUCT";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const UPDATE_USERNAME = "UPDATE_USERNAME";
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
+export const DELETE_USER = "DELETE_USER";
 
 export const getUser = (uid) => {
   return async (dispatch) => {
@@ -79,7 +80,18 @@ export const getAllUsers = () => {
 
 }
 
-export const deleteUser = () => { }
+export const deleteUser = (userId) => { 
+  return (dispatch) => {
+    return axios({
+      method: "delete",
+      url: `${process.env.REACT_APP_API_URL}api/client/${userId}`,
+    })
+      .then((res) => {
+        dispatch({ type: DELETE_USER, payload: { userId } });
+      })
+      .catch((err) => console.log(err));
+  };
+}
 
 const handleWishListInLocalStorage = (productId, newWishList) => {
   const authFromStorage = JSON.parse(localStorage.getItem('auth'));

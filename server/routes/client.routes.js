@@ -15,6 +15,7 @@ router.put('/wishlist', clientController.updateWishlist);
 router.put("/:id", clientController.updateUser);
 
 router.put("/password", clientController.updatePassword);
+router.delete("/:id", clientController.deleteUser);
 
 
 
