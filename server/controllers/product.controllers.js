@@ -12,10 +12,27 @@ module.exports.getProducts = async (req, res) => {
   if(req.query.category){
     match.category = {$regex: req.query.category, $options: 'i'};
   }
+  if(req.query.genre){
+    match.genre = {$regex: req.query.genre, $options: 'i'};
+  }
   if(req.query.keyword){
     match.name = {$regex: req.query.keyword, $options: 'i'};
   }
-  const products = await ProductModel.find({...match});
+  if(req.query.sort){
+    switch(req.query.sort){
+      case 'az': match.sort = {name: 1};
+      break;
+      case 'za': match.sort = {name: -1};
+      break;
+      case 'low-high': match.sort = {price: 1};
+      break;
+      case 'high-low': match.sort = {price: -1};
+      break;
+      default: match.sort = {...match, $sort: 1};
+      break;
+    }
+  }
+  const products = await ProductModel.find({...match}).sort(match.sort);
   res.send(products);
 }
 
