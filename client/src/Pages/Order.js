@@ -28,7 +28,7 @@ const Order = () => {
 
 
     return (
-        <div>
+        <div className='m-5'>
             {!isEmpty(orders[0]) && order && (
                 <>
 

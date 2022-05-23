@@ -18,7 +18,7 @@ const SearchResults = ({ match }) => {
   }, [dispatch, keyword]);
 
   return (
-    <div className='container'>
+    <div className='home'>
           <h1>Search Results</h1>
           <ProductCards products={products} />
     </div>

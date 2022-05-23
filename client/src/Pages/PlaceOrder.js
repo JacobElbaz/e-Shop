@@ -47,7 +47,7 @@ const PlaceOrder = () => {
   };
 
   return (
-    <div>
+    <div className='m-5'>
       <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Thank you !</Modal.Title>

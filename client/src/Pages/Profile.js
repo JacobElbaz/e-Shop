@@ -67,7 +67,7 @@ const Profile = () => {
   };
 
   return (
-    <>
+    <div className='p-5 home'>
       <Modal show={showModalError} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Error</Modal.Title>
@@ -176,7 +176,7 @@ const Profile = () => {
           </Form.Group>
         </Form>
       </FormContainer>
-    </>
+    </div>
   );
 };
 

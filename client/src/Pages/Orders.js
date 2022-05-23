@@ -61,7 +61,7 @@ const Orders = () => {
                                     <td>{order.shippingAddress.city}</td>
                                     <td>{order.status}</td>
                                     <td>
-                                        {order.isDelivered ? (
+                                        {new Date(order.deliveredAt) <= new Date() && order.status == 'Confirmed' ? (
                                             <i
                                                 className="fas fa-check"
                                                 style={{ color: 'green' }}

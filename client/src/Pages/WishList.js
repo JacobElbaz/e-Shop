@@ -43,7 +43,7 @@ const WishList = () => {
     };
 
     return (
-        <>
+        <div className='p-5 home'>
             <h1>Wish List</h1>
 
             <Row className='container'>
@@ -66,7 +66,7 @@ const WishList = () => {
                     )})
                 )}
             </Row>
-        </>
+        </div>
     );
 };
 

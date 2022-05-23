@@ -55,7 +55,7 @@ const Orders = () => {
 
             <Row className='align-items-center'>
                 <Col>
-                    <h1>Orders</h1>
+                    <h1>My Orders</h1>
                 </Col>
             </Row>
             <Table striped bordered hover responsive className='table-sm'>
@@ -63,6 +63,7 @@ const Orders = () => {
                     <tr>
                         <th>ID</th>
                         <th>DATE</th>
+                        <th>DATE OF DELIVERY</th>
                         <th>PRICE</th>
                         <th>ADDRESS</th>
                         <th>STATUS</th>
@@ -79,11 +80,12 @@ const Orders = () => {
                                         <Link to={`/order/${order._id}`}>{order._id}</Link>
                                     </td>
                                     <td>{order.payementDate.split('T')[0]}</td>
+                                    <td>{order.deliveredAt.split('T')[0]}</td>
                                     <td>${order.totalPrice}</td>
                                     <td>{order.shippingAddress.city}</td>
                                     <td>{order.status}</td>
                                     <td>
-                                        {order.isDelivered ? (
+                                        {new Date(order.deliveredAt) <= new Date() && order.status == 'Confirmed' ? (
                                             <i
                                                 className="fas fa-check"
                                                 style={{ color: 'green' }}
@@ -93,7 +95,7 @@ const Orders = () => {
                                         )}
                                     </td>
                                     <td>
-                                        {order.isDelivered && order.status != 'Canceled' ? (
+                                        {new Date(order.deliveredAt) <= new Date() && order.status == 'Confirmed' ? (
                                             <Button
                                             variant='success'
                                             onClick={() => onCancelClick(order._id)}
@@ -103,7 +105,7 @@ const Orders = () => {
                                         <Button
                                             variant='danger'
                                             onClick={() => onCancelClick(order._id)}
-                                            disabled={order.status == 'Canceled' || order.isDelivered}>Cancel
+                                            disabled={order.status == 'Canceled' || new Date(order.deliveredAt) < new Date()}>Cancel
                                         </Button>
                                     )}
                                         

@@ -16,7 +16,7 @@ const Delivery = () => {
     };
 
     return (
-        <>
+        <div className='home'>
             <FormContainer>
                 <CheckoutSteps step1 step2 step5 />
                 <h1>Date of delivery</h1>
@@ -30,7 +30,7 @@ const Delivery = () => {
                     Continue
                 </Button>
             </FormContainer>
-        </>
+        </div>
     );
 };
 

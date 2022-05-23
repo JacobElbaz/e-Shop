@@ -43,7 +43,7 @@ export default function AllProducts() {
 
 
   return (
-    <div className='m-5'>
+    <div className='home'>
       <h1>Products</h1>
       Filter <select className="form-select w-25 d-inline" onChange={(e) => { setFilter({ ...filter, category: e.target.value }) }}>
         <option value="">All</option>
