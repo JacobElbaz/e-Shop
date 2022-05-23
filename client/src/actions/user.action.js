@@ -7,6 +7,8 @@ export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USERS = "GET_USERS";
 export const UPDATE_WISH_PRODUCT = "UPDATE_WISH_PRODUCT";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
+export const UPDATE_USERNAME = "UPDATE_USERNAME";
+export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
 
 export const getUser = (uid) => {
   return async (dispatch) => {
@@ -95,3 +97,32 @@ const handleWishListInLocalStorage = (productId, newWishList) => {
 
   localStorage.setItem('auth', JSON.stringify(authFromStorage));
 };
+
+export const update_password = (email, password) => {
+  return async (dispatch) => {
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/client/password`,
+      data: { email, password },
+    })
+    .then((res) => {
+      dispatch({ type: UPDATE_PASSWORD, payload: password });
+    })
+    .catch((err) => console.log(err));
+  }
+}
+
+export const update_username = (email, username) => {
+  return async (dispatch) => {
+    return axios({
+      method: "put",
+      url: `${process.env.REACT_APP_API_URL}api/client/username`,
+      data: { email, username },
+    })
+    .then((res) => {
+      console.log(email);
+      dispatch({ type: UPDATE_USERNAME, payload: username });
+    })
+    .catch((err) => console.log(err));
+  }
+}

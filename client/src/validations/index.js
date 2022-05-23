@@ -72,9 +72,15 @@ export const addressFormValidationSchema = yup.object({
   });
 
   export const profileFormValidationSchema = yup.object({
-    name: yup.string().required('Name is required'),
+    username: yup.string().required('Name is required'),
     password: yup.string().min(6, 'Required at least 6 characters'),
-    confirmPassword: yup.string().min(6, 'Required at least 6 characters'),
+    passwordConfirmation: yup.string()
+     .oneOf([yup.ref('password'), null], 'Passwords must match')
+  });
+  export const confirmPasswordFormValidationSchema = yup.object({
+    password: yup.string().min(6, 'Required at least 6 characters'),
+    passwordConfirmation: yup.string()
+     .oneOf([yup.ref('password'), null], 'Passwords must match')
   });
 
   export const forgotPassordValidationSchema = yup.object({

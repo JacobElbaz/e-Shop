@@ -68,4 +68,28 @@ module.exports.forgot_password = async (req, res) => {
 
 }
 
+module.exports.updateUsername = async (req, res) => {
+  const {email, username} = req.body;
+  try{
+    const user = await ClientModel.findOne({email});
+    if (user) {
+
+      user.username = username || user.username;
+  
+      const updateUser = await user.save();
+  
+      res.send({name: updateUser.name,});
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+
+  }catch (err){
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+}
+
+
 

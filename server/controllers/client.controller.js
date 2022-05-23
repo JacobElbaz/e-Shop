@@ -63,3 +63,50 @@ module.exports.updateUser = async (req, res) => {
     }
 };
 
+module.exports.updatePassword = async (req, res) => {
+  const {email, password} = req.body;
+  try{
+    const user = await ClientModel.findOne({email});
+    if (user) {
+
+      user.password = password || user.password;
+  
+      const updateUser = await user.save();
+  
+      res.send({name: updateUser.name,});
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+
+  }catch (err){
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+}
+
+module.exports.updateUsername = async (req, res) => {
+  const {email, username} = req.body;
+  console.log(email);
+  try{
+    const user = await ClientModel.findOne({email});
+    console.log(user);
+    if (user) {
+
+      user.username = username || user.username;
+  
+      const updateUser = await user.save();
+  
+      res.send({name: updateUser.name,});
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+
+  }catch (err){
+    res.status(404);
+    throw new Error('User not found');
+  }
+
+}
