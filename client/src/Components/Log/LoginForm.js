@@ -97,7 +97,7 @@ function LoginForm() {
         <Modal.Footer>
           <Link
             type="button"
-            className="btn btn-secondary"
+            className="btn btn-primary"
             to={'/login'}
             onClick={() => onSubmit()}
           >
@@ -105,7 +105,7 @@ function LoginForm() {
           </Link>
           <Link
             type="button"
-            className="btn btn-primary"
+            className="btn btn-secondary"
             to={'/login'}
             onClick={handleClose}
           >
@@ -144,13 +144,7 @@ function LoginForm() {
               <div className="password error"></div>
             </div>
             <input type="submit" value="LOGIN" />
-            <Button
-              className="btn-block my-1"
-              type="button"
-              onClick={onForgotPassword}
-            >
-              Forgot Password
-            </Button>
+            <a className='managerlink text-decoration-none text-decoration-underline ms-5' href='#' onClick={onForgotPassword}>Forgot Password?</a>
           </div>
         </form>
       </div>
