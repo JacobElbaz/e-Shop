@@ -8,6 +8,7 @@ export const GET_LATEST = "GET_LATEST";
 export const GET_DEALS = "GET_DEALS";
 export const GET_BEST = "GET_BEST";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 
 export const getProducts = ( keyword = '', category = '', genre = '', sort = '') => {
     return async (dispatch) => {
@@ -93,4 +94,21 @@ export const getBestSeller = () => {
             return console.log(err);
         }
     };
+}
+
+export const updateProduct = (id, product) => {
+    console.log({product});
+    return async (dispatch) => {
+        return axios ({
+            method: "put",
+            url : `${process.env.REACT_APP_API_URL}api/product/${id}`,
+            data: product,
+        })
+        .then((res) => {
+            dispatch({type: UPDATE_PRODUCT, payload: product});
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
 }

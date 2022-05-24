@@ -1,4 +1,4 @@
-import { GET_PRODUCT, DELETE_PRODUCT } from "../actions/products.action";
+import { GET_PRODUCT, DELETE_PRODUCT, UPDATE_PRODUCT } from "../actions/products.action";
 
 const initialState = {};
 
@@ -8,6 +8,11 @@ export default function productReducer(state = initialState, action) {
       return action.payload;
     case DELETE_PRODUCT:
       return {...state};
+    case UPDATE_PRODUCT:
+      return {
+        ...state,
+        data: action.payload,
+      }
     default: 
       return state;
   }

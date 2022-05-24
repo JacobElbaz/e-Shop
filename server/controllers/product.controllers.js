@@ -114,23 +114,36 @@ module.exports.createProduct = async (req, res) => {
   
 };
 
-module.exports.updateProduct = (req, res) => {
-  if(!ObjectId.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-  const updatedRecord = {
-    price: req.body.price,
-    countInStock: req.body.countInStock
-  }
+module.exports.updateProduct = async (req, res) => {
+    const {
+      name,
+      image,
+      category,
+      genre,
+      description,
+      price,
+      countInStock,
+    } = req.body;
+    const bb = req.body;
 
-  ProductModel.findByIdAndUpdate(
-    req.params.id,
-    { $set: updatedRecord },
-    { new: true },
-    (err, docs) => {
-      if(!err) res.send(docs);
-      else console.log(err);
+    const product = await ProductModel.findById(req.params.id);
+
+    if(!product){
+      res.status(400);
+      throw new Error("Product not found");
     }
-  )
+
+    product.name = name;
+    product.image = image;
+    product.category = category;
+    product.genre = genre;
+    product.description = description;
+    product.price = price;
+    product.countInStock = countInStock;
+
+    await product.save();
+
+    res.send(product);
   };
 
 module.exports.deleteProduct = (req, res) => {
