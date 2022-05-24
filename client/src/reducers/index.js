@@ -9,6 +9,7 @@ import bestSellerReducer from './bestSeller.reducer';
 import dealsProductsReducer from './bestDeals.reducer';
 import ordersReducer from './orders.reducer';
 import orderReducer from './order.reducer';
+import datesReducer from './dates.reducer';
 
 export default combineReducers({
     usersReducer,
@@ -21,4 +22,5 @@ export default combineReducers({
     dealsProductsReducer,
     ordersReducer,
     orderReducer,
+    datesReducer
 })

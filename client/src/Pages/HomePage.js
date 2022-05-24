@@ -4,6 +4,8 @@ import { Link } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import { getBestSeller, getDeals, getLatest, getTrend} from '../actions/products.action';
 import ProductCards from '../Components/ProductCards';
+import { Button } from 'react-bootstrap';
+import { addDate } from '../actions/dates.action';
 
 function HomePage() {
 
@@ -19,6 +21,10 @@ function HomePage() {
         dispatch(getBestSeller());
 }, [dispatch]);
 
+const add_Date = (date) => {
+    dispatch(addDate(date));
+}
+
     return (
         <div>
             <div className="home">
@@ -31,6 +37,7 @@ function HomePage() {
                     <Link to='/allProducts/SWITCH' className="btn btn-secondary btn-lg mx-auto w-25">SWITCH</Link>
                 </div>
                 <Link to='/allProducts/all' className="btn btn-success btn-lg mx-auto mb-5 w-100">ALL GAMES</Link>
+                <Button onClick={() => add_Date(new Date())}>Add date</Button>
                 <h1>Trending</h1>
                 <ProductCards products={trending}></ProductCards>
                 <br />
