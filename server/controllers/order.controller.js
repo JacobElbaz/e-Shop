@@ -75,38 +75,24 @@ module.exports.updateStatus = async (req, res) => {
 };
 
 module.exports.updateSales = async (req, res) => {
-    
-    const id = req.body;
-    try{
-        const order = await OrderModel.findOne(id);
-        if(order){
-            const length = order.orderItems.length;
-            const orderItems = order.orderItems;
-            for(i = 0; i < length; i++ ){
-                const product = await ProductModel.findById(orderItems[i]._id)
-                console.log(product)
-                console.log(product._id)
-                console.log(orderItems[i]._id)
-                console.log(product.sales);
-                console.log(parseInt(orderItems[i].qty));
-                if(product._id.toString() === orderItems[i]._id.toString()){
-                    product.sales += parseInt(orderItems[i].qty);
-                    product.countInStock -= parseInt(orderItems[i].qty);
-                    console.log(product.sales);
-                    await product.save();
-                }
-            }  
-            res.send({order: id,});
+    const cart = req.body.cart;
+    try {
+        if (cart) {
+            for (i = 0; i < cart.length; i++) {
+                const product = await ProductModel.findById(cart[i]._id)
+                product.sales += parseInt(cart[i].qty);
+                product.countInStock -= parseInt(cart[i].qty);
+                await product.save();
+            }
+            res.send(cart);
         } else {
             res.status(404);
-            throw new Error('Order not found');
+            throw new Error('Cart not found');
         }
-    }catch (err){
+    } catch (err) {
         res.status(404);
-        throw new Error('Order not found');
-      }
-
-    
+        throw new Error('Cart not found');
+    }
 }
 
 

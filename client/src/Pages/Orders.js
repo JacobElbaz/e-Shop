@@ -4,7 +4,7 @@ import { Table, Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { isEmpty } from '../Components/Utils';
 import { getOrders } from '../actions/orders.action';
-import { update_Sales, updateStatus } from '../actions/order.action';
+import { updateStatus } from '../actions/order.action';
 
 const Orders = () => {
     const [loadOrders, setLoadOrders] = useState(true);
@@ -19,9 +19,7 @@ const Orders = () => {
     }, [loadOrders, dispatch]);
 
     const confirm = (id) => {
-        dispatch(update_Sales(id));
         dispatch(updateStatus(id, 'Confirmed'));
-       
         setLoadOrders(true);
     };
 
@@ -76,7 +74,7 @@ const Orders = () => {
                                         <Button variant='success' disabled={order.status == 'Confirmed'} onClick={() => confirm(order._id)}>Approve
 
                                         </Button>
-                                        <Button variant='danger' disabled={order.status == 'Canceled'} onClick={() => cancel(order._id)}>Cancel
+                                        <Button variant='danger' disabled={order.status == 'Canceled' || order.status == 'Confirmed'} onClick={() => cancel(order._id)}>Cancel
 
                                         </Button>
                                     </td>

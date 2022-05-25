@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { Button, Row, Col, ListGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { createOrder } from '../actions/order.action';
+import { createOrder, updateSales } from '../actions/order.action';
 
 import CheckoutSteps from '../Components/CheckoutSteps';
 import OrderSummary from '../Components/OrderSummary';
@@ -38,6 +38,7 @@ const PlaceOrder = () => {
         deliveredAt: new Date(JSON.parse(localStorage.getItem('deliveryDate'))),
       })
     );
+    dispatch(updateSales(cart));
     setShowModal(true);
   };
 

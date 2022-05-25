@@ -13,7 +13,7 @@ export default function orderReducer(state = initialState, action) {
     case UPDATE_SALES:
       return {
         ...state,
-        id: action.payload,
+        data: action.payload,
       };
 
     case GET_MY_ORDERS:

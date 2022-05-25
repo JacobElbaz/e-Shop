@@ -17,21 +17,21 @@ export const createOrder = (order) => {
     }
   };
 };
-export const update_Sales = (id) => {
-    return async (dispatch) => {
-      return axios({
-        method: 'put',
-        url: `${process.env.REACT_APP_API_URL}api/order/updatesales/` + id,
-        data:id
-
+export const updateSales = (cart) => {
+  console.log(cart);
+  return async (dispatch) => {
+    return axios({
+      method: 'put',
+      url: `${process.env.REACT_APP_API_URL}api/order/updatesales`,
+      data: { cart },
+    })
+      .then((res) => {
+        dispatch({ type: UPDATE_SALES, payload: cart });
       })
-        .then((res) => {
-          dispatch({ type: UPDATE_SALES , payload:id.toString()});
-        })
-        .catch((err) => console.log(err+ '  ' + err.response.data));
-    };
+      .catch((err) => console.log(err + ' rdstg ' + cart));
   };
-  
+};
+
 export const updateStatus = (orderId, status) => {
   return async (dispatch) => {
     return axios({
