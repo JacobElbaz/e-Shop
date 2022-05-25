@@ -1,4 +1,5 @@
 const OrderModel = require('../models/order.model');
+const ProductModel = require('../models/product.model');
 const ObjectID = require('mongoose').Types.ObjectId;
 
 module.exports.getOrders = async (req, res) => {
@@ -8,6 +9,7 @@ module.exports.getOrders = async (req, res) => {
 };
 
 //updateOrdertobedeliverd
+
 
 module.exports.createOrder = async (req, res) => {
     const {
@@ -71,5 +73,41 @@ module.exports.updateStatus = async (req, res) => {
         return res.status(500).json({ message: err });
     }
 };
+
+module.exports.updateSales = async (req, res) => {
+    
+    const id = req.body;
+    try{
+        const order = await OrderModel.findOne(id);
+        if(order){
+            const length = order.orderItems.length;
+            const orderItems = order.orderItems;
+            for(i = 0; i < length; i++ ){
+                const product = await ProductModel.findById(orderItems[i]._id)
+                console.log(product)
+                console.log(product._id)
+                console.log(orderItems[i]._id)
+                console.log(product.sales);
+                console.log(parseInt(orderItems[i].qty));
+                if(product._id.toString() === orderItems[i]._id.toString()){
+                    product.sales += parseInt(orderItems[i].qty);
+                    product.countInStock -= parseInt(orderItems[i].qty);
+                    console.log(product.sales);
+                    await product.save();
+                }
+            }  
+            res.send({order: id,});
+        } else {
+            res.status(404);
+            throw new Error('Order not found');
+        }
+    }catch (err){
+        res.status(404);
+        throw new Error('Order not found');
+      }
+
+    
+}
+
 
 

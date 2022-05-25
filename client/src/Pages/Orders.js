@@ -4,7 +4,7 @@ import { Table, Button, Col, Row } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 import { isEmpty } from '../Components/Utils';
 import { getOrders } from '../actions/orders.action';
-import { updateStatus } from '../actions/order.action';
+import { update_Sales, updateStatus } from '../actions/order.action';
 
 const Orders = () => {
     const [loadOrders, setLoadOrders] = useState(true);
@@ -19,7 +19,9 @@ const Orders = () => {
     }, [loadOrders, dispatch]);
 
     const confirm = (id) => {
+        dispatch(update_Sales(id));
         dispatch(updateStatus(id, 'Confirmed'));
+       
         setLoadOrders(true);
     };
 
