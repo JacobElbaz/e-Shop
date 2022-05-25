@@ -1,8 +1,8 @@
 const res = require('express/lib/response');
 const DatesModel = require('../models/dates.model');
 
-module.exports.getDates = async () => {
-    const dates = await DatesModel.find();
+module.exports.getDates = async (req, res) => {
+    const dates = await DatesModel.findOne();
     res.send(dates);
 }
 

@@ -26,6 +26,7 @@ import ClientOrders from '../Pages/ClientOrders'
 import Delivery from '../Pages/Delivery';
 import Order from '../Pages/Order';
 import EditProduct from '../Pages/EditProduct';
+import DeliveryDates from '../Pages/DeliveryDates';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
@@ -164,6 +165,7 @@ function NavbarComp() {
           <Route path="/myorders/:id" element={<ClientOrders/>}/>
           <Route path="/order/:id" element={<Order/>}/>
           <Route path="/admin/products/:id/edit" element = {<EditProduct/>}/>
+          <Route path="/admin/delivery" element = {<DeliveryDates/>}/>
 
         </Routes>
       </div>

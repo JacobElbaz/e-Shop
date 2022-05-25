@@ -1,4 +1,4 @@
-import { ADD_DATE } from "../actions/dates.action";
+import { ADD_DATE, GET_DATES } from "../actions/dates.action";
 
 const initialState = {};
 
@@ -12,6 +12,9 @@ export default function datesReducer(state = initialState, action) {
                     dates: [...action.payload],
                 },
             };
+
+        case GET_DATES:
+            return action.payload;
         default:
             return state;
 
