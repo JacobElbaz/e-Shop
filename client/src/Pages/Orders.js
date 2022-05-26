@@ -36,7 +36,7 @@ const Orders = () => {
                     <h1>Orders</h1>
                 </Col>
                 <Col>
-                <Button variant='secondary'>Set Delivery</Button></Col>
+                <Button as={Link} to={'/admin/delivery'} variant='secondary'>Set Delivery</Button></Col>
             </Row>
             <Table striped bordered hover responsive className='table-sm'>
                 <thead>
