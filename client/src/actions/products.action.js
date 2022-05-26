@@ -7,8 +7,10 @@ export const GET_TREND = "GET_TREND";
 export const GET_LATEST = "GET_LATEST";
 export const GET_DEALS = "GET_DEALS";
 export const GET_BEST = "GET_BEST";
+export const GET_BEST_MANAGER = "GET_BEST_MANAGER";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
+export const ALL_PRODUCTS = "ALL_PRODUCTS";
 
 export const getProducts = ( keyword = '', category = '', genre = '', sort = '') => {
     return async (dispatch) => {
@@ -21,6 +23,17 @@ export const getProducts = ( keyword = '', category = '', genre = '', sort = '')
         }
     };
 };
+
+export const allProducts = () => {
+    return async (dispatch) => {
+        try{
+            const res = await axios.get(`${process.env.REACT_APP_API_URL}api/product/all`);
+            dispatch({type: ALL_PRODUCTS, payload:res.data});
+        }catch (err) {
+            return console.log(err);
+    }
+}
+}
 
 export const getProduct = (pid) => {
     return async (dispatch) => {
@@ -90,6 +103,17 @@ export const getBestSeller = () => {
             const res = await axios
                 .get(`${process.env.REACT_APP_API_URL}api/product/best-seller`);
             dispatch({ type: GET_BEST, payload: res.data });
+        } catch (err) {
+            return console.log(err);
+        }
+    };
+}
+export const getBestSellerManager = () => {
+    return async (dispatch) => {
+        try {
+            const res = await axios
+                .get(`${process.env.REACT_APP_API_URL}api/product/best-seller-manager`);
+            dispatch({ type: GET_BEST_MANAGER, payload: res.data });
         } catch (err) {
             return console.log(err);
         }

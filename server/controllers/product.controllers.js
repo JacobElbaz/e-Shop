@@ -28,11 +28,22 @@ module.exports.getProducts = async (req, res) => {
       break;
       case 'high-low': match.sort = {price: -1};
       break;
+      case 'best-sales': match.sort = {sales: -1};
+      break;
+      case 'newest': match.sort = {releaseDate: -1};
+      break;
+      case 'oldest': match.sort = {releaseDate: 1};
+      break;
       default: match.sort = {...match, $sort: 1};
       break;
     }
   }
   const products = await ProductModel.find({...match}).sort(match.sort);
+  res.send(products);
+}
+
+module.exports.allProduct = async (req, res) => {
+  const products = await ProductModel.find();
   res.send(products);
 }
 
@@ -57,6 +68,19 @@ module.exports.getBestSeller = async (req, res) => {
   }
   res.send(products);
 }
+
+module.exports.getBestSellerManager = async (req, res) => {
+  const products = await ProductModel.find({})
+  .sort({sales: -1})
+  .limit(10)
+  if (!products) {
+    res.status(404);
+    throw new Error('Best-seller products not found');
+  }
+  res.send(products);
+}
+
+
 
 module.exports.getTrend = async (req, res) => {
   const products = await ProductModel.find({})
