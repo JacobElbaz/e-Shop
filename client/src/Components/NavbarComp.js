@@ -28,7 +28,6 @@ import Order from '../Pages/Order';
 import EditProduct from '../Pages/EditProduct';
 import DeliveryDates from '../Pages/DeliveryDates';
 import Statistic from '../Pages/Statistic';
-import RatingPage from '../Pages/RatingPage';
 
 function NavbarComp() {
   const uid = useContext(UidContext);
