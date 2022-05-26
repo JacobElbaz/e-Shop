@@ -169,9 +169,6 @@ function NavbarComp() {
           <Route path="/admin/products/:id/edit" element = {<EditProduct/>}/>
           <Route path="/admin/delivery" element = {<DeliveryDates/>}/>
           <Route path="/admin/stats" element = {<Statistic/>}/>
-          <Route path="/rating/:id" element = {<RatingPage/>}/>
-
-
         </Routes>
       </div>
     </div>
