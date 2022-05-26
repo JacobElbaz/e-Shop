@@ -182,3 +182,11 @@ module.exports.deleteProduct = (req, res) => {
     }
   )
 };
+
+module.exports.updateRateProduct = async (req, res) => {
+  const id = req.body.productId;
+  const rate_ = req.body.rate;
+  const product = await ProductModel.findById(id);
+  product.rating.push(rate_);
+  await product.save();
+}

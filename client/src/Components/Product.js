@@ -32,7 +32,7 @@ const Product = ({ product }) => {
         </Link>
         <Card.Text as='div'>{product.category}</Card.Text>
         <Card.Text as='div'>
-          <Rating value={product.rating} />
+          <Rating value={product.rating.length != 0 && product.rating.reduce((total, currentVal) => total + currentVal)/product.rating.length} />
         </Card.Text>
         <Card.Text as='h3'>${product.price}</Card.Text>
       </Card.Body>

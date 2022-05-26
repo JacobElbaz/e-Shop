@@ -9,6 +9,7 @@ import { updateStatus } from '../actions/order.action';
 const Orders = () => {
     const [loadOrders, setLoadOrders] = useState(true);
     const [showModal, setShowModal] = useState(false);
+    const [showConfirmModal, setShowConfirmModal] = useState(false);
     const [toCancel, setToCancel] = useState();
     const dispatch = useDispatch();
     const orders = useSelector((state) => state.orderReducer);
@@ -28,6 +29,7 @@ const Orders = () => {
 
     const handleClose = () => {
         setShowModal(false);
+        setShowConfirmModal(false);
     };
 
     const onCancelClick = (order) => {
@@ -49,6 +51,18 @@ const Orders = () => {
                     </Button>
                     <Button variant='secondary' onClick={handleClose}>
                         No
+                    </Button>
+                </Modal.Footer>
+            </Modal>
+
+            <Modal show={showConfirmModal} onHide={handleClose}>
+                <Modal.Header closeButton>
+                    <Modal.Title>Reception Confirmed</Modal.Title>
+                </Modal.Header>
+                <Modal.Body>Thank you for confirm reception, you can now rate the products you just received !</Modal.Body>
+                <Modal.Footer>
+                    <Button variant='primary' onClick={() => handleClose()}>
+                        OK
                     </Button>
                 </Modal.Footer>
             </Modal>
@@ -98,7 +112,7 @@ const Orders = () => {
                                         {new Date(order.deliveredAt) <= new Date() && order.status === 'Confirmed' ? (
                                             <Button
                                             variant='success'
-                                            onClick={() => onCancelClick(order._id)}
+                                            onClick={setShowConfirmModal(true)}
                                             >Confirm Reception
                                         </Button>
                                     ) : (

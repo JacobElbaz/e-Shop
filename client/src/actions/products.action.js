@@ -11,6 +11,7 @@ export const GET_BEST_MANAGER = "GET_BEST_MANAGER";
 export const DELETE_PRODUCT = "DELETE_PRODUCT";
 export const UPDATE_PRODUCT = "UPDATE_PRODUCT";
 export const ALL_PRODUCTS = "ALL_PRODUCTS";
+export const UPDATE_RATE = "UPDATE_RATE";
 
 export const getProducts = ( keyword = '', category = '', genre = '', sort = '') => {
     return async (dispatch) => {
@@ -130,6 +131,22 @@ export const updateProduct = (id, product) => {
         })
         .then((res) => {
             dispatch({type: UPDATE_PRODUCT, payload: product});
+        })
+        .catch((err)=>{
+            console.log(err);
+        })
+    }
+}
+
+export const updateRateProduct = (productId, rate) => {
+    return async (dispatch) => {
+        return axios ({
+            method: 'put',
+            url: `${process.env.REACT_APP_API_URL}api/product/rate`,
+            data: {productId, rate},
+        })
+        .then((res) => {
+            dispatch({type: UPDATE_RATE, payload: {productId, rate}});
         })
         .catch((err)=>{
             console.log(err);

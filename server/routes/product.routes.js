@@ -11,6 +11,7 @@ router.get('/trend', productController.getTrend);
 router.get('/deals', productController.getDeals);
 router.get('/:id', productController.getProduct);
 router.post('/', productController.createProduct);
+router.put('/rate', productController.updateRateProduct);
 router.put('/:id', productController.updateProduct);
 router.delete('/:id', productController.deleteProduct);
 
