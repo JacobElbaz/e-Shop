@@ -1,8 +1,8 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { UidContext } from '../Components/AppContext';
-import { useNavigate, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Formik, Form } from 'formik';
-import { Button } from 'react-bootstrap';
+import { Button, Modal } from 'react-bootstrap';
 import FormContainer from '../Components/FormContainer';
 import Input from '../Components/Input';
 import { productFormValidationSchema } from '../validations';
@@ -19,6 +19,7 @@ function EditProduct() {
     console.log(product_id);
     console.log(product_);
     const [details, setDetails] = useState({});
+    const [showModal, setShowModal] = useState(false);
     const dispatch = useDispatch();
     useEffect(() => {
         dispatch(getProduct(product_id));
@@ -70,12 +71,33 @@ function EditProduct() {
       description: e.description,
       price: e.price,
       countInStock: e.countInStock}));
+      setShowModal(true);
     
+  };
+
+  const handleClose = () => {
+    setShowModal(false);
   };
   return (
     <>
+    <Modal show={showModal} onHide={handleClose}>
+        <Modal.Header closeButton>
+          <Modal.Title>Delete</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>This Game has been deleted successfully</Modal.Body>
+        <Modal.Footer>
+          <Link
+            type="button"
+            className="btn btn-secondary"
+            to={'/admin/productList'}
+            onClick={handleClose}
+          >
+            OK
+          </Link>
+        </Modal.Footer>
+      </Modal>
       <FormContainer>
-        <h1>Add Product</h1>
+        <h1>Update Product</h1>
         <Formik
           onSubmit={submitHandler}
           initialValues={product_}
@@ -106,7 +128,7 @@ function EditProduct() {
                 className='d-block ml-auto'
                 type='submit'
                 variant='primary'>
-                Add in stock
+                Update
               </Button>
             </Form>
           )}

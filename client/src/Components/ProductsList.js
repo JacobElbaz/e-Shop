@@ -67,7 +67,9 @@ const ProductList = () => {
               <th>PRICE</th>
               <th>GENRE</th>
               <th>CATEGORY</th>
+              <th>COUNT IN STOCK</th>
               <th>RELEASE DATE</th>
+              <th>SALES</th>
               <th>ACTIONS</th>
             </tr>
           </thead>
@@ -83,7 +85,9 @@ const ProductList = () => {
                     <td>${product.price}</td>
                     <td>{product.genre}</td>
                     <td>{product.category}</td>
+                    <td>{product.countInStock}</td>
                     <td>{product.releaseDate.split('T')[0]}</td>
+                    <td>{product.sales}</td>
                     <td>
                       <Link to={`/admin/products/${product._id}/edit`}>
                         <Button variant="light" className="btn-sm">

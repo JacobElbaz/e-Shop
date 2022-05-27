@@ -56,7 +56,7 @@ const Orders = () => {
                             return (
                                 <tr key={order._id}>
                                     <td>
-                                        <Link to={`/admin/order/`}>{order._id}</Link>
+                                        {order._id}
                                     </td>
                                     <td>{order.client._id}</td>
                                     <td>${order.totalPrice}</td>
