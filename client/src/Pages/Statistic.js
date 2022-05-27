@@ -33,7 +33,6 @@ function Statistic() {
   }
 
   const sumOrders = () => {
-    console.log(orders);
     return orders.length;
   }
 

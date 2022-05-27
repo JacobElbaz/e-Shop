@@ -40,7 +40,7 @@ const Orders = () => {
     return (
 
         <div className='m-5'>
-            <Modal show={showModal} onHide={handleClose}>
+            <Modal show={showModal} onHide={() =>handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Cancel Order</Modal.Title>
                 </Modal.Header>
@@ -49,13 +49,13 @@ const Orders = () => {
                     <Button variant='danger' onClick={() => cancel(toCancel)}>
                         Yes, cancel this order
                     </Button>
-                    <Button variant='secondary' onClick={handleClose}>
+                    <Button variant='secondary' onClick={()=>handleClose}>
                         No
                     </Button>
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={showConfirmModal} onHide={handleClose}>
+            <Modal show={showConfirmModal} onHide={() => handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Reception Confirmed</Modal.Title>
                 </Modal.Header>
@@ -112,7 +112,7 @@ const Orders = () => {
                                         {new Date(order.deliveredAt) <= new Date() && order.status === 'Confirmed' ? (
                                             <Button
                                             variant='success'
-                                            onClick={setShowConfirmModal(true)}
+                                            onClick={() => setShowConfirmModal(true)}
                                             >Confirm Reception
                                         </Button>
                                     ) : (

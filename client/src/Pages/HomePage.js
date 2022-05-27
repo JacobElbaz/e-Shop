@@ -54,13 +54,15 @@ function HomePage() {
                             <div className="col-sm-6 col-md-3 item">
                                 <h3>Contact</h3>
                                 <ul>
-                                    <li><a href="#">050-301-3489</a></li>
-                                    <li><a href="#">jacobelbz@gmail.com</a></li>
+                                    <li><a href="#">Elie Bracha</a></li>
+                                    <li><a href="#">Jacob Elbaz</a></li>
+                                    <li><a href="#">Adane Adgo</a></li>
+                                    <li><a href="#">Samuel Levy</a></li>
                                 </ul>
                             </div>
                             <div className="col-md-6 item text">
                                 <h3>About</h3>
-                                <p>Praesent sed lobortis mi. Suspendisse vel placerat ligula. Vivamus ac sem lacus. Ut vehicula rhoncus elementum. Etiam quis tristique lectus. Aliquam in arcu eget velit pulvinar dictum vel in justo.</p>
+                                <p>Game Zone is the premiere source and community for both niche and unique games across the globe. We provide fun daily content, memes, and comprehensive coverage of the latest and greatest video games. We are the new enthusiast gaming press, for the digital age.</p>
                             </div></div>
                         <p className="copyright">Game Zone © 2022</p>
                     </div>

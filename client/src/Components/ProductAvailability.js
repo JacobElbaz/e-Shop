@@ -60,16 +60,16 @@ const ProductAvailability = ({ product }) => {
 
   return (
     <Card>
-       <Modal show={showModalCart} onHide={handleClose}>
+       <Modal show={showModalCart} onHide={() => handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Thank you for adding to the cart</Modal.Title>
         </Modal.Header>
         <Modal.Body>The product was added to your cart!</Modal.Body>
         <Modal.Footer>
-          <Link type="button" className='btn btn-secondary' to={'/'} onClick={handleClose}>
+          <Link type="button" className='btn btn-secondary' to={'/'} onClick={() =>handleClose}>
             Continue Shopping
           </Link>
-          <Link type="button" className='btn btn-primary' to='/cart' onClick={handleClose}>
+          <Link type="button" className='btn btn-primary' to='/cart' onClick={() =>handleClose}>
             To My Cart
           </Link>
         </Modal.Footer>
