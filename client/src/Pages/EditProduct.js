@@ -82,9 +82,9 @@ function EditProduct() {
     <>
     <Modal show={showModal} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Delete</Modal.Title>
+          <Modal.Title>Update Product</Modal.Title>
         </Modal.Header>
-        <Modal.Body>This Game has been deleted successfully</Modal.Body>
+        <Modal.Body>This Game has been Updated</Modal.Body>
         <Modal.Footer>
           <Link
             type="button"
