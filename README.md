@@ -16,7 +16,8 @@ In this project we create a basic web app that contain a Login/Signup option.
 2) Open it in the IDE (preferable: Visual Studio Code) 
 3) Install NodeJs: [link here](https://nodejs.org/en/download/)
 4) Open command line in the project
-5) Create a file '.env' in the client folder and past this code into:
+5) In the root Run: `npm install`
+6) Create a file '.env' in the client folder and past this code into:
 ```
 REACT_APP_API_URL = http://localhost:5000/
 ``` 
@@ -31,8 +32,7 @@ TOKEN_SECRET=555
 8) Open the command line in the client folder: `cd client`
 9) Run: `npm install`
 10) (In client folder) Run: `npm start`
-11) In the root Run: `npm start`
-12) Create User in MongoDB [link here](https://www.mongodb.com/)
-13) Download MongoDB Compass [link here](https://www.mongodb.com/try/download/compass)
-14) Open MongoCompass
-15) NewConnect and ADD as URL: mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test
+11) Create User in MongoDB [link here](https://www.mongodb.com/)
+12) Download MongoDB Compass [link here](https://www.mongodb.com/try/download/compass)
+13) Open MongoCompass
+14) NewConnect and ADD as URL: mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test
