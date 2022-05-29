@@ -25,14 +25,13 @@ In this project we create a basic web app that contain a Login/Signup option.
 ```
 REACT_APP_API_URL = http://localhost:5000/
 ``` 
-7) Create a file '.env' in the server/config folder and past this code into: 
+11) Create a file '.env' in the server/config folder and past this code into: 
 ```
 PORT=5000
 CLIENT_URL=http://localhost:3000
 DB_USER_PASS=Jacobel:12345
 TOKEN_SECRET=555
 ```
-7) Run in client and server folder: `npm install`
-8) Open the command line in the client folder: `cd client`
-9) (In client and server folder) Run: `npm start`
+12) Run in client and server folder: `npm install`
+13) (In client and server folder) Run: `npm start`
 
