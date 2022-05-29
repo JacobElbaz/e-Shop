@@ -31,3 +31,8 @@ TOKEN_SECRET=555
 8) Open the command line in the client folder: `cd client`
 9) Run: `npm install`
 10) (In client folder) Run: `npm start`
+11) In the root Run: `npm start`
+12) Create User in MongoDB [link here](https://www.mongodb.com/)
+13) Download MongoDB Compass [link here](https://www.mongodb.com/try/download/compass)
+14) Open MongoCompass
+15) NewConnect and ADD as URL: mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test
