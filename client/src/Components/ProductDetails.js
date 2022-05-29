@@ -30,8 +30,9 @@ const ProductDetails = ({ product }) => {
       return false;
     } else {
       const clientOrders = orders.filter(
-        (order) => order.client._id == clientId
+        (order) => order.client === clientId
       );
+      console.log(clientOrders);
       if (clientOrders) {
         for (let i = 0; i < clientOrders.length; i++) {
           if (
@@ -39,6 +40,7 @@ const ProductDetails = ({ product }) => {
               (product) => product._id == productId
             )
           ) {
+            
             return true;
           }
         }
