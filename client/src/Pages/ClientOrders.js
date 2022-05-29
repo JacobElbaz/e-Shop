@@ -119,7 +119,7 @@ const Orders = () => {
                                         <Button
                                             variant='danger'
                                             onClick={() => onCancelClick(order._id)}
-                                            disabled={order.status === 'Canceled' || new Date(order.deliveredAt) < new Date()}>Cancel
+                                            disabled={order.status === 'Canceled' }>Cancel
                                         </Button>
                                     )}
                                         
