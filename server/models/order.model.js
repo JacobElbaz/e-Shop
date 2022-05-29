@@ -3,9 +3,8 @@ const mongoose = require('mongoose');
 const orderSchema = mongoose.Schema(
     {
         client: {
-            type: mongoose.Schema.Types.ObjectId,
-            required: true,
-            ref: 'client'
+            type: String,
+            required: true, 
         },
         orderItems: [
             {
@@ -28,7 +27,7 @@ const orderSchema = mongoose.Schema(
             address: { type: String, required: true },
             city: { type: String, required: true },
             postalCode: { type: String, required: true },
-            appartment: {type: Number, required: true},
+            street: {type: Number, required: true},
           },
           paymentMethod: {
             creditCard: { type: Number, required: true },

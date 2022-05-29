@@ -30,7 +30,7 @@ const PlaceOrder = () => {
   const onPlaceOrderClick = () => {
     dispatch(
       createOrder({
-        client: client._id,
+        client: client._id.toString(),
         orderItems: cart,
         shippingAddress: JSON.parse(localStorage.getItem('shippingAddress')),
         paymentMethod: JSON.parse(localStorage.getItem('paymentMethod')),

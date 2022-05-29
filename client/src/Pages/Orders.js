@@ -58,7 +58,7 @@ const Orders = () => {
                                     <td>
                                         {order._id}
                                     </td>
-                                    <td>{order.client._id}</td>
+                                    <td>{order.client}</td>
                                     <td>${order.totalPrice}</td>
                                     <td>{order.shippingAddress.city}</td>
                                     <td>{order.status}</td>

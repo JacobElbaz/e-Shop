@@ -41,7 +41,7 @@ const UserList = () => {
               return (
                 <tr key={user._id}>
                   <td>
-                    <Link to={`/admin/user/${user._id}/edit`}>{user._id}</Link>
+                    {user._id}
                   </td>
                   <td>{user.username}</td>
                   <td>
