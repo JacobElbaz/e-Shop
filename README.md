@@ -15,9 +15,13 @@ In this project we create a basic web app that contain a Login/Signup option.
 1) Clone the project from git repository: [In order to clone click this link](https://github.com/TechLeadersSce/CICD_Class)
 2) Open it in the IDE (preferable: Visual Studio Code) 
 3) Install NodeJs: [link here](https://nodejs.org/en/download/)
-4) Open command line in the project
-5) In the root Run: `npm install`
-6) Create a file '.env' in the client folder and past this code into:
+4) Create User in MongoDB [link here](https://www.mongodb.com/)
+5) Download MongoDB Compass [link here](https://www.mongodb.com/try/download/compass)
+6) Open MongoCompass
+7) NewConnect and ADD as URL: mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test
+8) Open command line in the project
+9) In the root Run: `npm install`
+10) Create a file '.env' in the client folder and past this code into:
 ```
 REACT_APP_API_URL = http://localhost:5000/
 ``` 
@@ -28,11 +32,7 @@ CLIENT_URL=http://localhost:3000
 DB_USER_PASS=Jacobel:12345
 TOKEN_SECRET=555
 ```
-7) Run: `npm install`
+7) Run in client and server folder: `npm install`
 8) Open the command line in the client folder: `cd client`
-9) Run: `npm install`
-10) (In client folder) Run: `npm start`
-11) Create User in MongoDB [link here](https://www.mongodb.com/)
-12) Download MongoDB Compass [link here](https://www.mongodb.com/try/download/compass)
-13) Open MongoCompass
-14) NewConnect and ADD as URL: mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test
+9) (In client and server folder) Run: `npm start`
+
