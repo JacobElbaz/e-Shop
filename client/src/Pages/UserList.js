@@ -32,7 +32,7 @@ const UserList = () => {
             <th>NAME</th>
             <th>EMAIL</th>
             <th>MANAGER</th>
-            <th>ACTIONS</th>
+            
           </tr>
         </thead>
         <tbody>
@@ -57,7 +57,7 @@ const UserList = () => {
                       <i className="fas fa-times" style={{ color: 'red' }}></i>
                     )}
                   </td>
-                  <td>
+                  {/* <td>
                     <Link to={`/admin/products/${user._id}/edit`}>
                       <Button variant="light" className="btn-sm">
                         <i className="fas fa-edit"></i>
@@ -70,7 +70,7 @@ const UserList = () => {
                     >
                       <i className="fas fa-trash"></i>
                     </Button>
-                  </td>
+                  </td> */}
                 </tr>
               );
             })}
