@@ -18,7 +18,8 @@ In this project we create a basic web app that contain a Login/Signup option.
 4) Create User in MongoDB [link here](https://www.mongodb.com/)
 5) Download MongoDB Compass [link here](https://www.mongodb.com/try/download/compass)
 6) Open MongoCompass
-7) NewConnect and ADD as URL: mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test
+7) NewConnect and ADD as URL:
+``` mongodb+srv://Jacobel:12345@cluster0.2gjbq.mongodb.net/test```
 8) Open command line in the project
 9) In the root Run: `npm install`
 10) Create a file '.env' in the client folder and past this code into:
