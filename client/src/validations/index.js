@@ -4,7 +4,7 @@ export const addressFormValidationSchema = yup.object({
     address: yup.string().required('Address is required'),
     city: yup.string().required('City is required'),
     postalCode: yup.number().required('ZIP Code required'),
-    appartment: yup.number().required('Appartment number is reqired'),
+    street: yup.number().required('Street number is reqired'),
   });
 
   export const paymentFormValidationSchema = yup.object({

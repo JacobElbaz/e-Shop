@@ -30,6 +30,10 @@ export default function AllProducts() {
       break;
       case 'high-low': products.sort((a, b) => a.price - b.price).reverse();
       break;
+      case 'best-sales': products.sort();
+      break;
+      case 'newest': products.sort();
+      break;
       default: 
       break;
     }
@@ -70,6 +74,8 @@ export default function AllProducts() {
         <option value="za">Z-A</option>
         <option value="low-high">Low-High</option>
         <option value="high-low">High-Low</option>
+        <option value="best-sales">Best Sales</option>
+        <option value="newest">New Release</option>
       </select>
       <ProductCards products={products} />
     </div>
