@@ -43,7 +43,7 @@ const Order = () => {
                         <Col md={4}>
                             <OrderSummary order={order}>
                                 Delivery: {new Date(order.deliveredAt).toDateString()}
-                                {order.isDelivered ? ' (Delivered)' : ' (Not Delivered)'} <br /> Status: {order.status}
+                                {new Date(order.deliveredAt) <= new Date() ? ' (Delivered)' : ' (Not Delivered)'} <br /> Status: {order.status}
                             </OrderSummary>
                         </Col>
                     </Row>
