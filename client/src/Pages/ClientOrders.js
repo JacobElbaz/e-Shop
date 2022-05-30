@@ -40,7 +40,7 @@ const Orders = () => {
     return (
 
         <div className='m-5'>
-            <Modal show={showModal} onHide={() =>handleClose}>
+            <Modal show={showModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Cancel Order</Modal.Title>
                 </Modal.Header>
@@ -55,7 +55,7 @@ const Orders = () => {
                 </Modal.Footer>
             </Modal>
 
-            <Modal show={showConfirmModal} onHide={() => handleClose}>
+            <Modal show={showConfirmModal} onHide={handleClose}>
                 <Modal.Header closeButton>
                     <Modal.Title>Reception Confirmed</Modal.Title>
                 </Modal.Header>

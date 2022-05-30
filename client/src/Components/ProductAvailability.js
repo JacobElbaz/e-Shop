@@ -1,41 +1,48 @@
 import React, { useContext, useEffect, useState } from 'react';
-import { Row, Col, ListGroup, Card, Form, Button, Modal } from 'react-bootstrap';
+import {
+  Row,
+  Col,
+  ListGroup,
+  Card,
+  Form,
+  Button,
+  Modal,
+} from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getUser, updateWishProduct } from '../actions/user.action';
-import {Link} from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { UidContext } from '../Components/AppContext';
-
 
 const ProductAvailability = ({ product }) => {
   const [showModalCart, setShowModalCart] = useState(false);
   const [qty, setQty] = useState(1);
   const dispatch = useDispatch();
   const user = JSON.parse(localStorage.getItem('auth'));
-  let [cart, setCart] = useState([])
-  let localCart = localStorage.getItem("cart");
+  let [cart, setCart] = useState([]);
+  let localCart = localStorage.getItem('cart');
 
- 
   useEffect(() => {
     localCart = JSON.parse(localCart);
     if (localCart) setCart(localCart);
-  }, []) //the empty array ensures useEffect only runs once
+  }, []); //the empty array ensures useEffect only runs once
 
   const onAddToCartClick = () => {
-    if(user){
-    let cartCopy = [...cart];
-    let existingItem = cartCopy.find(cartItem => cartItem._id == product._id);
-    if (existingItem) {
-      
+    if (user) {
+      let cartCopy = [...cart];
+      let existingItem = cartCopy.find(
+        (cartItem) => cartItem._id == product._id
+      );
+      if (existingItem) {
+      } else {
+        product.qty = qty;
+        cartCopy.push(product);
+      }
+      setCart(cartCopy);
+      let stringCart = JSON.stringify(cartCopy);
+      localStorage.setItem('cart', stringCart);
+      setShowModalCart(true);
     } else {
-      product.qty = qty;
-      cartCopy.push(product);
-    }
-    setCart(cartCopy)
-    let stringCart = JSON.stringify(cartCopy);
-    localStorage.setItem("cart", stringCart);
-    setShowModalCart(true);}
-    else {
-      window.location ='/login';
+      window.location = '/login';
     }
   };
 
@@ -43,93 +50,111 @@ const ProductAvailability = ({ product }) => {
     if (user) {
       dispatch(updateWishProduct(product._id, user._id));
       window.location.reload();
-    }
-    else {
+    } else {
       window.location = '/login';
     }
   };
 
   const handleClose = () => {
     setShowModalCart(false);
-  }
+  };
 
-  const renderWishlistText = 
-  user && user.wishlist?.find(wish => wish[0] === product._id)
+  const renderWishlistText =
+    user && user.wishlist?.find((wish) => wish[0] === product._id)
       ? 'Remove From Wishlist'
       : 'Add To Wishlist';
 
   return (
-    <Card>
-       <Modal show={showModalCart} onHide={() => handleClose}>
+    <>
+      <Modal show={showModalCart} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>Thank you for adding to the cart</Modal.Title>
         </Modal.Header>
         <Modal.Body>The product was added to your cart!</Modal.Body>
         <Modal.Footer>
-          <Link type="button" className='btn btn-secondary' to={'/'} onClick={() =>handleClose}>
+          <Link
+            type="button"
+            className="btn btn-secondary"
+            to={'/'}
+            onClick={() => handleClose}
+          >
             Continue Shopping
           </Link>
-          <Link type="button" className='btn btn-primary' to='/cart' onClick={() =>handleClose}>
+          <Link
+            type="button"
+            className="btn btn-primary"
+            to="/cart"
+            onClick={() => handleClose}
+          >
             To My Cart
           </Link>
         </Modal.Footer>
       </Modal>
-      <ListGroup varient='flush'>
-        <ListGroup.Item>
-          <Row>
-            <Col>Price:</Col>
-            <Col>
-              <strong>${product.price}</strong>
-            </Col>
-          </Row>
-        </ListGroup.Item>
-        <ListGroup.Item>
-          <Row>
-            <Col>Status:</Col>
-            <Col>{product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}</Col>
-          </Row>
-        </ListGroup.Item>
-
-        {product.countInStock > 0 && (
+      <Card>
+        <ListGroup varient="flush">
           <ListGroup.Item>
             <Row>
-              <Col>Qty</Col>
+              <Col>Price:</Col>
               <Col>
-                <Form.Control
-                  as='select'
-                  value={qty}
-                  onChange={(e) => setQty(e.target.value)}>
-                  {[...Array(product.countInStock).keys()].map((index) => (
-                    <option key={index + 1} value={index + 1}>
-                      {index + 1}
-                    </option>
-                  ))}
-                </Form.Control>
+                <strong>${product.price}</strong>
               </Col>
             </Row>
           </ListGroup.Item>
-        )}
-        <ListGroup.Item>
-          <Row>
-            <Button
-              className='btn-block my-1'
-              type='button'
-              disabled={product.countInStock < 1}
-              onClick={onAddToCartClick}>
-              Add To Cart
-            </Button></Row>
-          <Row>
-            <Button
-              className='btn-block my-1'
-              type='button'
-              onClick={onAddToWishListClick}>
-              {user && user.wishlist.find(wish => wish === product._id)
-      ? 'Remove From Wishlist'
-      : 'Add To Wishlist'}
-            </Button></Row>
-        </ListGroup.Item>
-      </ListGroup>
-    </Card>
+          <ListGroup.Item>
+            <Row>
+              <Col>Status:</Col>
+              <Col>
+                {product.countInStock > 0 ? 'In Stock' : 'Out of Stock'}
+              </Col>
+            </Row>
+          </ListGroup.Item>
+
+          {product.countInStock > 0 && (
+            <ListGroup.Item>
+              <Row>
+                <Col>Qty</Col>
+                <Col>
+                  <Form.Control
+                    as="select"
+                    value={qty}
+                    onChange={(e) => setQty(e.target.value)}
+                  >
+                    {[...Array(product.countInStock).keys()].map((index) => (
+                      <option key={index + 1} value={index + 1}>
+                        {index + 1}
+                      </option>
+                    ))}
+                  </Form.Control>
+                </Col>
+              </Row>
+            </ListGroup.Item>
+          )}
+          <ListGroup.Item>
+            <Row>
+              <Button
+                className="btn-block my-1"
+                type="button"
+                disabled={product.countInStock < 1}
+                onClick={onAddToCartClick}
+              >
+                Add To Cart
+              </Button>
+            </Row>
+            <Row>
+              <Button
+                className="btn-block my-1"
+                type="button"
+                onClick={onAddToWishListClick}
+              >
+                {user && user.wishlist.find((wish) => wish === product._id)
+                  ? 'Remove From Wishlist'
+                  : 'Add To Wishlist'}
+              </Button>
+            </Row>
+          </ListGroup.Item>
+        </ListGroup>
+      </Card>
+    </>
   );
 };
 
