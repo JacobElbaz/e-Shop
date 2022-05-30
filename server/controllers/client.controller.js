@@ -33,7 +33,7 @@ module.exports.updateWishlist = async (req, res) => {
       });
     }
 
-    client.save();
+    await client.save();
 
     res.send(client.wishlist);
   } else {
