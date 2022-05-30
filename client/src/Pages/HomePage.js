@@ -52,7 +52,7 @@ function HomePage() {
                     <div className="container">
                         <div className="row">
                             <div className="col-sm-6 col-md-3 item">
-                                <h3>Contact</h3>
+                                <Link to = '/contact'>Contact</Link>
                                 <ul>
                                     <li><a href="#">Elie Bracha</a></li>
                                     <li><a href="#">Jacob Elbaz</a></li>
@@ -61,7 +61,7 @@ function HomePage() {
                                 </ul>
                             </div>
                             <div className="col-md-6 item text">
-                                <h3>About</h3>
+                                <Link to = '/about'>About</Link>
                                 <p>Game Zone is the premiere source and community for both niche and unique games across the globe. We provide fun daily content, memes, and comprehensive coverage of the latest and greatest video games. We are the new enthusiast gaming press, for the digital age.</p>
                             </div></div>
                         <p className="copyright">Game Zone © 2022</p>

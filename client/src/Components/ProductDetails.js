@@ -32,7 +32,6 @@ const ProductDetails = ({ product }) => {
       const clientOrders = orders.filter(
         (order) => order.client === clientId
       );
-      console.log(clientOrders);
       if (clientOrders) {
         for (let i = 0; i < clientOrders.length; i++) {
           if (
