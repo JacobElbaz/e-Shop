@@ -26,7 +26,7 @@ export const getUser = (uid) => {
 export const updateWishProduct = (productId, userId) => async (dispatch, getState) => {
 
   try {
-    const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/wishlist`, { productId, userId });
+    const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/wishlist/` + userId, { productId });
 
     dispatch({ type: UPDATE_WISH_PRODUCT, payload: data });
 

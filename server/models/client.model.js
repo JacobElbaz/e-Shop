@@ -33,8 +33,11 @@ const clientSchema = mongoose.Schema(
 
 //Password encryption
 clientSchema.pre("save", async function(next){
+  const user = this;
+  if (user.isModified('password')){
   const salt = await bcrypt.genSalt();
   this.password = await bcrypt.hash(this.password, salt);
+  }
   next();
 });
 

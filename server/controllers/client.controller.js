@@ -18,8 +18,11 @@ module.exports.userInfo = (req, res) => {
 };
 
 module.exports.updateWishlist = async (req, res) => {
-  const { productId, userId } = req.body;
+  const { productId } = req.body;
+  const userId = req.params.id;
+  
   const client = await ClientModel.findById(userId);
+  
   if (client) {
     const alreadyExisted = client.wishlist.find(
       (wish) => wish._id.toString() === productId
@@ -32,8 +35,9 @@ module.exports.updateWishlist = async (req, res) => {
         return wish._id.toString() !== productId;
       });
     }
-
+    
     await client.save();
+    
 
     res.send(client.wishlist);
   } else {
