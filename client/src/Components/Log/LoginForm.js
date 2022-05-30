@@ -123,9 +123,11 @@ function LoginForm() {
                 type="email"
                 name="email"
                 id="email"
-                onChange={(e) =>
+                onChange={(e) =>{
+                  e.preventDefault();
                   setDetails({ ...details, email: e.target.value })
                 }
+              }
                 value={details.email}
               />
               <div className="email error"></div>
@@ -136,9 +138,11 @@ function LoginForm() {
                 type="password"
                 name="password"
                 id="password"
-                onChange={(e) =>
+                onChange={(e) =>{
+                  e.preventDefault();
                   setDetails({ ...details, password: e.target.value })
                 }
+              }
                 value={details.password}
               />
               <div className="password error"></div>
