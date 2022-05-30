@@ -46,7 +46,7 @@ const Shipping = () => {
                     {() => (
                         <Form>
                             <Input label='Address*' name='address' type='text' />
-                            <Input label='Street' name='street' type='text' />
+                            <Input label='No. Of Street' name='street' type='text' />
                             <Input label='City*' name='city' type='text' />
                             <Input label='Post Code' name='postalCode' type='text' />
                             <Button

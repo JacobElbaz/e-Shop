@@ -49,7 +49,7 @@ export const addressFormValidationSchema = yup.object({
     )
     .test(
       'test-credit-card-expiration-date',
-      'Invalid Expiration Month',
+      'Invalid Expiration Month or Year',
       expirationDate => {
         if (!expirationDate) {
           return false
@@ -59,9 +59,12 @@ export const addressFormValidationSchema = yup.object({
           .toString()
           .substr(-2)
   
-        const [expMonth] = expirationDate.split('/')
+        const [expMonth, expYear] = expirationDate.split('/')
   
         if (Number(expMonth) > 12) {
+          return false
+        }
+        if (Number(expYear) > 27){
           return false
         }
   

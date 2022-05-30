@@ -13,27 +13,26 @@ function SignupForm() {
 
   const submitHandler = async (e) => {
     e.preventDefault();
-    const usernameError = document.querySelector(".username.error");
-    const emailError = document.querySelector(".email.error");
-    const passwordError = document.querySelector(".password.error");
+    const usernameError = document.querySelector('.username.error');
+    const emailError = document.querySelector('.email.error');
+    const passwordError = document.querySelector('.password.error');
 
     await axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}api/client/register`,
       data: details,
     })
-    .then((res) => {
-          console.log(res);
-          if (res.data.errors) {
-            usernameError.innerHTML = res.data.errors.username;
-            emailError.innerHTML = res.data.errors.email;
-            passwordError.innerHTML = res.data.errors.password;
-          } else {
-            navigate('/login');
-          }
-        })
-        .catch((err) => console.log(err));
-    
+      .then((res) => {
+        console.log(res);
+        if (res.data.errors) {
+          usernameError.innerHTML = res.data.errors.username;
+          emailError.innerHTML = res.data.errors.email;
+          passwordError.innerHTML = res.data.errors.password;
+        } else {
+          navigate('/login');
+        }
+      })
+      .catch((err) => console.log(err));
   };
 
   return (
@@ -71,6 +70,9 @@ function SignupForm() {
             <label htmlFor="password">Password:</label>
             <input
               type="password"
+              //pattern="^(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{7,}$"
+              minLength={6}
+              title="Minimum of 7 characters. Should have at least one special character and one number and one UpperCase Letter."
               name="password"
               id="password"
               onChange={(e) =>
@@ -81,7 +83,13 @@ function SignupForm() {
             <div className="password error"></div>
           </div>
           <input type="submit" value="Sign Up" />
-          <a className='managerlink text-decoration-none text-decoration-underline ms-5' href='' onClick={() => navigate('/signupManager')}>For manager click here</a>
+          <a
+            className="managerlink text-decoration-none text-decoration-underline ms-5"
+            href=""
+            onClick={() => navigate('/signupManager')}
+          >
+            For manager click here
+          </a>
         </div>
       </form>
     </div>
