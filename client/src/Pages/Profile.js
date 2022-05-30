@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { update_username, forgot_password, getUser, deleteUser } from '../actions/user.action';
+import { update_username, forgot_password, getUser, deleteUser, updateProfile } from '../actions/user.action';
 import { Link } from 'react-router-dom';
 import axios from "axios";
 import cookie from "js-cookie";
@@ -15,7 +15,7 @@ const Profile = () => {
     email: user.email,
   };
   const [username, setUsername] = useState(initialValues.username);
-  const [password, setPassword] = useState('');
+  const [password, setPassword] = useState('e');
   const [showModalUsername, setShowModalUsername] = useState(false);
   const [showModalPassword, setShowModalPassword] = useState(false);
   const [showModalError, setShowModalError] = useState(false);
@@ -40,8 +40,10 @@ const Profile = () => {
   };
 
   const PasswordChangeHandler = (event) => {
-    if (event.target.value.length < 6)
+    if (event.target.value.length < 6){
       setPasswordErrors('Password require 6 character at least');
+      setPassword('e');
+    }
     else {
       setPasswordErrors('');
       setPassword(event.target.value);
@@ -50,9 +52,16 @@ const Profile = () => {
 
 
   const onSubmitUsername = (e) => {
+    
     e.preventDefault();
-    dispatch(update_username(initialValues.email, username));
-    setShowModalUsername(true);
+    if (errors === '' && passwordErrors === '') {
+      dispatch(updateProfile(initialValues.email, username, password));
+      setShowModalPassword(true);
+    } else {
+      setShowModalError(true);
+    }
+    //dispatch(update_username(initialValues.email, username));
+    //setShowModalUsername(true);
   };
 
   const onSubmitPassword = (e) => {
@@ -158,8 +167,9 @@ Your data will be permanently deleted and the account will no longer be accessib
       </Modal>
       <Modal show={showModalPassword} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Success Update Password</Modal.Title>
+          <Modal.Title>Success Update Profile</Modal.Title>
         </Modal.Header>
+        <Modal.Body>Username: {username}</Modal.Body>
         <Modal.Footer>
           <Link
             type="button"
@@ -187,9 +197,9 @@ Your data will be permanently deleted and the account will no longer be accessib
             />
           </Form.Group>
           <p></p>
-          <Button variant="primary" size="sm" type="submit">
+          {/* <Button variant="primary" size="sm" type="submit">
             Update Username
-          </Button>
+          </Button> */}
           <hr />
           <Form.Group controlId="email">
             <Form.Label>Email</Form.Label>
@@ -202,9 +212,34 @@ Your data will be permanently deleted and the account will no longer be accessib
               value={initialValues.email}
             />
           </Form.Group>
+          <hr />
+          <Form.Group controlId="password">
+            <Form.Label>New Password</Form.Label>
+            <Form.Control
+              type="password"
+              name="password"
+              placeholder="Enter New Password"
+              onChange={PasswordChangeHandler}
+            />
+          </Form.Group>
+          <p className="text-danger">{passwordErrors}</p>
+          <hr />
+          <Form.Group controlId="confirmPassword">
+            <Form.Label>Password Confirmation</Form.Label>
+            <Form.Control
+              type="password"
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              onChange={validate}
+            />
+            <p className="text-danger">{errors}</p>
+            <Button variant="primary"  type="submit">
+              Update Profile
+            </Button>
+          </Form.Group>
         </Form>
-        <hr />
-        <Form onSubmit={onSubmitPassword}>
+        
+        {/* <Form onSubmit={onSubmitPassword}>
           <Form.Group controlId="password">
             <Form.Label>New Password</Form.Label>
             <Form.Control
@@ -233,7 +268,7 @@ Your data will be permanently deleted and the account will no longer be accessib
               Update Password
             </Button>
           </Form.Group>
-        </Form>
+        </Form> */}
       </FormContainer>
       <hr />
       <FormContainer>

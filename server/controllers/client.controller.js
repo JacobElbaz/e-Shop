@@ -18,7 +18,7 @@ module.exports.userInfo = (req, res) => {
 };
 
 module.exports.updateWishlist = async (req, res) => {
-  const {productId, userId} = req.body;
+  const { productId, userId } = req.body;
   const client = await ClientModel.findById(userId);
   if (client) {
     const alreadyExisted = client.wishlist.find(
@@ -43,83 +43,77 @@ module.exports.updateWishlist = async (req, res) => {
 };
 
 module.exports.updateUser = async (req, res) => {
-  if (!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
+  const { email, username, password } = req.body;
+  try {
+    const user = await ClientModel.findOne({ email });
 
-    const { username, password } = req.body;
-
-    const user = await ClientModel.findById(req.params.id);
-  
-    if (user) {
+    if (user && password !== 'e') {
       user.username = username || user.username;
       user.password = password || user.password;
-  
+
       const updateUser = await user.save();
-  
-      res.send({name: updateUser.name,});
+
+      res.send({ name: updateUser.name });
+    } else if (user && password !== 'e') {
+      user.username = username || user.username;
     } else {
       res.status(404);
       throw new Error('User not found');
     }
+  } catch {
+    res.status(404);
+    throw new Error('User not found');
+  }
 };
 
 module.exports.updatePassword = async (req, res) => {
-  const {email, password} = req.body;
-  try{
-    const user = await ClientModel.findOne({email});
+  const { email, password } = req.body;
+  try {
+    const user = await ClientModel.findOne({ email });
     if (user) {
-
       user.password = password || user.password;
-  
+
       const updateUser = await user.save();
-  
-      res.send({name: updateUser.name,});
+
+      res.send({ name: updateUser.name });
     } else {
       res.status(404);
       throw new Error('User not found');
     }
-
-  }catch (err){
+  } catch (err) {
     res.status(404);
     throw new Error('User not found');
   }
-
-}
+};
 
 module.exports.updateUsername = async (req, res) => {
-  const {email, username} = req.body;
+  const { email, username } = req.body;
   console.log(email);
-  try{
-    const user = await ClientModel.findOne({email});
+  try {
+    const user = await ClientModel.findOne({ email });
     console.log(user);
     if (user) {
-
       user.username = username || user.username;
-  
+
       const updateUser = await user.save();
-  
-      res.send({name: updateUser.name,});
+
+      res.send({ name: updateUser.name });
     } else {
       res.status(404);
       throw new Error('User not found');
     }
-
-  }catch (err){
+  } catch (err) {
     res.status(404);
     throw new Error('User not found');
   }
-
-}
+};
 
 module.exports.deleteUser = (req, res) => {
-  if(!ObjectID.isValid(req.params.id))
-    return res.status(400).send("ID unknown : " + req.params.id);
-  
-  ClientModel.findByIdAndRemove(
-    req.params.id,
-    (err, docs) => {
-      if(!err) res.send(docs);
-      else console.log(err);
-    }
-  )
+  if (!ObjectID.isValid(req.params.id))
+    return res.status(400).send('ID unknown : ' + req.params.id);
+
+  ClientModel.findByIdAndRemove(req.params.id, (err, docs) => {
+    if (!err) res.send(docs);
+    else console.log(err);
+  });
 };

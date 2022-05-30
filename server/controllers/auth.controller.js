@@ -91,5 +91,30 @@ module.exports.updateUsername = async (req, res) => {
 
 }
 
+module.exports.updateUser = async (req, res) => {
+  const { email, username, password } = req.body;
+  try {
+    const user = await ClientModel.findOne({ email });
+
+    if (user && password !== 'e') {
+      user.username = username || user.username;
+      user.password = password || user.password;
+
+      const updateUser = await user.save();
+
+      res.send({ name: updateUser.name });
+    } else if (user && password === 'e') {
+      user.username = username || user.username;
+      await user.save();
+    } else {
+      res.status(404);
+      throw new Error('User not found');
+    }
+  } catch {
+    res.status(404);
+    throw new Error('User not found');
+  }
+};
+
 
 

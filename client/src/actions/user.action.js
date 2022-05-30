@@ -37,12 +37,12 @@ export const updateWishProduct = (productId, userId) => async (dispatch, getStat
 };
 
 
-export const updateProfile = (userId, username, password) => {
+export const updateProfile = (email, username, password) => {
   return async (dispatch) => {
     return axios({
       method: "put",
-      url: `${process.env.REACT_APP_API_URL}api/client/` + userId ,
-      data: { username, password },
+      url: `${process.env.REACT_APP_API_URL}api/client/updateprofile`  ,
+      data: { email, username, password },
     })
       .then((res) => {
         dispatch({ type: UPDATE_PROFILE, payload: username });

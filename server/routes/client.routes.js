@@ -8,6 +8,7 @@ router.post('/login', authController.signIn);
 router.get('/logout', authController.logout);
 router.put('/forgotpassword', authController.forgot_password);
 router.put('/username', authController.updateUsername);
+router.put('/updateprofile', authController.updateUser);
 //client DB
 router.get('/', clientController.getAllUsers);
 router.get("/:id", clientController.userInfo);
