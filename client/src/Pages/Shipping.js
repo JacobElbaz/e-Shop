@@ -18,7 +18,7 @@ const initialValues = {
 
 const Shipping = () => {
 
-    const commentOptions = [
+    const cities = [
         
         { title: 'Afula', value: 'Afula' },
         { title: 'Akko', value: 'Akko' },
@@ -113,7 +113,7 @@ const Shipping = () => {
                         <Form>
                             <Input label='Address*' name='address' type='text' />
                             <Input label='No. Of Street' name='street' type='text' />
-                            <Input label='City*' name='city' type='select'  options={commentOptions}/>
+                            <Input label='City*' name='city' type='select'  options={cities}/>
                             <Input label='Post Code' name='postalCode' type='text' />
                             <Button
                                 className='d-block ml-auto'
