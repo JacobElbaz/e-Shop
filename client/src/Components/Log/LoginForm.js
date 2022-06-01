@@ -1,20 +1,35 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Button, Row, Col, Form, ListGroup, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgot_password } from '../../actions/user.action';
 import { Link } from 'react-router-dom';
+import { getAllUsers } from '../../actions/user.action';
 import { forgotPassordValidationSchema } from '../../validations';
 import axios from 'axios';
 import './LoginForm.css';
+import { isEmpty } from '../../Components/Utils';
 
 function LoginForm() {
   const [details, setDetails] = useState({ email: '', password: '' });
-
+  const dispatch = useDispatch();
+  const users = useSelector((state) => state.usersReducer);
+  const [loadUsers, setLoadUsers] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
   const [newPass, setNewPass] = useState();
+  const [emailError, setEmailError] = useState('');
   const [email, setEmail] = useState();
-  const dispatch = useDispatch();
+  let d = 'wrong email';
+
+  useEffect(() => {
+    console.log(emailError)
+    console.log(d);
+    console.log(email);
+    if (loadUsers) {
+      dispatch(getAllUsers());
+      setLoadUsers(false);
+    }
+  }, [loadUsers, dispatch, emailError]);
 
   const submitHandler = (e) => {
     e.preventDefault();
@@ -52,21 +67,42 @@ function LoginForm() {
   };
 
   const onSubmit = () => {
-    setShowModal(false);
-    setNewPass('123456');
-    dispatch(forgot_password(email, '123456'));
-    setShowPassword(true);
+    if (d === 'wrong email') {
+      console.log('USER UNKOWN');
+    } else {
+      setShowModal(false);
+      dispatch(forgot_password(d, '123456'));
+      setShowPassword(true);
+    }
   };
+
+  const onChangeEmail = (e) => {
+    e.preventDefault();
+    setEmailError(e.target.value);
+    
+    // if(d === emailError)
+    // {
+    //   console.log(email);
+    //   setEmail(emailError);
+    //   console.log(email);
+      
+    // }
+  }
 
   return (
     <>
-    <Modal show={showPassword} onHide={handleClose}>
+      <Modal show={showPassword} onHide={handleClose}>
         <Modal.Header closeButton>
           <Modal.Title>New Password</Modal.Title>
         </Modal.Header>
-        <Modal.Body>This is your new password: {newPass}</Modal.Body>
+        <Modal.Body>This is your new password: 123456</Modal.Body>
         <Modal.Footer>
-          <Link type="button" className='btn btn-secondary' to={'/login'} onClick={handleClose}>
+          <Link
+            type="button"
+            className="btn btn-secondary"
+            to={'/login'}
+            onClick={handleClose}
+          >
             OK
           </Link>
         </Modal.Footer>
@@ -80,16 +116,27 @@ function LoginForm() {
           <Row>
             <Col>
               <Form onSubmit={onSubmit}>
-                <Form.Group controlId='email'>
-                    <Form.Label>Email</Form.Label>
-                    <Form.Control
-                    type = "email"
-                    name = "email"
+                <Form.Group controlId="email">
+                  <Form.Label>Email</Form.Label>
+                  <Form.Control
+                    type="email"
+                    name="email"
                     required
-                    placeholder='Enter Email'
-                    onChange={e => setEmail(e.target.value)}
-                    />
+                    placeholder="Enter Email"
+                    onChange={(e) => onChangeEmail(e)}
+                  />
                 </Form.Group>
+                {!isEmpty(users[0]) &&
+                  users.map((user) => {
+                    return user.email === emailError
+                      ? (d = emailError)
+                      : null;
+                  })}
+                {d !== emailError  ? (
+                  <p className="text-danger">User Unknown</p>
+                ) : (
+                  <p className="text-success">Known User</p>
+                )}
               </Form>
             </Col>
           </Row>
@@ -123,11 +170,10 @@ function LoginForm() {
                 type="email"
                 name="email"
                 id="email"
-                onChange={(e) =>{
+                onChange={(e) => {
                   e.preventDefault();
-                  setDetails({ ...details, email: e.target.value })
-                }
-              }
+                  setDetails({ ...details, email: e.target.value });
+                }}
                 value={details.email}
               />
               <div className="email error"></div>
@@ -138,17 +184,22 @@ function LoginForm() {
                 type="password"
                 name="password"
                 id="password"
-                onChange={(e) =>{
+                onChange={(e) => {
                   e.preventDefault();
-                  setDetails({ ...details, password: e.target.value })
-                }
-              }
+                  setDetails({ ...details, password: e.target.value });
+                }}
                 value={details.password}
               />
               <div className="password error"></div>
             </div>
             <input type="submit" value="LOGIN" />
-            <a className='managerlink text-decoration-none text-decoration-underline ms-5' href='#' onClick={onForgotPassword}>Forgot Password?</a>
+            <a
+              className="managerlink text-decoration-none text-decoration-underline ms-5"
+              href="#"
+              onClick={onForgotPassword}
+            >
+              Forgot Password?
+            </a>
           </div>
         </form>
       </div>
