@@ -13,6 +13,8 @@ router.put('/updateprofile', authController.updateUser);
 router.get('/', clientController.getAllUsers);
 router.get("/:id", clientController.userInfo);
 router.put('/wishlist/:id', clientController.updateWishlist);
+router.put('/addwishlist/:id', clientController.addWishlist);
+router.put('/removewishlist/:id', clientController.removeWishlist);
 router.put("/:id", clientController.updateUser);
 
 router.put("/password", clientController.updatePassword);

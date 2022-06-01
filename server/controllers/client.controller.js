@@ -45,6 +45,44 @@ module.exports.updateWishlist = async (req, res) => {
     throw new Error('User not found');
   }
 };
+module.exports.addWishlist = async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.params.id;
+  
+  const client = await ClientModel.findById(userId);
+  
+  if (client) {
+      const product = await Product.findById(productId);
+      client.wishlist.push(product);
+    await client.save();
+    
+
+    res.send(client.wishlist);
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+};
+
+module.exports.removeWishlist = async (req, res) => {
+  const { productId } = req.body;
+  const userId = req.params.id;
+  
+  const client = await ClientModel.findById(userId);
+  
+  if (client) {
+      client.wishlist = client.wishlist.filter((wish) => {
+        return wish._id.toString() !== productId;
+      });
+    await client.save();
+    
+
+    res.send(client.wishlist);
+  } else {
+    res.status(404);
+    throw new Error('User not found');
+  }
+};
 
 module.exports.updateUser = async (req, res) => {
   const { email, username, password } = req.body;

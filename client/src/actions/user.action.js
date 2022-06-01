@@ -6,6 +6,8 @@ export const UPDATE_PROFILE = "UPDATE_PROFILE";
 export const GET_ALL_USERS = "GET_ALL_USERS";
 export const GET_USERS = "GET_USERS";
 export const UPDATE_WISH_PRODUCT = "UPDATE_WISH_PRODUCT";
+export const ADD_WISH_PRODUCT = "ADD_WISH_PRODUCT";
+export const REMOVE_WISH_PRODUCT = "REMOVE_WISH_PRODUCT";
 export const FORGOT_PASSWORD = "FORGOT_PASSWORD";
 export const UPDATE_USERNAME = "UPDATE_USERNAME";
 export const UPDATE_PASSWORD = "UPDATE_PASSWORD";
@@ -29,6 +31,30 @@ export const updateWishProduct = (productId, userId) => async (dispatch, getStat
     const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/wishlist/` + userId, { productId });
 
     dispatch({ type: UPDATE_WISH_PRODUCT, payload: data });
+
+    handleWishListInLocalStorage(productId, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const addWishProduct = (productId, userId) => async (dispatch, getState) => {
+
+  try {
+    const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/addwishlist/` + userId, { productId });
+
+    dispatch({ type: ADD_WISH_PRODUCT, payload: data });
+
+    handleWishListInLocalStorage(productId, data);
+  } catch (error) {
+    console.log(error);
+  }
+};
+export const removeWishProduct = (productId, userId) => async (dispatch, getState) => {
+
+  try {
+    const { data } = await axios.put(`${process.env.REACT_APP_API_URL}api/client/removewishlist/` + userId, { productId });
+
+    dispatch({ type: ADD_WISH_PRODUCT, payload: data });
 
     handleWishListInLocalStorage(productId, data);
   } catch (error) {

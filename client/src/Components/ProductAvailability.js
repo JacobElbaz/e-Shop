@@ -9,7 +9,7 @@ import {
   Modal,
 } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { getUser, updateWishProduct } from '../actions/user.action';
+import { addWishProduct, getUser, removeWishProduct, updateWishProduct } from '../actions/user.action';
 import { Link } from 'react-router-dom';
 import { UidContext } from '../Components/AppContext';
 
@@ -20,6 +20,7 @@ const ProductAvailability = ({ product }) => {
   const user = JSON.parse(localStorage.getItem('auth'));
   let [cart, setCart] = useState([]);
   let localCart = localStorage.getItem('cart');
+  let d = '';
 
   useEffect(() => {
     localCart = JSON.parse(localCart);
@@ -48,8 +49,15 @@ const ProductAvailability = ({ product }) => {
 
   const onAddToWishListClick = () => {
     if (user) {
-      dispatch(updateWishProduct(product._id, user._id));
-      window.location.reload();
+      if(d==='Remove From Wishlist'){
+        dispatch(removeWishProduct(product._id, user._id));
+        window.location.reload();
+      }
+      else{
+        dispatch(addWishProduct(product._id, user._id));
+        window.location.reload();
+      }
+      
     } else {
       window.location = '/login';
     }
@@ -61,8 +69,8 @@ const ProductAvailability = ({ product }) => {
 
   const renderWishlistText =
     user && user.wishlist?.find((wish) => wish[0] === product._id)
-      ? 'Remove From Wishlist'
-      : 'Add To Wishlist';
+      ? d = 'Remove From Wishlist'
+      : d ='Add To Wishlist';
 
   return (
     <>
@@ -147,8 +155,8 @@ const ProductAvailability = ({ product }) => {
                 onClick={onAddToWishListClick}
               >
                 {user && user.wishlist.find((wish) => wish === product._id)
-                  ? 'Remove From Wishlist'
-                  : 'Add To Wishlist'}
+                  ? d = 'Remove From Wishlist'
+                  : d = 'Add To Wishlist'}
               </Button>
             </Row>
           </ListGroup.Item>

@@ -4,7 +4,7 @@ import { Row, Col, Button, Modal } from 'react-bootstrap';
 import Product from '../Components/Product';
 import { HeartFill } from 'react-bootstrap-icons';
 import { Link } from 'react-router-dom';
-import { getUser, updateWishProduct } from '../actions/user.action';
+import { getUser, removeWishProduct, updateWishProduct } from '../actions/user.action';
 import { UidContext } from '../Components/AppContext';
 import { getProducts } from '../actions/products.action';
 //import { deleteWishProduct } from '../actions/auth';
@@ -51,8 +51,9 @@ const WishList = () => {
 
   const onRemoveProduct = (productId) => {
     if (user) {
-      dispatch(updateWishProduct(productId, user._id));
+      dispatch(removeWishProduct(productId, user._id));
       setLoadProducts(true);
+      window.location.reload();
     }
   };
   const renderLikeIcon = (productId) => {
@@ -105,7 +106,7 @@ const WishList = () => {
 
         <Row className="container">
           {wishlist?.length === 0 ? (
-            <h1>You don't have any order yet.</h1>
+            <h3>You don't have any wish product yet.</h3>
           ) : (
             Object.values(products)?.map((product) => {
               if (product._id == wishlist?.find((wish) => product._id == wish))
