@@ -13,7 +13,7 @@ function ContactUs() {
       <div className="i-left">
         <div className="i-left-wrapper">
           <h2 className="i-intro">Hello, My name is</h2>
-          <h1 className="i-name">Elie Bracha</h1>
+          <h1 className="i-name">Elie <span className='family'>Bracha</span></h1>
           <div className="i-title">
             <div className="i-title-wrapper">
               <div className="i-title-item">Web Developer</div>
@@ -107,7 +107,7 @@ function ContactUs() {
       <div className="i-left">
         <div className="i-left-wrapper">
           <h2 className="i-intro">Hello, My name is</h2>
-          <h1 className="i-name">Jacob Elbaz</h1>
+          <h1 className="i-name">Jacob <span className='family'>Elbaz</span></h1>
           <div className="i-title">
             <div className="i-title-wrapper">
               <div className="i-title-item">Web Developer</div>
@@ -200,7 +200,7 @@ function ContactUs() {
       <div className="i-left">
         <div className="i-left-wrapper">
           <h2 className="i-intro">Hello, My name is</h2>
-          <h1 className="i-name">Samuel Levy</h1>
+          <h1 className="i-name">Samuel <span className='family'>Levy</span></h1>
           <div className="i-title">
             <div className="i-title-wrapper">
               <div className="i-title-item">Web Developer</div>
@@ -292,7 +292,7 @@ function ContactUs() {
       <div className="i-left">
         <div className="i-left-wrapper">
           <h2 className="i-intro">Hello, My name is</h2>
-          <h1 className="i-name">Adane Adgo</h1>
+          <h1 className="i-name">Adane <span className='family'>Adgo</span></h1>
           <div className="i-title">
             <div className="i-title-wrapper">
               <div className="i-title-item">Web Developer</div>
