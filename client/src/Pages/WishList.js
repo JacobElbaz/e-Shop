@@ -43,7 +43,7 @@ const WishList = () => {
       setCart(cartCopy);
       let stringCart = JSON.stringify(cartCopy);
       localStorage.setItem('cart', stringCart);
-      setShowModalCart(true);
+      onRemoveProduct(product._id);
     } else {
       window.location = '/login';
     }
@@ -102,9 +102,9 @@ const WishList = () => {
         </Modal.Footer>
       </Modal>
       <div className="p-5 home">
-        <h1>Wish List</h1>
+        <h1>Wishlist</h1>
 
-        <Row className="container">
+        <Row>
           {wishlist?.length === 0 ? (
             <h3>You don't have any wish product yet.</h3>
           ) : (

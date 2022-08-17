@@ -54,10 +54,8 @@ function HomePage() {
                             <div className="col-sm-6 col-md-3 item">
                                 <Link to = '/contact'>Contact</Link>
                                 <ul>
-                                    <li><a href="#">Elie Bracha</a></li>
-                                    <li><a href="#">Jacob Elbaz</a></li>
-                                    <li><a href="#">Adane Adgo</a></li>
-                                    <li><a href="#">Samuel Levy</a></li>
+                                    <li>Jacob Elbaz</li>
+                                    <li>Elie Bracha</li>
                                 </ul>
                             </div>
                             <div className="col-md-6 item text">

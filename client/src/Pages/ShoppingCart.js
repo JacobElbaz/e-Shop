@@ -39,13 +39,13 @@ export default function ShoppingCart() {
 
     return (
         <div className='p-5 home'>
-            <Row className='container'>
+            <Row>
                 <Col md={8}>
                     <h1>Shopping Cart</h1>
                     {cart.length === 0 ? (
-                        <h1>
-                            Your cart is empty <Link to='/'>Go back</Link>
-                        </h1>
+                        <h2>
+                            Your cart is empty !
+                        </h2>
                     ) : (
                         <ListGroup variant='flush'>
                             {cart.map((item) => {
