@@ -1,15 +1,12 @@
-# CICD_Class Project Team 10
+# eShop Game Zone
 Welcome,
 
 In this project we create a basic web app that contain a Login/Signup option.
 
 ## Technology use
-- Shortcut to give each other tasks
 - Heroku to host our website. [link here](http://mern-team10.herokuapp.com/)
 - CircleCI - CICD. [link here](https://app.circleci.com/pipelines/github/TechLeadersSce/CICD_Class)
 - Github - most popular version control platform. [link here](https://github.com/TechLeadersSce/CICD_Class)
-- IDE - Visual Studio Code
-- OS - Windows 10
 
 ## Steps
 1) Clone the project from git repository: [In order to clone click this link](https://github.com/TechLeadersSce/CICD_Class)
