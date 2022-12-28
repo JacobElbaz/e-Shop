@@ -1,10 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Button, Row, Col, Form, ListGroup, Modal } from 'react-bootstrap';
+import { Button, Row, Col, Form, Modal } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { forgot_password } from '../../actions/user.action';
 import { Link } from 'react-router-dom';
 import { getAllUsers } from '../../actions/user.action';
-import { forgotPassordValidationSchema } from '../../validations';
 import axios from 'axios';
 import './LoginForm.css';
 import { isEmpty } from '../../Components/Utils';
@@ -16,15 +15,10 @@ function LoginForm() {
   const [loadUsers, setLoadUsers] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
-  const [newPass, setNewPass] = useState();
   const [emailError, setEmailError] = useState('');
-  const [email, setEmail] = useState();
   let d = 'wrong email';
 
   useEffect(() => {
-    console.log(emailError)
-    console.log(d);
-    console.log(email);
     if (loadUsers) {
       dispatch(getAllUsers());
       setLoadUsers(false);
@@ -39,7 +33,6 @@ function LoginForm() {
     axios({
       method: 'post',
       url: `${process.env.REACT_APP_API_URL}api/client/login`,
-      withCredentials: true,
       data: details,
     })
       .then((res) => {
@@ -79,14 +72,6 @@ function LoginForm() {
   const onChangeEmail = (e) => {
     e.preventDefault();
     setEmailError(e.target.value);
-    
-    // if(d === emailError)
-    // {
-    //   console.log(email);
-    //   setEmail(emailError);
-    //   console.log(email);
-      
-    // }
   }
 
   return (
